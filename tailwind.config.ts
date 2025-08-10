@@ -1,7 +1,13 @@
 import type { Config } from "tailwindcss";
 
 export default <Partial<Config>>{
-  theme: { extend: {} },
+  theme: {
+    extend: {
+      fontFamily: {
+        pretendard: ["Pretendard", "sans-serif"],
+      },
+    },
+  },
   content: {
     files: [
       "app/**/*.{vue,js,jsx,mjs,ts,tsx}",

@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     autoImport: true,
     scan: true,
   },
+  css: ["@/assets/css/global.css"],
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL!,

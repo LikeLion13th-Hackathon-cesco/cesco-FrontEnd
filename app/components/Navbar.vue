@@ -1,5 +1,7 @@
 <template>
-  <nav class="sticky top-0 w-full py-[40px] px-[80px] flex items-center gap-[70px] bg-[#fefefe]">
+  <nav
+    class="sticky top-0 w-full py-[40px] px-[80px] flex items-center justify-center gap-[70px] bg-[#fefefe]"
+  >
     <!-- 로고 -->
     <NuxtLink to="/">
       <span class="text-2xl font-mono font-light tracking-wide">Logo</span>

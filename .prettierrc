@@ -8,5 +8,6 @@
   "jsxBracketSameLine": false,
   "quoteProps": "as-needed",
   "bracketSpacing": true,
-  "useTabs": false
+  "useTabs": false,
+  "htmlWhitespaceSensitivity": "ignore"
 }

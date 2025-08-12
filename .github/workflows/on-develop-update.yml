@@ -1,4 +1,4 @@
-name: ESLint & Prettier Check
+name: Build Develop Branch
 
 on:
   push:

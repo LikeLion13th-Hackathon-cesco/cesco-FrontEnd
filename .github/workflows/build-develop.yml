@@ -1,15 +1,13 @@
-name: Code Integrity Check
+name: Build Develop Branch
 
 on:
-  pull_request:
-    branches: ["develop", "main"]
-    types: [opened, synchronize, reopened]
+  push:
+    branches: ["develop"]
   workflow_dispatch:
-  workflow_call:
 
 jobs:
-  code-check:
-    name: ESLint & Prettier Check
+  build-project:
+    name: Build Project
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -24,8 +22,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run ESLint
-        run: npm run lint
-
-      - name: Check Prettier formatting
-        run: npm run format:check
+      - name: Build project
+        run: npm run build

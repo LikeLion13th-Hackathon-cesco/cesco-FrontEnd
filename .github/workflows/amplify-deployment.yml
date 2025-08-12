@@ -8,12 +8,12 @@ on:
 
 jobs:
   deploy-amplify:
+    name: Deploy AWS Amplify
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Trigger Amplify webhook
         run: |
-          curl -X POST -d {} "${{ secrets.AMPLIFY_WEBHOOK_URL }}" -H "Content-Type:application/json"
+          curl -X POST -d '{}' "${{ secrets.AMPLIFY_WEBHOOK_URL }}" -H "Content-Type:application/json"

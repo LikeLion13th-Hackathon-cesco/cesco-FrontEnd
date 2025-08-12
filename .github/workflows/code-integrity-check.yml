@@ -1,6 +1,9 @@
-name: ESLint & Prettier Check
+name: Code Integrity Check
 
 on:
+  pull_request:
+    branches: ["develop", "main"]
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
   workflow_call:
 

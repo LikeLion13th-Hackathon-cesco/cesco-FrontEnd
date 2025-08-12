@@ -9,11 +9,13 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/tailwindcss",
     "@nuxt/eslint",
+    "nuxt-svgo",
   ],
   imports: {
     autoImport: true,
     scan: true,
   },
+  css: ["@/assets/css/global.css"],
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL!,

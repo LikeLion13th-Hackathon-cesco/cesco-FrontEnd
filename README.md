@@ -1,5 +1,3 @@
----
-
 # 1. 폴더 구조
 
 ```bash
@@ -7,7 +5,7 @@
 ├── .env # 환경변수
 ├── .prettierrc # Prettier 규칙
 ├── .vscode
-│   └── settings.json # VSCode 설정 덮어씌우기용 
+│   └── settings.json # VSCode 설정 덮어씌우기용
 ├── app
 │   ├── app.vue # 리액트에서 App.jsx 같은 역할
 │   ├── assets # 자료들
@@ -27,7 +25,7 @@
 │   │   │   ├── _utils
 │   │   │   └── index.vue # /hello 쳤을때 보여지는 페이지
 │   │   └── index.vue # / 쳤을때 보여지는 페이지
-│   ├── plugins # Vue에게 자동으로 주입되는 플러그인?들 
+│   ├── plugins # Vue에게 자동으로 주입되는 플러그인?들
 │   │   ├── api.ts
 │   │   └── tanstack-query.ts
 │   ├── stores # Pinia라는 Vue의 상태관리 라이브러리로 만든 상태들 저장
@@ -53,9 +51,9 @@
 
 공통 컴포넌트는 `app/components` 안에 `Hello.vue` 이런식으로 하기. 파일 이름이 곧 컴포넌트 이름이므로 반드시 대문자로 시작.
 
-개별 페이지에서만 쓰이는 컴포넌트들은 `app/pages/hello/_components/Hello.vue` 처럼 만들기. 언더스코어(_)로 시작함으로써 전역적으로 쓰이지 않고 로컬처럼 쓴다는 약속
+개별 페이지에서만 쓰이는 컴포넌트들은 `app/pages/hello/_components/Hello.vue` 처럼 만들기. 언더스코어(\_)로 시작함으로써 전역적으로 쓰이지 않고 로컬처럼 쓴다는 약속
 
-그리고 `className` 이 아니라 `class` 입니다?!! @배다은 
+그리고 `className` 이 아니라 `class` 입니다?!! @배다은
 
 ### 나머지는 아직 생각이…
 
@@ -82,7 +80,7 @@ bg-gray-b4
 
 tailwind에 변수 등록해놔서 자유롭게 사용가능함
 
-````
+```
 
 # 4. 커밋 메시지 규칙
 
@@ -90,7 +88,7 @@ tailwind에 변수 등록해놔서 자유롭게 사용가능함
 
 ```markdown
 feat(#1): 뭐시기뭐시기 함요 -> 뭐시기 겁나 좋아하네 ?
-````
+```
 
 ```markdown
 ui(#13): 뭐시기 페이지 퍼블리싱
@@ -118,7 +116,16 @@ ui(#13): 뭐시기 페이지 퍼블리싱
 
 세부적이게 이런식으로 ㄱㄱ
 
-# 6. svg를 컴포넌트처럼 쓰는 방법
+# 6. 기여 방식
+
+1. 이슈 생성
+2. develop에서 브랜치 생성
+3. 생성된 브랜치 checkout 후 작업 시작
+4. 작업한거 다 커밋 후 푸시
+5. (해당 브랜치) -> develop을 destination으로 하는 PR 생성
+6. 코드 리뷰 & status check 확인 후 머지
+
+# 7. svg를 컴포넌트처럼 쓰는 방법
 
 [nuxt-svgo · Nuxt Modules](https://nuxt.com/modules/nuxt-svgo)
 

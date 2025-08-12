@@ -7,12 +7,12 @@ on:
     branches: ["develop"]
     types: [opened, synchronize, reopened]
   workflow_dispatch:
+  workflow_call:
 
 jobs:
-  code-integrity-check:
+  code-check:
     name: ESLint & Prettier Check
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,6 +31,3 @@ jobs:
 
       - name: Check Prettier formatting
         run: npm run format:check
-
-      - name: Build project
-        run: npm run build

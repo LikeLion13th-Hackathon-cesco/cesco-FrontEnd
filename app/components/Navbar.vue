@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 w-full py-[40px] px-[80px] flex items-center justify-center gap-[70px] bg-[#fefefe]"
+    class="sticky top-0 w-full py-[40px] px-[80px] flex items-center justify-center gap-[70px] bg-background"
   >
     <!-- 로고 -->
     <NuxtLink to="/">
@@ -12,9 +12,9 @@
       <NuxtLink
         to="/community"
         :class="[
-          'relative p-[8px] text-[16px] text-[#1a1a1a]',
+          'relative p-[8px] text-[16px] text-foreground',
           isActive('/community') &&
-            'text-[#2D8AE7] font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-[#2D8AE7]',
+            'text-primary font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-primary',
         ]"
       >
         커뮤니티
@@ -22,9 +22,9 @@
       <NuxtLink
         to="/report"
         :class="[
-          'relative p-[8px] text-[16px] text-[#1a1a1a]',
+          'relative p-[8px] text-[16px] text-foreground',
           isActive('/report') &&
-            'text-[#2D8AE7] font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-[#2D8AE7]',
+            'text-primary font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-primary',
         ]"
       >
         사기신고
@@ -32,9 +32,9 @@
       <NuxtLink
         to="/checklist"
         :class="[
-          'relative p-[8px] text-[16px] text-[#1a1a1a]',
+          'relative p-[8px] text-[16px] text-foreground',
           isActive('/checklist') &&
-            'text-[#2D8AE7] font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-[#2D8AE7]',
+            'text-primary font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-primary',
         ]"
       >
         체크리스트
@@ -42,18 +42,18 @@
       <NuxtLink
         to="/my"
         :class="[
-          'relative p-[8px] text-[16px] text-[#1a1a1a]',
+          'relative p-[8px] text-[16px] text-foreground',
           isActive('/my') &&
-            'text-[#2D8AE7] font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-[#2D8AE7]',
+            'text-primary font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-primary',
         ]"
       >
         마이 페이지
       </NuxtLink>
       <NuxtLink
         to="/pricing"
-        :class="['p-[16px] rounded-[10px]', isPlus ? 'bg-[#2D8AE7]' : 'bg-[#F3F9FF]']"
+        :class="['p-[16px] rounded-[10px]', isPlus ? 'bg-primary' : 'bg-secondary']"
       >
-        <span :class="['text-[16px] font-[600]', isPlus ? 'text-[#fefefe]' : 'text-[#2D8AE7]']">
+        <span :class="['text-[16px] font-[600]', isPlus ? 'text-gray-fe' : 'text-primary']">
           PLUS 서비스 {{ isPlus ? "이용중" : "이용하기" }}
         </span>
       </NuxtLink>
@@ -61,13 +61,13 @@
 
     <!-- 검색바 -->
     <div
-      class="py-[15px] px-[30px] flex items-center gap-[12px] border-[1.5px] border-[#B4B4B4] rounded-full"
+      class="py-[15px] px-[30px] flex items-center gap-[12px] border-[1.5px] border-gray-b4 rounded-full"
     >
       <SearchIcon class="w-[20px] h-[20px]" filled="false" />
       <input
         type="search"
         placeholder="실거주 후기가 궁금하다면, 주소를 입력하세요."
-        class="w-full text-[#1a1a1a] placeholder:text-[#B4B4B4] text-[16px] font-[500] outline-none"
+        class="w-full text-foreground placeholder:text-gray-b4 text-[16px] font-[500] outline-none"
       />
     </div>
   </nav>

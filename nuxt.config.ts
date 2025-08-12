@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/tailwindcss",
     "@nuxt/eslint",
+    "nuxt-svgo",
   ],
   imports: {
     autoImport: true,
@@ -18,6 +19,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL!,
+      kakaoJavascriptKey: process.env.KAKAO_JAVASCRIPT_KEY,
     },
   },
 });

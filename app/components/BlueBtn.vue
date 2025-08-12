@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-20 py-5 bg-blue-500 rounded-2xl inline-flex justify-center items-center gap-2.5 box-border"
+    class="px-20 py-5 bg-blue-500 rounded-2xl inline-flex justify-center items-center gap-2.5 box-border cursor-pointer"
   >
     <div class="justify-start text-white text-3xl font-semibold font-['Pretendard'] leading-10">
       {{ text }}

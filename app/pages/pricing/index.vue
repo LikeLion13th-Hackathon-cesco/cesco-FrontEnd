@@ -69,11 +69,7 @@
       </div>
 
       <div class="absolute top-0 right-0 w-[487px] h-[734px] rounded-[30px] overflow-hidden">
-        <img
-          src="~/assets/image/pricingImage.jpg"
-          alt="가격페이지 이미지"
-          class="w-full h-full object-cover"
-        />
+        <img :src="pricingImage" alt="가격페이지 이미지" class="w-full h-full object-cover" />
 
         <!-- 그라디언트 오버레이 -->
         <div
@@ -83,3 +79,7 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import pricingImage from "~/assets/image/pricingImage.jpg";
+</script>

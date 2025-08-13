@@ -1,8 +1,8 @@
 <template>
   <div
-    class="px-20 py-5 bg-blue-500 rounded-2xl inline-flex justify-center items-center gap-2.5 box-border cursor-pointer"
+    class="box-border inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-blue-500 px-20 py-5"
   >
-    <div class="justify-start text-white text-3xl font-semibold font-['Pretendard'] leading-10">
+    <div class="justify-start font-['Pretendard'] text-3xl font-semibold leading-10 text-white">
       {{ text }}
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center">
     <div v-if="!selectedPost" class="flex justify-center gap-[70px]">
-      <div id="map" class="w-[604px] h-[768px] rounded-[20px] bg-black font-white">지도위치</div>
+      <div id="map" class="font-white h-[768px] w-[604px] rounded-[20px] bg-black">지도위치</div>
       <CommentWrap />
     </div>
     <div v-else class="flex gap-[72px]">

@@ -1,25 +1,25 @@
 <template>
-  <div class="flex flex-col items-start pl-[190px] m-0">
+  <div class="m-0 flex flex-col items-start pl-[190px]">
     <div class="flex justify-center gap-5">
       <img src="~/assets/icon/creditPin.svg" alt="pin" />
-      <div class="w-96 h-12 justify-start">
-        <span class="text-zinc-900 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]">
+      <div class="h-12 w-96 justify-start">
+        <span class="font-['Pretendard'] text-4xl font-semibold leading-[50.31px] text-zinc-900">
           우리동네
         </span>
-        <span class="text-blue-500 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]">
+        <span class="font-['Pretendard'] text-4xl font-semibold leading-[50.31px] text-blue-500">
           성북구
         </span>
-        <span class="text-zinc-900 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]">
+        <span class="font-['Pretendard'] text-4xl font-semibold leading-[50.31px] text-zinc-900">
           제휴매장
         </span>
       </div>
     </div>
     <div
-      class="w-[489px] h-12 justify-start text-neutral-400 text-2xl font-normal font-['Pretendard'] leading-[50.31px]"
+      class="h-12 w-[489px] justify-start font-['Pretendard'] text-2xl font-normal leading-[50.31px] text-neutral-400"
     >
       성북구 내의 크레딧 사용 가능처를 알려드립니다.
     </div>
-    <div class="mt-[54px] mb-[200px]">
+    <div class="mb-[200px] mt-[54px]">
       <div v-for="(store, index) in dummy" :key="store.id">
         <StoreItem
           :store-name="store?.storeName"
@@ -28,7 +28,7 @@
         />
         <div v-if="index !== dummy.length - 1" class="my-[43px]">
           <div
-            class="w-[980px] h-0 outline outline-[1.50px] outline-offset-[-0.75px] outline-zinc-400"
+            class="h-0 w-[980px] outline outline-[1.50px] outline-offset-[-0.75px] outline-zinc-400"
           />
         </div>
       </div>

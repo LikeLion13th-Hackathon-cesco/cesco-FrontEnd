@@ -1,14 +1,14 @@
 <template>
-  <div class="flex items-center gap-[43px] pt-11 cursor-pointer">
-    <img class="w-48 h-48 rounded-2xl" :src="storeImg" />
+  <div class="flex cursor-pointer items-center gap-[43px] pt-11">
+    <img class="h-48 w-48 rounded-2xl" :src="storeImg" />
     <div class="flex flex-col">
       <div
-        class="w-auto h-12 justify-start text-zinc-900 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]"
+        class="h-12 w-auto justify-start font-['Pretendard'] text-4xl font-semibold leading-[50.31px] text-zinc-900"
       >
         {{ storeName }}
       </div>
       <div
-        class="w-auto h-12 justify-start text-zinc-900 text-3xl font-normal font-['Pretendard'] leading-[50.31px]"
+        class="h-12 w-auto justify-start font-['Pretendard'] text-3xl font-normal leading-[50.31px] text-zinc-900"
       >
         주소 : {{ address }}
       </div>

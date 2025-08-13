@@ -1,29 +1,29 @@
 <template>
-  <div class="flex-col max-w-[400px]">
+  <div class="max-w-[400px] flex-col">
     <div class="justify-start">
-      <span class="text-blue-500 text-2xl font-semibold font-['Pretendard']">송파대로 48길 29</span>
-      <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">의</span>
-      <span class="text-blue-500 text-2xl font-semibold font-['Pretendard']" />
-      <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">리뷰 게시글</span>
+      <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500">송파대로 48길 29</span>
+      <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">의</span>
+      <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500" />
+      <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">리뷰 게시글</span>
     </div>
-    <div class="flex gap-[254px] mt-[28px]">
+    <div class="mt-[28px] flex gap-[254px]">
       <div class="justify-start">
-        <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">총</span>
-        <span class="text-blue-500 text-2xl font-semibold font-['Pretendard']">5</span>
-        <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">개</span>
+        <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">총</span>
+        <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500">5</span>
+        <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">개</span>
       </div>
       <div
-        class="w-20 h-8 bg-white rounded-[5px] border border-zinc-400 flex justify-center items-center gap-1"
+        class="flex h-8 w-20 items-center justify-center gap-1 rounded-[5px] border border-zinc-400 bg-white"
       >
         <p
-          class="justify-start text-zinc-400 text-sm font-semibold font-['Pretendard'] leading-normal"
+          class="justify-start font-['Pretendard'] text-sm font-semibold leading-normal text-zinc-400"
         >
           최신순
         </p>
-        <img :src="DropDownIcon" class="w-[19px] h-[19px]" />
+        <img :src="DropDownIcon" class="h-[19px] w-[19px]" />
       </div>
     </div>
-    <div class="w-[400px] h-[650px] flex flex-col mt-[21px] overflow-y-auto overflow-x-hidden">
+    <div class="mt-[21px] flex h-[650px] w-[400px] flex-col overflow-y-auto overflow-x-hidden">
       <div v-for="comment in dummy" :key="comment.id">
         <CommentItem
           :writer="comment?.writer"

@@ -1,34 +1,34 @@
 <template>
-  <div class="w-[620px] h-[200px] flex flex-col p-[30px] box-bordercursor-pointer">
+  <div class="box-bordercursor-pointer flex h-[200px] w-[620px] flex-col p-[30px]">
     <div
-      class="justify-start text-zinc-900 text-lg font-semibold font-['Pretendard'] leading-tight mb-[5px]"
+      class="mb-[5px] justify-start font-['Pretendard'] text-lg font-semibold leading-tight text-zinc-900"
     >
       {{ writer }}
     </div>
     <div
-      class="justify-start text-neutral-400 text-base font-normal font-['Pretendard'] leading-tight mb-[15px]"
+      class="mb-[15px] justify-start font-['Pretendard'] text-base font-normal leading-tight text-neutral-400"
     >
       {{ date }}
     </div>
     <div
-      class="justify-start text-zinc-900 text-base font-normal font-['Pretendard'] leading-normal mb-[10px]"
+      class="mb-[10px] justify-start font-['Pretendard'] text-base font-normal leading-normal text-zinc-900"
     >
       {{ comment }}
     </div>
     <div class="flex justify-start gap-[10px]">
-      <img :src="CommentIcon" class="w-4 h-4" />
+      <img :src="CommentIcon" class="h-4 w-4" />
       <div
-        class="justify-start text-zinc-400 text-base font-normal font-['Pretendard'] leading-none"
+        class="justify-start font-['Pretendard'] text-base font-normal leading-none text-zinc-400"
       >
         {{ commentCount }}
       </div>
     </div>
-    <div class="w-96 h-48 bg-blue-50 rounded-[10px] hidden" />
-    <div class="flex gap-[22px] items-center">
+    <div class="hidden h-48 w-96 rounded-[10px] bg-blue-50" />
+    <div class="flex items-center gap-[22px]">
       <input
         v-model="inputValue"
         type="text"
-        class="w-[549px] h-16 bg-neutral-100 rounded-2xl px-4"
+        class="h-16 w-[549px] rounded-2xl bg-neutral-100 px-4"
         placeholder="댓글을 입력하세요."
       />
       <img :src="SendingBtn" alt="보내기" />

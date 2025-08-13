@@ -1,10 +1,10 @@
 <template>
   <nav
-    class="sticky top-0 w-full py-[40px] px-[80px] flex items-center justify-center gap-[70px] bg-background"
+    class="sticky top-0 flex w-full items-center justify-center gap-[70px] bg-background px-[80px] py-[40px]"
   >
     <!-- 로고 -->
     <NuxtLink to="/">
-      <span class="text-2xl font-mono font-light tracking-wide">Logo</span>
+      <span class="font-mono text-2xl font-light tracking-wide">Logo</span>
     </NuxtLink>
 
     <!-- 메뉴 -->
@@ -14,7 +14,7 @@
         :class="[
           'relative p-[8px] text-[16px] text-foreground',
           isActive('/community') &&
-            'text-primary font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-primary',
+            'font-[600] text-primary after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-primary after:transition-all after:duration-300 after:ease-in-out',
         ]"
       >
         커뮤니티
@@ -24,7 +24,7 @@
         :class="[
           'relative p-[8px] text-[16px] text-foreground',
           isActive('/report') &&
-            'text-primary font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-primary',
+            'font-[600] text-primary after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-primary after:transition-all after:duration-300 after:ease-in-out',
         ]"
       >
         사기신고
@@ -34,7 +34,7 @@
         :class="[
           'relative p-[8px] text-[16px] text-foreground',
           isActive('/checklist') &&
-            'text-primary font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-primary',
+            'font-[600] text-primary after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-primary after:transition-all after:duration-300 after:ease-in-out',
         ]"
       >
         체크리스트
@@ -44,14 +44,14 @@
         :class="[
           'relative p-[8px] text-[16px] text-foreground',
           isActive('/my') &&
-            'text-primary font-[600] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:rounded-full after:transition-all after:duration-300 after:ease-in-out after:bg-primary',
+            'font-[600] text-primary after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-primary after:transition-all after:duration-300 after:ease-in-out',
         ]"
       >
         마이 페이지
       </NuxtLink>
       <NuxtLink
         to="/pricing"
-        :class="['p-[16px] rounded-[10px]', isPlus ? 'bg-primary' : 'bg-secondary']"
+        :class="['rounded-[10px] p-[16px]', isPlus ? 'bg-primary' : 'bg-secondary']"
       >
         <span :class="['text-[16px] font-[600]', isPlus ? 'text-gray-fe' : 'text-primary']">
           PLUS 서비스 {{ isPlus ? "이용중" : "이용하기" }}
@@ -61,13 +61,13 @@
 
     <!-- 검색바 -->
     <div
-      class="py-[15px] px-[30px] flex items-center gap-[12px] border-[1.5px] border-gray-b4 rounded-full"
+      class="flex items-center gap-[12px] rounded-full border-[1.5px] border-gray-b4 px-[30px] py-[15px]"
     >
-      <SearchIcon class="w-[20px] h-[20px]" filled="false" />
+      <SearchIcon class="h-[20px] w-[20px]" filled="false" />
       <input
         type="search"
         placeholder="실거주 후기가 궁금하다면, 주소를 입력하세요."
-        class="w-full text-foreground placeholder:text-gray-b4 text-[16px] font-[500] outline-none"
+        class="w-full text-[16px] font-[500] text-foreground outline-none placeholder:text-gray-b4"
       />
     </div>
   </nav>

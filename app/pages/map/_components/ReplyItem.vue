@@ -40,9 +40,21 @@
 import CommentIcon from "~/assets/icon/commentIcon.svg";
 import SendingBtn from "~/assets/icon/community-uploadBtn.svg";
 defineProps({
-  writer: String,
-  date: String,
-  comment: String,
-  commentCount: Number,
+  writer: {
+    type: String,
+    default: "작성자",
+  },
+  date: {
+    type: String,
+    default: "2025-08-06",
+  },
+  comment: {
+    type: String,
+    default: "이 집 왜이래요",
+  },
+  commentCount: {
+    type: Number,
+    default: 4,
+  },
 });
 </script>

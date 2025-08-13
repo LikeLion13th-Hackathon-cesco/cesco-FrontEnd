@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div
     class="w-[400px] h-[200px] flex flex-col p-[30px] box-border hover:bg-blue-50 rounded-[10px] cursor-pointer"
   >
@@ -38,4 +38,4 @@ defineProps({
   comment: String,
   commentCount: Number,
 });
-</script>
+</script> -->

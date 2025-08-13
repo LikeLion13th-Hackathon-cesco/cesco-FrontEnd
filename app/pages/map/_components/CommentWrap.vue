@@ -1,19 +1,16 @@
 <template>
   <div class="flex-col max-w-[400px]">
     <div class="justify-start">
-      <span class="text-blue-500 text-2xl font-semibold font-['Pretendard']">송파대로 48길 29</span
-      ><span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">의</span
-      ><span class="text-blue-500 text-2xl font-semibold font-['Pretendard']" /><span
-        class="text-zinc-900 text-2xl font-semibold font-['Pretendard']"
-      >
-        리뷰 게시글</span
-      >
+      <span class="text-blue-500 text-2xl font-semibold font-['Pretendard']">송파대로 48길 29</span>
+      <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">의</span>
+      <span class="text-blue-500 text-2xl font-semibold font-['Pretendard']" />
+      <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">리뷰 게시글</span>
     </div>
     <div class="flex gap-[254px] mt-[28px]">
       <div class="justify-start">
-        <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">총 </span
-        ><span class="text-blue-500 text-2xl font-semibold font-['Pretendard']">5</span
-        ><span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">개</span>
+        <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">총</span>
+        <span class="text-blue-500 text-2xl font-semibold font-['Pretendard']">5</span>
+        <span class="text-zinc-900 text-2xl font-semibold font-['Pretendard']">개</span>
       </div>
       <div
         class="w-20 h-8 bg-white rounded-[5px] border border-zinc-400 flex justify-center items-center gap-1"

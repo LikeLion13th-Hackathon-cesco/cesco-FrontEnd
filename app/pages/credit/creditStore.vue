@@ -3,13 +3,15 @@
     <div class="flex justify-center gap-5">
       <img src="~/assets/icon/creditPin.svg" alt="pin" />
       <div class="w-96 h-12 justify-start">
-        <span class="text-zinc-900 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]"
-          >우리동네 </span
-        ><span class="text-blue-500 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]"
-          >성북구</span
-        ><span class="text-zinc-900 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]">
-          제휴매장</span
-        >
+        <span class="text-zinc-900 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]">
+          우리동네
+        </span>
+        <span class="text-blue-500 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]">
+          성북구
+        </span>
+        <span class="text-zinc-900 text-4xl font-semibold font-['Pretendard'] leading-[50.31px]">
+          제휴매장
+        </span>
       </div>
     </div>
     <div

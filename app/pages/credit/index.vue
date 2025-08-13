@@ -4,9 +4,9 @@
       <div class="absolute top-[248px] left-[66px] z-20 max-w-[600px]">
         <div class="mb-[30px]">
           <div class="justify-start">
-            <span class="text-zinc-900 text-3xl font-semibold font-['Pretendard'] leading-10"
-              >사용 가능한 제휴 매장이 가까이 있습니다.</span
-            >
+            <span class="text-zinc-900 text-3xl font-semibold font-['Pretendard'] leading-10">
+              사용 가능한 제휴 매장이 가까이 있습니다.
+            </span>
             <div class="text-blue-500 text-3xl font-bold font-['Pretendard'] leading-10">
               지금 제휴처를 확인하고, 크레딧을 사용해보세요.
             </div>

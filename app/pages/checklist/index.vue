@@ -249,62 +249,6 @@ import Two from "~/assets/image/checkTwo.jpg";
 import Three from "~/assets/image/checkThree.jpg";
 import Four from "~/assets/image/checkFour.jpg";
 import Five from "~/assets/image/checkFive.jpg";
-// import { ref } from "vue";
 import CheckCard from "./_components/CheckCard.vue";
 import CheckTipBox from "./_components/CheckTipBox.vue";
-
-// const Imgdummy = ref([
-//   {
-//     id: 0,
-//     blueText: "보증보험 가입 ",
-//     normalText: "가능 여부 확인",
-//     description:
-//       "보증보험을 가입하면 보증금 피해 발생 시 보증금의 일부나 전액을 배상 받을 수 있습니다.",
-//     img: One,
-//     cardWidth: "413px",
-//     cardHeight: "208px",
-//     cardImgWidth: "413px",
-//     cardImgHeight: "240px",
-//     cardTop: "239px",
-//   },
-//   {
-//     id: 1,
-//     blueText: "중개업자 신원 ",
-//     normalText: "확인",
-//     description:
-//       "국토부 중개사 조회 사이트에서 중개사의 자격 여부를 확인해야합니다. 무자격자에게 계약하면 법적인 보호를 받지 못할 수 있습니다.",
-//     img: Two,
-//     cardWidth: "413px",
-//     cardHeight: "208px",
-//     cardImgWidth: "413px",
-//     cardImgHeight: "240px",
-//     cardTop: "239px",
-//   },
-//   {
-//     id: 2,
-//     blueText: "등기부등본",
-//     normalText: "확인",
-//     description: `등기부등본은 부동산 또는 대법원 인터넷등기소를 통해 반드시 확인해야할 정보입니다. 실제 집주인이 누구인지 확인하고 근저당이나 압류 여부를 확인할 수 있습니다.`,
-//     img: Three,
-//     cardWidth: "413px",
-//     cardHeight: "330px",
-//     cardImgWidth: "413px",
-//     cardImgHeight: "240px",
-//     cardTop: "239px",
-//   },
-//   {
-//     id: 3,
-//     blueText: "확정일자 및 전입신고",
-//     normalText: "가능 여부 확인",
-//     description:
-//       "확정일자와 전입신고가 가능해야지만 보증금을 법적으로 보호할 수 있습니다. 다만, 상가주택이나 불법건축물 등의 경우 불가할 수도 있기에 반드시 사전에 확인해야합니다.",
-//     img: Four,
-//     cardWidth: "413px",
-//     cardHeight: "330px",
-//     cardImgWidth: "413px",
-//     cardImgHeight: "240px",
-//     cardTop: "239px",
-//   },
-// ]);
-//
 </script>

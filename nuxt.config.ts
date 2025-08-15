@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxt/eslint",
     "nuxt-svgo",
+    "motion-v/nuxt",
   ],
   imports: {
     autoImport: true,

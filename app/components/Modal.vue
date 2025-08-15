@@ -6,7 +6,7 @@ import XIcon from "~/assets/icon/x.svg";
 
 interface ModalButton {
   label: string;
-  variant: "normal" | "destructive";
+  variant: "normal" | "destructive" | "dismiss";
   onClick: () => Promise<void>;
   disabled?: boolean;
 }
@@ -95,9 +95,14 @@ const handleBackdropClick = () => {
               <button
                 :class="[
                   'flex items-center justify-center rounded-[10px] px-[80px] py-[20px] text-[26px] font-[600] text-gray-fe',
-                  btn.variant === 'normal' ? 'bg-primary' : 'bg-destructive',
+                  !btn.disabled &&
+                    (btn.variant === 'normal'
+                      ? 'bg-primary'
+                      : btn.variant === 'destructive'
+                        ? 'bg-destructive'
+                        : 'bg-gray-b4'),
                   buttons.length === 1 ? 'mx-[20px] w-full' : 'flex-1',
-                  btn.disabled || loadingIndex === i ? 'cursor-not-allowed opacity-50' : '',
+                  (btn.disabled || loadingIndex === i) && 'cursor-not-allowed bg-gray-8f',
                 ]"
                 :disabled="btn.disabled || loadingIndex === i"
                 @click="handleClick(btn, i)"

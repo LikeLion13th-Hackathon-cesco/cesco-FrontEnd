@@ -24,7 +24,7 @@ const modalStore = useModalStore();
         },
         {
           label: '취소',
-          variant: 'destructive',
+          variant: 'dismiss',
           onClick: async () => modalStore.close('modal1'),
         },
       ]"

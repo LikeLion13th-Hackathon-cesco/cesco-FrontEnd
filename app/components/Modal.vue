@@ -60,7 +60,7 @@ const handleBackdropClick = () => {
         v-if="visible"
         :key="'backdrop-' + id"
         tag="div"
-        class="bg-foreground/40 fixed inset-0 flex items-center justify-center will-change-transform"
+        class="fixed inset-0 flex items-center justify-center bg-foreground/40 will-change-transform"
         :style="{ zIndex }"
         :initial="{ opacity: 0 }"
         :animate="{ opacity: 1, transition: { duration: 0.2 } }"

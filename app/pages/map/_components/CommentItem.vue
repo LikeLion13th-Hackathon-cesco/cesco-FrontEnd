@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div
     class="w-[400px] h-[200px] flex flex-col p-[30px] box-border hover:bg-blue-50 rounded-[10px] cursor-pointer"
   >
@@ -32,10 +32,10 @@
 <script setup>
 import CommentIcon from "~/assets/icon/commentIcon.svg";
 
-defineProps({
-  writer: String,
-  date: String,
-  comment: String,
-  commentCount: Number,
-});
-</script> -->
+// defineProps({
+//   writer: String,
+//   date: String,
+//   comment: String,
+//   commentCount: Number,
+// });
+</script>

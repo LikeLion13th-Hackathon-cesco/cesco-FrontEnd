@@ -4,47 +4,47 @@ import { z } from "zod";
 
 const formSchema = z
   .object({
-    rentType: z.enum(["전세", "월세"], { error: "전세 또는 월세를 선택해주세요." }),
+    rentType: z.enum(["전세", "월세"]),
     deposit_hundred_million: z
       .string()
-      .regex(/^[0-9]*$/, "숫자만 입력 가능합니다.")
-      .refine((val) => val === "" || (Number(val) >= 0 && Number(val) <= 999), {
-        message: "0-999 사이의 값을 입력해주세요.",
-      }),
+
+      .regex(/^[0-9]*$/)
+      .refine((val) => Number(val) >= 0 && Number(val) <= 999),
     deposit_ten_million: z
       .string()
-      .regex(/^[0-9]?$/, "한 자리 숫자만 입력 가능합니다.")
-      .refine((val) => val === "" || (Number(val) >= 0 && Number(val) <= 9), {
-        message: "0-9 사이의 값을 입력해주세요.",
-      }),
+
+      .regex(/^[0-9]?$/)
+      .refine((val) => Number(val) >= 0 && Number(val) <= 9),
     deposit_million: z
       .string()
-      .regex(/^[0-9]{0,3}$/, "최대 3자리 숫자만 입력 가능합니다.")
-      .refine((val) => val === "" || (Number(val) >= 0 && Number(val) <= 999), {
-        message: "0-999 사이의 값을 입력해주세요.",
-      }),
+
+      .regex(/^[0-9]{0,3}$/)
+      .refine((val) => Number(val) >= 0 && Number(val) <= 999),
     monthlyRent_hundred: z
       .string()
-      .regex(/^[0-9]*$/, "숫자만 입력 가능합니다.")
-      .refine((val) => val === "" || Number(val) >= 0, {
-        message: "0 이상의 값을 입력해주세요.",
-      }),
+
+      .regex(/^[0-9]*$/)
+      .refine((val) => Number(val) >= 0),
     monthlyRent_ten_thousand: z
       .string()
-      .regex(/^[0-9]{0,2}$/, "최대 2자리 숫자만 입력 가능합니다.")
-      .refine((val) => val === "" || (Number(val) >= 0 && Number(val) <= 99), {
-        message: "0-99 사이의 값을 입력해주세요.",
-      }),
+
+      .regex(/^[0-9]{0,2}$/)
+      .refine((val) => Number(val) >= 0 && Number(val) <= 99),
+    detailed_address_dong: z.string().min(1),
+    detailed_address_ho: z.string().min(1),
   })
   .refine((data) => {
     console.log(data);
     if (
-      data.deposit_hundred_million !== "" &&
-      data.deposit_ten_million !== "" &&
-      data.deposit_million !== ""
+      data.deposit_hundred_million.trim().length > 0 &&
+      data.deposit_ten_million.trim().length > 0 &&
+      data.deposit_million.trim().length > 0
     ) {
       if (data.rentType === "월세") {
-        return data.monthlyRent_hundred !== "" && data.monthlyRent_ten_thousand !== "";
+        return (
+          data.monthlyRent_hundred.trim().length > 0 &&
+          data.monthlyRent_ten_thousand.trim().length > 0
+        );
       }
 
       if (data.rentType === "전세") {
@@ -63,9 +63,10 @@ const form = useForm({
     deposit_million: "",
     monthlyRent_hundred: "",
     monthlyRent_ten_thousand: "",
+    detailed_address_dong: "",
+    detailed_address_ho: "",
   },
   validators: {
-    onMount: formSchema,
     onChange: formSchema,
     onSubmit: formSchema,
   },
@@ -138,18 +139,17 @@ const form = useForm({
       <span class="text-[26px] font-[400] text-foreground">2. 보증금 입력</span>
       <div class="mt-4 flex items-center justify-between gap-[15px]">
         <form.Field name="deposit_hundred_million">
-          <template #default="{ field, state }">
+          <template #default="{ field }">
             <div class="flex flex-col items-center">
               <input
                 :id="field.name"
                 :name="field.name"
                 :value="field.state.value"
                 type="text"
-                placeholder="0"
                 autocomplete="off"
                 :class="[
                   'w-[100px] border-b text-center text-[26px] font-[600] text-foreground outline-none',
-                  state.meta.errors?.length ? 'border-red-500' : 'border-gray-b4',
+                  'border-gray-b4',
                 ]"
                 @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
                 @blur="field.handleBlur"
@@ -160,18 +160,17 @@ const form = useForm({
         <span class="mt-2 text-[26px] font-[400] text-gray-b4">억</span>
 
         <form.Field name="deposit_ten_million">
-          <template #default="{ field, state }">
+          <template #default="{ field }">
             <div class="flex flex-col items-center">
               <input
                 :id="field.name"
                 :name="field.name"
                 :value="field.state.value"
                 type="text"
-                placeholder="0"
                 autocomplete="off"
                 :class="[
                   'w-[100px] border-b text-center text-[26px] font-[600] text-foreground outline-none',
-                  state.meta.errors?.length ? 'border-red-500' : 'border-gray-b4',
+                  'border-gray-b4',
                 ]"
                 @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
                 @blur="field.handleBlur"
@@ -182,18 +181,17 @@ const form = useForm({
         <span class="mt-2 text-[26px] font-[400] text-gray-b4">천</span>
 
         <form.Field name="deposit_million">
-          <template #default="{ field, state }">
+          <template #default="{ field }">
             <div class="flex flex-col items-center">
               <input
                 :id="field.name"
                 :name="field.name"
                 :value="field.state.value"
                 type="text"
-                placeholder="0"
                 autocomplete="off"
                 :class="[
                   'w-[100px] border-b text-center text-[26px] font-[600] text-foreground outline-none',
-                  state.meta.errors?.length ? 'border-red-500' : 'border-gray-b4',
+                  'border-gray-b4',
                 ]"
                 @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
                 @blur="field.handleBlur"
@@ -212,18 +210,17 @@ const form = useForm({
           <span class="text-[26px] font-[400] text-foreground">3. 월세 입력</span>
           <div class="mt-4 flex items-center justify-between gap-[15px]">
             <form.Field name="monthlyRent_hundred">
-              <template #default="{ field, state }">
+              <template #default="{ field }">
                 <div class="flex flex-col items-center">
                   <input
                     :id="field.name"
                     :name="field.name"
                     :value="field.state.value"
                     type="text"
-                    placeholder="0"
                     autocomplete="off"
                     :class="[
                       'w-[200px] border-b text-center text-[26px] font-[600] text-foreground outline-none',
-                      state.meta.errors?.length ? 'border-red-500' : 'border-gray-b4',
+                      'border-gray-b4',
                     ]"
                     @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
                     @blur="field.handleBlur"
@@ -234,18 +231,17 @@ const form = useForm({
             <span class="mt-2 text-[26px] font-[400] text-gray-b4">백</span>
 
             <form.Field name="monthlyRent_ten_thousand">
-              <template #default="{ field, state }">
+              <template #default="{ field }">
                 <div class="flex flex-col items-center">
                   <input
                     :id="field.name"
                     :name="field.name"
                     :value="field.state.value"
                     type="text"
-                    placeholder="0"
                     autocomplete="off"
                     :class="[
                       'w-[200px] border-b text-center text-[26px] font-[600] text-foreground outline-none',
-                      state.meta.errors?.length ? 'border-red-500' : 'border-gray-b4',
+                      'border-gray-b4',
                     ]"
                     @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
                     @blur="field.handleBlur"
@@ -254,6 +250,60 @@ const form = useForm({
               </template>
             </form.Field>
             <span class="mt-2 text-[26px] font-[400] text-gray-b4">만원</span>
+          </div>
+        </div>
+      </template>
+    </form.Subscribe>
+
+    <!-- 4. 상세주소 입력 - Position changes based on rentType -->
+    <form.Subscribe>
+      <template #default="{ values }">
+        <div>
+          <span class="text-[26px] font-[400] text-foreground">
+            {{ values.rentType === "전세" ? "3" : "4" }}. 상세주소 입력
+          </span>
+          <div class="mt-4 flex items-center justify-between gap-[15px]">
+            <form.Field name="detailed_address_dong">
+              <template #default="{ field }">
+                <div class="flex flex-col items-center">
+                  <input
+                    :id="field.name"
+                    :name="field.name"
+                    :value="field.state.value"
+                    type="text"
+                    autocomplete="off"
+                    :class="[
+                      'w-[200px] border-b text-center text-[26px] font-[600] text-foreground outline-none',
+                      'border-gray-b4',
+                    ]"
+                    @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
+                    @blur="field.handleBlur"
+                  />
+                </div>
+              </template>
+            </form.Field>
+            <span class="mt-2 text-[26px] font-[400] text-gray-b4">동</span>
+
+            <form.Field name="detailed_address_ho">
+              <template #default="{ field }">
+                <div class="flex flex-col items-center">
+                  <input
+                    :id="field.name"
+                    :name="field.name"
+                    :value="field.state.value"
+                    type="text"
+                    autocomplete="off"
+                    :class="[
+                      'w-[200px] border-b text-center text-[26px] font-[600] text-foreground outline-none',
+                      'border-gray-b4',
+                    ]"
+                    @input="(e) => field.handleChange((e.target as HTMLInputElement).value)"
+                    @blur="field.handleBlur"
+                  />
+                </div>
+              </template>
+            </form.Field>
+            <span class="mt-2 text-[26px] font-[400] text-gray-b4">호</span>
           </div>
         </div>
       </template>

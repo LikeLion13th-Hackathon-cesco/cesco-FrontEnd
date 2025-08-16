@@ -1,8 +1,25 @@
+<script setup lang="ts">
+import UploadIcon from "~/assets/icon/upload.svg";
+import PdfUpload from "../_modals/PdfUpload.vue";
+
+const modalStore = useModalStore();
+
+const handleUploadFile = async (data: {
+  selectedExample: string | null;
+  selectedFile: File | null;
+}) => {
+  console.log(data);
+
+  modalStore.close("pdf-select");
+};
+</script>
+
 <template>
   <div class="flex flex-col items-center justify-center rounded-[16px] bg-secondary p-[40px]">
     <UploadIcon class="h-[60px] w-[60px]" filled="false" :font-controlled="false" />
     <button
       class="mt-[20px] rounded-[10px] bg-primary px-[30px] py-[8px] text-center text-[18px] font-[600] text-gray-fe"
+      @click="modalStore.open('pdf-select')"
     >
       등기부등본 PDF 파일 업로드
     </button>
@@ -15,8 +32,6 @@
       파일 크기 : 50MB 이내
     </p>
   </div>
+  <!-- 모달 -->
+  <PdfUpload :on-submit="handleUploadFile" />
 </template>
-
-<script setup>
-import UploadIcon from "~/assets/icon/upload.svg";
-</script>

@@ -4,7 +4,7 @@
       <h1 class="text-center text-[28px] font-[700] text-primary">
         복잡한 등기부등본, 업로드 한 번으로 안전지수부터 보증보험가입 가능 여부까지!
       </h1>
-      <div class="mt-[60px] flex justify-center gap-[120px]">
+      <div class="mt-[60px] flex justify-center gap-[60px]">
         <PDFUploadPanel />
         <FormPanel />
       </div>

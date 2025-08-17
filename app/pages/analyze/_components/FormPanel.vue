@@ -1,63 +1,61 @@
 <script setup lang="ts">
+import { watch } from "vue";
 import { useForm } from "@tanstack/vue-form";
 import { z } from "zod";
+import { useFileStore } from "~/stores/file";
+import { useModalStore } from "~/stores/modal";
+import PdfSubmitted from "../_modals/PdfSubmitted.vue";
+
+const fileStore = useFileStore();
+const modalStore = useModalStore();
 
 const formSchema = z
   .object({
-    rentType: z.enum(["전세", "월세"]),
+    rentType: z.literal("전세").or(z.literal("월세")),
     deposit_hundred_million: z
       .string()
-
       .regex(/^[0-9]*$/)
-      .refine((val) => Number(val) >= 0 && Number(val) <= 999),
+      .refine((val) => Number(val) <= 999),
     deposit_ten_million: z
       .string()
-
       .regex(/^[0-9]?$/)
-      .refine((val) => Number(val) >= 0 && Number(val) <= 9),
+      .refine((val) => Number(val) <= 9),
     deposit_million: z
       .string()
-
       .regex(/^[0-9]{0,3}$/)
-      .refine((val) => Number(val) >= 0 && Number(val) <= 999),
-    monthlyRent_hundred: z
-      .string()
-
-      .regex(/^[0-9]*$/)
-      .refine((val) => Number(val) >= 0),
+      .refine((val) => Number(val) <= 999),
+    monthlyRent_hundred: z.string().regex(/^[0-9]*$/),
     monthlyRent_ten_thousand: z
       .string()
-
       .regex(/^[0-9]{0,2}$/)
-      .refine((val) => Number(val) >= 0 && Number(val) <= 99),
+      .refine((val) => Number(val) <= 99),
     detailed_address_dong: z.string().min(1),
     detailed_address_ho: z.string().min(1),
+    selected_file: z.union([z.instanceof(File), z.null()]),
+    selected_example: z.string(),
   })
   .refine((data) => {
-    console.log(data);
+    const hasFile = data.selected_file;
+    const hasExample = data.selected_example.length > 0;
+    return hasFile || hasExample;
+  })
+  .refine((data) => {
     if (
-      data.deposit_hundred_million.trim().length > 0 &&
-      data.deposit_ten_million.trim().length > 0 &&
-      data.deposit_million.trim().length > 0
+      data.deposit_hundred_million?.length &&
+      data.deposit_ten_million?.length &&
+      data.deposit_million?.length
     ) {
-      if (data.rentType === "월세") {
-        return (
-          data.monthlyRent_hundred.trim().length > 0 &&
-          data.monthlyRent_ten_thousand.trim().length > 0
-        );
-      }
-
-      if (data.rentType === "전세") {
-        return true;
-      }
+      return (
+        data.rentType === "전세" ||
+        (data.monthlyRent_hundred?.length && data.monthlyRent_ten_thousand?.length)
+      );
     }
-
     return false;
   });
 
 const form = useForm({
   defaultValues: {
-    rentType: "전세",
+    rentType: "전세" as "전세" | "월세",
     deposit_hundred_million: "",
     deposit_ten_million: "",
     deposit_million: "",
@@ -65,28 +63,42 @@ const form = useForm({
     monthlyRent_ten_thousand: "",
     detailed_address_dong: "",
     detailed_address_ho: "",
+    selected_file: null as File | null,
+    selected_example: "",
   },
-  validators: {
-    onChange: formSchema,
-    onSubmit: formSchema,
-  },
+  validators: { onChange: formSchema, onSubmit: formSchema },
   onSubmit: async ({ value }) => {
-    console.log("Form submitted:", value);
-
     const totalDeposit =
       (Number(value.deposit_hundred_million) || 0) * 1_0000_0000 +
       (Number(value.deposit_ten_million) || 0) * 1000_0000 +
       (Number(value.deposit_million) || 0) * 100_0000;
-
     const totalMonthlyRent =
       (Number(value.monthlyRent_hundred) || 0) * 1000000 +
       (Number(value.monthlyRent_ten_thousand) || 0) * 10000;
 
-    alert(
-      `제출 완료!\n보증금: ${totalDeposit.toLocaleString()}원\n월세: ${totalMonthlyRent.toLocaleString()}원`
-    );
+    modalStore.open("pdf-submitted");
   },
 });
+
+watch(
+  () => fileStore.hasFile,
+  (hasFile) => {
+    if (hasFile) {
+      if (fileStore.selectedFile) {
+        form.setFieldValue("selected_file", fileStore.selectedFile);
+        form.setFieldValue("selected_example", "");
+      } else {
+        form.setFieldValue("selected_file", null);
+        form.setFieldValue("selected_example", String(fileStore.selectedExample));
+      }
+    } else {
+      form.setFieldValue("selected_file", null);
+      form.setFieldValue("selected_example", "");
+    }
+    form.validate("change");
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -95,7 +107,6 @@ const form = useForm({
     @submit="
       (e) => {
         e.preventDefault();
-        e.stopPropagation();
         form.handleSubmit();
       }
     "
@@ -255,7 +266,7 @@ const form = useForm({
       </template>
     </form.Subscribe>
 
-    <!-- 4. 상세주소 입력 - Position changes based on rentType -->
+    <!-- 4. 상세주소 입력 -->
     <form.Subscribe>
       <template #default="{ values }">
         <div>
@@ -311,15 +322,18 @@ const form = useForm({
 
     <!-- Submit button -->
     <form.Subscribe>
-      <template #default="{ canSubmit, isSubmitting }">
+      <template #default="{ isValid, isPristine, isSubmitting }">
         <button
           type="submit"
-          :disabled="!canSubmit"
-          class="mt-[100px] w-full cursor-pointer rounded-[10px] bg-primary py-[30px] text-center text-[26px] font-[600] text-gray-fe transition-colors disabled:cursor-not-allowed disabled:bg-gray-b4"
+          :disabled="!isValid || isPristine || isSubmitting"
+          class="mt-[100px] w-full rounded-[10px] bg-primary py-[30px] text-[26px] font-[600] text-gray-fe transition-colors disabled:cursor-not-allowed disabled:bg-gray-b4"
         >
           {{ isSubmitting ? "제출 중..." : "제출" }}
         </button>
       </template>
     </form.Subscribe>
   </form>
+
+  <!-- 모달 -->
+  <PdfSubmitted />
 </template>

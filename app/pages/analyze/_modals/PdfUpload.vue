@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import InfoIcon from "~/assets/icon/info.svg";
 import TrashIcon from "~/assets/icon/trash.svg";
+import { useFileStore } from "~/stores/file";
 
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -15,15 +16,12 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const modalStore = useModalStore();
-
-const selectedExample = ref<string | null>(null);
-const selectedFile = ref<File | null>(null);
+const fileStore = useFileStore();
 
 const handleFileChange = (e: Event) => {
   const file = (e as HTMLInputEvent).target.files?.[0];
   if (file) {
-    selectedFile.value = file;
-    selectedExample.value = null; // Clear selected example when file is uploaded
+    fileStore.setFile(file);
     console.log(file);
   }
 };
@@ -31,23 +29,22 @@ const handleFileChange = (e: Event) => {
 const handleDeleteFile = (e: Event) => {
   e.preventDefault();
   e.stopPropagation();
-  selectedFile.value = null;
+  fileStore.setFile(null);
 };
 
 const handleExampleSelect = (example: string) => {
-  if (selectedExample.value === example) {
-    selectedExample.value = null;
+  if (fileStore.selectedExample === example) {
+    fileStore.setExample(null);
   } else {
-    selectedExample.value = example;
-    selectedFile.value = null; // Clear uploaded file when example is selected
+    fileStore.setExample(example);
   }
 };
 
 const handleSubmit = async () => {
   if (props.onSubmit) {
     await props.onSubmit({
-      selectedExample: selectedExample.value,
-      selectedFile: selectedFile.value,
+      selectedExample: fileStore.selectedExample,
+      selectedFile: fileStore.selectedFile,
     });
   }
 };
@@ -67,7 +64,7 @@ const handleSubmit = async () => {
         label: '제출',
         variant: 'normal',
         onClick: handleSubmit,
-        disabled: selectedExample == null && selectedFile == null,
+        disabled: fileStore.selectedExample == null && fileStore.selectedFile == null,
       },
     ]"
     @close="modalStore.close('pdf-select')"
@@ -90,7 +87,9 @@ const handleSubmit = async () => {
           alt="등기부등본 예시 1"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            selectedExample === 'example1' ? 'ring-[5px] ring-primary' : 'ring-1 ring-gray-b4',
+            fileStore.selectedExample === 'example1'
+              ? 'ring-[5px] ring-primary'
+              : 'ring-1 ring-gray-b4',
           ]"
           @click="handleExampleSelect('example1')"
         />
@@ -99,7 +98,9 @@ const handleSubmit = async () => {
           alt="등기부등본 예시 2"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            selectedExample === 'example2' ? 'ring-[5px] ring-primary' : 'ring-1 ring-gray-b4',
+            fileStore.selectedExample === 'example2'
+              ? 'ring-[5px] ring-primary'
+              : 'ring-1 ring-gray-b4',
           ]"
           @click="handleExampleSelect('example2')"
         />
@@ -108,7 +109,9 @@ const handleSubmit = async () => {
           alt="등기부등본 예시 3"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            selectedExample === 'example3' ? 'ring-[5px] ring-primary' : 'ring-1 ring-gray-b4',
+            fileStore.selectedExample === 'example3'
+              ? 'ring-[5px] ring-primary'
+              : 'ring-1 ring-gray-b4',
           ]"
           @click="handleExampleSelect('example3')"
         />
@@ -116,20 +119,20 @@ const handleSubmit = async () => {
       <label
         htmlFor="pdf-upload"
         class="flex w-full cursor-pointer items-center rounded-[10px] px-[32px] py-[28px] ring-[1.5px] ring-gray-b4"
-        :class="[selectedFile ? 'justify-between' : 'justify-center']"
+        :class="[fileStore.selectedFile ? 'justify-between' : 'justify-center']"
       >
         <span
           :class="[
             'overflow-hidden text-ellipsis whitespace-nowrap',
-            selectedFile
+            fileStore.selectedFile
               ? 'w-96 text-[24px] font-[400] text-foreground'
               : 'text-[28px] font-[600] text-gray-b4',
           ]"
         >
-          {{ selectedFile ? selectedFile.name : "직접 파일 불러오기" }}
+          {{ fileStore.selectedFile ? fileStore.selectedFile.name : "직접 파일 불러오기" }}
         </span>
         <TrashIcon
-          v-if="selectedFile"
+          v-if="fileStore.selectedFile"
           class="h-[25px] w-[25px] cursor-pointer"
           :font-controlled="false"
           filled="false"

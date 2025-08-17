@@ -76,6 +76,7 @@ const form = useForm({
       (Number(value.monthlyRent_hundred) || 0) * 1000000 +
       (Number(value.monthlyRent_ten_thousand) || 0) * 10000;
 
+    console.log(totalDeposit, totalMonthlyRent, value.selected_example, value.selected_file);
     modalStore.open("pdf-submitted");
   },
 });

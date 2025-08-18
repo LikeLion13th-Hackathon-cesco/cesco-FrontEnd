@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 flex w-full items-center justify-center gap-[70px] bg-background px-[80px] py-[40px]"
+    class="sticky top-0 z-[999] flex w-full items-center justify-center gap-[70px] bg-background px-[80px] py-[40px]"
   >
     <!-- 로고 -->
     <NuxtLink to="/">

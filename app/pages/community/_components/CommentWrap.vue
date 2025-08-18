@@ -62,7 +62,7 @@
         <!-- 해당 게시물의 댓글들 (게시물이 열려있을 때만 표시) -->
         <div v-if="openedPostId === post.id && post.replies" class="mt-[10px] bg-gray-50 p-4">
           <div v-for="reply in post.replies" :key="reply.id" class="mb-[10px] last:mb-0">
-            <!-- 댓글도 CommentItem 재사용 (좋아요/댓글수 숨김) -->
+            <!-- 댓글도 (좋아요/댓글수 숨긴 컴포넌트로) -->
             <ReplyItem
               :writer="reply.writer"
               :date="reply.date"

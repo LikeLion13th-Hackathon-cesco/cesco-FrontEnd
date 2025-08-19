@@ -1,15 +1,20 @@
 <template>
   <div class="flex flex-col items-center justify-start">
     <div
-      class="relative flex h-96 w-[896px] flex-col items-center justify-center rounded-2xl bg-neutral-100"
+      class="relative flex h-[371px] w-[896px] flex-col items-center justify-center rounded-2xl bg-neutral-100 py-[35px]"
     >
       <img src="~/assets/image/checklistIcon.jpg" alt="체크리스트" class="h-[147px] w-[107px]" />
       <div
-        class="mb-[20px] mt-[25px] justify-start text-center font-['Pretendard'] text-3xl font-semibold leading-10 text-zinc-900"
+        class="justify-start px-[40px] py-[10px] text-center font-['Pretendard'] text-3xl font-semibold leading-10 text-zinc-900"
       >
         부동산 퀴즈 풀고 크레딧 받기
       </div>
-      <BlueBtn text="퀴즈풀기" />
+
+      <button
+        class="h-[64px] w-[177px] justify-start rounded-[10px] bg-[#2D8AE7] font-['Pretendard'] text-[32px] font-semibold leading-10 text-white"
+      >
+        퀴즈풀기
+      </button>
     </div>
     <div class="mt-[90px] flex w-[896px] flex-col">
       <section class="mb-[80px]">

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const api = axios.create({
-  baseURL: process.env.NUXT_PUBLIC_API_BASE_URL,
+export const apiInstance = axios.create({
+  baseURL: "http://setbangsari.shop:8080/api/",
   timeout: 30 * 1000,
 });
 

@@ -4,7 +4,7 @@
     <HelloComponent />
     <div v-if="isPending">Loading…</div>
     <div v-if="error">{{ error.message }}</div>
-    <div v-if="data">{{ data.hello }}</div>
+    <div v-if="data">{{ data.data.hello }}</div>
   </div>
 </template>
 
@@ -12,8 +12,9 @@
 import { useQuery } from "@tanstack/vue-query";
 import HelloComponent from "./_components/HelloComponent.vue";
 
-const { data, isPending, error } = useQuery<{ hello: string }>({
+const { data, isPending, error } = useQuery<BaseResponse<{ hello: string }>>({
   queryKey: ["hello"],
-  queryFn: async () => useAPI<{ hello: string }>("/api/hello").then((res) => res.data.value!),
+  queryFn: async () =>
+    useAPI<BaseResponse<{ hello: string }>>("/hello").then((res) => res.data.value!),
 });
 </script>

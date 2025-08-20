@@ -6,7 +6,7 @@ import type { MyPageResponse } from "./_api/types/MyPageResponse";
 import { useQuery } from "@tanstack/vue-query";
 import { apiInstance } from "~/utils/api";
 
-const { data, isLoading } = useQuery<BaseResponse<MyPageResponse>>({
+const { data } = useQuery<BaseResponse<MyPageResponse>>({
   queryKey: ["mypage"],
   queryFn: () => apiInstance.get("/user/1/mypage").then((res) => res.data),
 });

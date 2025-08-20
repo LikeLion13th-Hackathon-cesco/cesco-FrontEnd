@@ -11,6 +11,7 @@
 <script setup lang="ts">
 import { useQuery } from "@tanstack/vue-query";
 import HelloComponent from "./_components/HelloComponent.vue";
+import type { BaseResponse } from "~/composables/useAPI";
 
 const { data, isPending, error } = useQuery<BaseResponse<{ hello: string }>>({
   queryKey: ["hello"],

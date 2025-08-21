@@ -5,7 +5,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: true,
-        refetchOnReconnect: "always",
+        refetchOnReconnect: true,
+        retry: 1,
       },
     },
   });

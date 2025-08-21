@@ -23,6 +23,9 @@
 │   │   │   │   └── HelloComponent.vue
 │   │   │   ├── _composables
 │   │   │   ├── _utils
+│   │   │   ├── _api # API 연동 관련
+│   │   │   │   └── types
+│   │   │   │   │   └── HelloResponse.ts # response body interface 정의용
 │   │   │   └── index.vue # /hello 쳤을때 보여지는 페이지
 │   │   └── index.vue # / 쳤을때 보여지는 페이지
 │   ├── plugins # Vue에게 자동으로 주입되는 플러그인?들
@@ -140,4 +143,18 @@ import SearchIcon from "~/assets/icon/search.svg";
 // .. 나머지 js 코드
 
 </script>
+```
+
+# 8. API 연동 방법
+
+`~/utils/api` 에 axios 인스턴스랑 BaseResponse 인터페이스 있음.
+
+queryKey: 각 API마다 고유한 키를 지정. kebab case
+queryFn: 아래 예시와 같이 가능한 한줄로 작성. `.then` 체이닝 콜백 함수에 `res.data`를 넣어서 바로 response body를 내보내도록 함.
+
+```tsx
+const { data, isLoading } = useQuery<BaseResponse<MyPageResponse>>({
+  queryKey: ["mypage"],
+  queryFn: () => apiInstance.get("/user/1/mypage").then((res) => res.data),
+});
 ```

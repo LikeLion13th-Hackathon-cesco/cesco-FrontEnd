@@ -11,10 +11,10 @@
 <script setup lang="ts">
 import { useQuery } from "@tanstack/vue-query";
 import HelloComponent from "./_components/HelloComponent.vue";
-import { api } from "~/utils/api";
+import { apiInstance } from "~/utils/api";
 
 const { data, isPending, error } = useQuery<BaseResponse<{ hello: string }>>({
   queryKey: ["hello"],
-  queryFn: async () => api.get("/hello").then((res) => res.data!),
+  queryFn: async () => apiInstance.get("/hello").then((res) => res.data!),
 });
 </script>

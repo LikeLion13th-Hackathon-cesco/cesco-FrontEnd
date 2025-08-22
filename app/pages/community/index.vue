@@ -50,10 +50,7 @@
       id="map"
       class="absolute left-[598px] top-0 z-10 h-[871px] w-[897px] rounded-[20px] bg-black"
     >
-      <SearchBar
-        class="absolute left-[155px] top-[87px] z-10"
-        @search-address="searchAddress"
-      ></SearchBar>
+      <SearchBar @search-address="searchAddress"></SearchBar>
     </div>
   </div>
 </template>

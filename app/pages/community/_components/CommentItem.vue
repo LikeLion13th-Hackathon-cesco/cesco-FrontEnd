@@ -57,12 +57,12 @@ defineProps({
     default: "",
   },
   commentCount: {
-    type: String,
-    default: "",
+    type: Number,
+    default: 1,
   },
   likeCount: {
-    type: String,
-    default: "",
+    type: Number,
+    default: 1,
   },
 });
 </script>

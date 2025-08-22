@@ -33,17 +33,30 @@
       </div>
       <div class="flex flex-col items-center gap-[30px]">
         <div v-if="currentTab === 'community'">
-          <CommentWrap></CommentWrap>
+          <div v-if="!roadCode || !buildingNumber">
+            <div class="mt-[264px] flex flex-col items-center justify-center gap-[30px]">
+              <MapIcon class="h-[122px] w-[110px]" filled="false" :font-controlled="false" />
+              <div
+                class="justify-start text-center text-[26px] font-medium leading-9 text-neutral-400"
+              >
+                지도에서 위치를 검색하여
+                <br />
+                커뮤니티 게시글을 확인하세요.
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <CommentWrap
+              :posts="posts || []"
+              :is-loading="isLoading"
+              :error="isError"
+              :selected-address="selectedAddress"
+            />
+          </div>
         </div>
         <div v-else>
           <CreditStore></CreditStore>
         </div>
-        <!-- <MapIcon class="h-[122px] w-[110px]" filled="false" :font-controlled="false"></MapIcon>
-        <div class="justify-start text-center text-[26px] font-medium leading-9 text-neutral-400">
-          지도에서 위치를 검색하여
-          <br />
-          제휴매장을 확인하세요.
-        </div> -->
       </div>
     </div>
     <div
@@ -57,10 +70,12 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
-// import MapIcon from "~/assets/icon/mapIcon.svg";
+import MapIcon from "~/assets/icon/mapIcon.svg";
 import SearchBar from "./_components/SearchBar.vue";
 import CommentWrap from "./_components/CommentWrap.vue";
 import CreditStore from "../credit/creditStore.vue";
+import { useQuery } from "@tanstack/vue-query";
+import { apiInstance } from "~/utils/api";
 
 const currentTab = ref("community");
 const handleTabStore = () => {
@@ -69,6 +84,40 @@ const handleTabStore = () => {
 const handleTabCommunity = () => {
   currentTab.value = "community";
 };
+const roadCode = ref(null);
+const buildingNumber = ref(null);
+const selectedAddress = ref("");
+const {
+  data: posts,
+  refetch,
+  isLoading,
+  isError,
+} = useQuery({
+  queryKey: ["posts", roadCode, buildingNumber],
+  enabled: false,
+  queryFn: async () => {
+    console.log("queryFn 실행됨!");
+    console.log("현재 roadCode:", roadCode.value);
+    console.log("현재 buildingNumber:", buildingNumber.value);
+
+    if (!roadCode.value || !buildingNumber.value) {
+      console.log("roadCode 또는 buildingNumber가 없어서 빈 배열 반환");
+      return [];
+    }
+
+    const url = `v1/posts/${roadCode.value}/${buildingNumber.value}`;
+    console.log("API 호출 URL:", url);
+
+    try {
+      const response = await apiInstance.get(url);
+      console.log("API Response:", response.data);
+      return response.data.data;
+    } catch (error) {
+      console.error("API Error:", error);
+      throw error;
+    }
+  },
+});
 
 //const selectedPost = ref(null);
 // const handlePost = () => {
@@ -118,27 +167,40 @@ onMounted(async () => {
   });
 });
 
-const searchAddress = (address) => {
+const searchAddress = (suggestion) => {
   if (!map.value || !kakaoRef.value) return;
 
-  const geocoder = new kakaoRef.value.maps.services.Geocoder();
-  geocoder.addressSearch(address, (result, status) => {
+  // 1. 백엔드 API 파라미터 세팅
+  roadCode.value = suggestion.rnMgtSn;
+  buildingNumber.value = suggestion.buldMnnm;
+  selectedAddress.value = suggestion.roadAddrPart1;
+  refetch();
+
+  // 2. 지도 이동 (카카오 KeywordSearch)
+  const places = new kakaoRef.value.maps.services.Places();
+  places.keywordSearch(suggestion.roadAddrPart1, (result, status) => {
     if (status === kakaoRef.value.maps.services.Status.OK) {
       const coords = new kakaoRef.value.maps.LatLng(result[0].y, result[0].x);
 
+      // 기존 마커 제거
       if (currentMarker.value) currentMarker.value.setMap(null);
 
+      // 새 마커 추가
       const imageSrc = new URL("~/assets/icon/mapPin.svg", import.meta.url).href;
-      const imageSize = new kakao.maps.Size(40, 50); // 이미지 크기
-      const imageOption = { offset: new kakao.maps.Point(27, 69) };
-      const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+      const imageSize = new kakaoRef.value.maps.Size(40, 50);
+      const imageOption = { offset: new kakaoRef.value.maps.Point(27, 69) };
+      const markerImage = new kakaoRef.value.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
       currentMarker.value = new kakaoRef.value.maps.Marker({
         position: coords,
         map: map.value,
         image: markerImage,
       });
 
+      // 지도 중심 이동
       map.value.setCenter(coords);
+    } else {
+      console.warn("카카오 키워드 검색 실패:", status);
     }
   });
 };

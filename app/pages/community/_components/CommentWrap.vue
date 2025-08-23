@@ -11,18 +11,16 @@
       <Pencil class="ml-[20px] h-[22px] w-[22px]" filled="false" :font-controlled="false"></Pencil>
     </div>
 
-    <div class="justify-start">
+    <div class="justify-start text-2xl font-semibold text-zinc-900">
       <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500">
         {{ selectedAddress || "지역을 선택해주세요" }}
       </span>
-      <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">의</span>
-      <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500" />
-      <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">리뷰 게시글</span>
+      의 리뷰 게시글
     </div>
 
     <div class="mt-[28px] flex gap-[254px]">
-      <div class="justify-start">
-        <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">총</span>
+      <div class="justify-start text-2xl font-semibold text-zinc-900">
+        <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">총 {{ " " }}</span>
         <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500">
           {{ posts?.length || 0 }}
         </span>
@@ -56,17 +54,14 @@
       </div>
     </div>
 
-    <!-- 로딩 상태 -->
     <div v-if="isLoading" class="mt-[21px] flex h-[526px] w-[400px] items-center justify-center">
       <div class="text-zinc-400">게시글을 불러오는 중...</div>
     </div>
 
-    <!-- 에러 상태 -->
     <div v-else-if="error" class="mt-[21px] flex h-[526px] w-[400px] items-center justify-center">
       <div class="text-red-500">게시글을 불러오는데 실패했습니다.</div>
     </div>
 
-    <!-- 게시글이 없는 경우 -->
     <div
       v-else-if="!posts || posts.length === 0"
       class="mt-[21px] flex h-[526px] w-[400px] items-center justify-center"
@@ -89,7 +84,7 @@
           @click="handlePostClick(post.postId)"
         />
         <!-- 댓글 기능은 나중에 구현 -->
-        <!-- 
+
         <div v-if="openedPostId === post.postId && post.replies" class="mt-[10px] bg-gray-50 p-4">
           <div v-for="reply in post.replies" :key="reply.id" class="mb-[10px] last:mb-0">
             <ReplyItem
@@ -100,14 +95,18 @@
             />
           </div>
         </div>
-        -->
       </div>
     </div>
 
     <div v-if="PostModalOpen" class="fixed inset-0 z-50 flex items-center justify-center">
       <div class="absolute inset-0 bg-zinc-900/40" @click="handlePostModal"></div>
       <div class="z-60 relative">
-        <PostComment @close="handlePostModal" />
+        <PostComment
+          :road-code="roadCode"
+          :building-number="buildingNumber"
+          :selected-address="selectedAddress"
+          @close="handlePostModal"
+        />
       </div>
     </div>
   </div>
@@ -117,7 +116,7 @@
 import { computed } from "vue";
 import DropDownIcon from "~/assets/icon/dropDownIcon.svg";
 import CommentItem from "./CommentItem.vue";
-// import ReplyItem from "./ReplyItem.vue";
+import ReplyItem from "./ReplyItem.vue";
 import PostComment from "../_modals/PostComment.vue";
 import Stick from "~/assets/icon/stick.svg";
 import Pencil from "~/assets/icon/pencil.svg";
@@ -137,6 +136,14 @@ const props = defineProps({
     default: null,
   },
   selectedAddress: {
+    type: String,
+    default: "",
+  },
+  roadCode: {
+    type: String,
+    default: "",
+  },
+  buildingNumber: {
     type: String,
     default: "",
   },

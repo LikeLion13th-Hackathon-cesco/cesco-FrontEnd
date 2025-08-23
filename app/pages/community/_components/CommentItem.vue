@@ -10,7 +10,7 @@
     <div
       class="mb-[15px] justify-start font-['Pretendard'] text-base font-normal leading-tight text-neutral-400"
     >
-      {{ date }}
+      {{ dayjs(date).format("YYYY-MM-DD") }}
     </div>
     <div
       class="mb-[10px] justify-start font-['Pretendard'] text-base font-normal leading-normal text-zinc-900"
@@ -42,6 +42,7 @@
 <script setup>
 import CommentIcon from "~/assets/icon/commentIcon.svg";
 import Like from "~/assets/icon/like.svg";
+import dayjs from "dayjs";
 
 defineProps({
   writer: {

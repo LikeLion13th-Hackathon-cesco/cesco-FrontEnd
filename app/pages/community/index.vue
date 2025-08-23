@@ -47,10 +47,12 @@
           </div>
           <div v-else>
             <CommentWrap
-              :posts="posts || []"
+              :posts="posts"
               :is-loading="isLoading"
               :error="isError"
               :selected-address="selectedAddress"
+              :road-code="roadCode"
+              :building-number="buildingNumber"
             />
           </div>
         </div>
@@ -89,12 +91,11 @@ const buildingNumber = ref(null);
 const selectedAddress = ref("");
 const {
   data: posts,
-  refetch,
   isLoading,
   isError,
 } = useQuery({
   queryKey: ["posts", roadCode, buildingNumber],
-  enabled: false,
+  enabled: true,
   queryFn: async () => {
     console.log("queryFn 실행됨!");
     console.log("현재 roadCode:", roadCode.value);
@@ -114,6 +115,7 @@ const {
       return response.data.data;
     } catch (error) {
       console.error("API Error:", error);
+      if (error.status === 404) return [];
       throw error;
     }
   },
@@ -172,13 +174,13 @@ const searchAddress = (suggestion) => {
 
   // 1. 백엔드 API 파라미터 세팅
   roadCode.value = suggestion.rnMgtSn;
-  buildingNumber.value = suggestion.buldMnnm;
-  selectedAddress.value = suggestion.roadAddrPart1;
-  refetch();
+  buildingNumber.value = suggestion?.buldMnnm;
+  selectedAddress.value = suggestion?.roadAddrPart1;
 
   // 2. 지도 이동 (카카오 KeywordSearch)
   const places = new kakaoRef.value.maps.services.Places();
   places.keywordSearch(suggestion.roadAddrPart1, (result, status) => {
+    console.log("suggestion:", suggestion);
     if (status === kakaoRef.value.maps.services.Status.OK) {
       const coords = new kakaoRef.value.maps.LatLng(result[0].y, result[0].x);
 

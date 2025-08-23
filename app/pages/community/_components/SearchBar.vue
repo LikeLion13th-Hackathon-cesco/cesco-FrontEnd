@@ -27,7 +27,7 @@
             'cursor-pointer text-[24px] font-[400] hover:underline hover:underline-offset-4',
             part.toLowerCase() === address.toLowerCase() ? 'text-primary' : 'text-foreground',
           ]"
-          @click="emits('search-address', suggestion.roadAddrPart1)"
+          @click="emits('search-address', suggestion)"
         >
           {{ part }}
         </span>
@@ -55,8 +55,8 @@ const { data: searchResponse } = useQuery<BaseResponse<SearchAddressResponse>>({
   queryKey: ["search-address", debouncedAddress],
   queryFn: async () =>
     apiInstance
-      .get("/v1/address-search", {
-        data: {
+      .get("v1/address-search", {
+        params: {
           currentPage: 1,
           countPerPage: 20,
           keyword: debouncedAddress.value,
@@ -66,6 +66,7 @@ const { data: searchResponse } = useQuery<BaseResponse<SearchAddressResponse>>({
       .then((res) => res.data),
   enabled: computed(() => !!debouncedAddress.value),
 });
+console.log("검색 결과 suggestion:", searchResponse.value);
 
 const handleInput = (e: Event) => {
   address.value = (e.target as HTMLInputElement).value.trim();

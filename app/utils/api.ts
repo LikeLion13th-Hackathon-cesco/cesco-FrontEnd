@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiInstance = axios.create({
-  baseURL: "http://setbangsari.shop:8080/api/",
+  baseURL: "https://api.setbangsari.com/api/",
   timeout: 30 * 1000,
 });
 

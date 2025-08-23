@@ -63,14 +63,26 @@ const reportMutation = useMutation({
       // 실제 파일 업로드 모드
       formData = new FormData();
       if (fileStore.selectedFile) {
-        formData.append("fraudReportFile", fileStore.selectedFile); // 등기부등본
+        formData.append("fraud_report_file", fileStore.selectedFile); // 등기부등본
       }
       if (fileStore.selectedReportFile) {
-        formData.append("complaintFile", fileStore.selectedReportFile); // 고소장
+        formData.append("complaint_file", fileStore.selectedReportFile); // 고소장
       }
       isExample = 0;
     } else if (fileStore.selectedExample || fileStore.selectedReportExample) {
       // 예시 파일 모드
+
+      const res = await fetch(`/pdf/${fileStore.selectedExample}`); //등기부
+      const resReport = await fetch(`/pdf/${fileStore.selectedReportExample}`); //고소장
+
+      const blob = await res.blob();
+      const blob_report = await resReport.blob();
+
+      formData = new FormData();
+
+      formData.append("fraud_report_file", blob, fileStore.selectedExample!); // 등기부등본
+      formData.append("complaint_file", blob_report, fileStore.selectedReportExample!); // 고소장
+
       isExample = 1;
     }
 

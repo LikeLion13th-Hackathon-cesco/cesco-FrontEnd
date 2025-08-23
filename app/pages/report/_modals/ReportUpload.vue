@@ -82,7 +82,7 @@ const handleSubmit = async () => {
       }
     "
   >
-    <InfoIcon :font-controlled="false" :filled="false" class="mx-auto h-[80px] w-[80px]" />
+    <InfoIcon :font-controlled="false" filled="false" class="mx-auto h-[80px] w-[80px]" />
     <div class="mt-[30px] flex flex-col gap-[40px]">
       <div>
         <h1 class="text-center text-[32px] font-[600] text-foreground">

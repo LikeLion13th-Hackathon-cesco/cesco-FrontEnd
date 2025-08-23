@@ -34,19 +34,73 @@
       >
         신고하기
       </button>
+      <div
+        v-if="isModalOpen"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/40"
+      >
+        <UploadComplete @close="closeModal" @check-credit="handleCreditCheck" />
+      </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Upload from "./_components/Upload.vue";
-import { useFileStore } from "~/stores/file.ts";
+import { useFileStore } from "~/stores/file";
+import { apiInstance } from "~/utils/api";
+import { useMutation } from "@tanstack/vue-query";
+import UploadComplete from "./_modals/UploadComplete.vue";
+
+const isModalOpen = ref(false);
 const fileStore = useFileStore();
 
+const reportMutation = useMutation({
+  mutationFn: async () => {
+    let formData: FormData | undefined;
+    let isExample = 0;
+
+    if (fileStore.selectedFile || fileStore.selectedReportFile) {
+      // 실제 파일 업로드 모드
+      formData = new FormData();
+      if (fileStore.selectedFile) {
+        formData.append("fraudReportFile", fileStore.selectedFile); // 등기부등본
+      }
+      if (fileStore.selectedReportFile) {
+        formData.append("complaintFile", fileStore.selectedReportFile); // 고소장
+      }
+      isExample = 0;
+    } else if (fileStore.selectedExample || fileStore.selectedReportExample) {
+      // 예시 파일 모드
+      isExample = 1;
+    }
+
+    return apiInstance
+      .post(`fraud-reports/reports-result?isExample=${isExample}`, formData, {
+        headers: formData ? { "Content-Type": "multipart/form-data" } : {},
+      })
+      .then((res) => res.data);
+  },
+  onSuccess: (data) => {
+    console.log("신고 성공:", data);
+    isModalOpen.value = true;
+    fileStore.clearAll();
+  },
+  onError: (error) => {
+    console.error("신고 실패:", error);
+    alert("신고 처리 중 오류가 발생했습니다.");
+  },
+});
+
+const closeModal = () => {
+  isModalOpen.value = !isModalOpen.value;
+};
+const handleCreditCheck = () => {
+  navigateTo("/my");
+  console.log("크레딧 페이지로 이동");
+};
 const handleReport = () => {
   if (fileStore.canSubmit) {
-    alert("신고 접수 완료!");
-    fileStore.clearAll();
+    reportMutation.mutate();
   } else {
     alert("등기부등본과 고소증 파일 모두 업로드해주세요.");
   }

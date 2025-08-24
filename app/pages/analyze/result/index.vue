@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ProcessAndDisclaimer from "./_components/ProcessAndDisclaimer.vue";
+
 const RATING = ref(4.5);
 </script>
 
@@ -9,19 +11,19 @@ const RATING = ref(4.5);
         등기부등본 분석 결과
       </h1>
       <div class="mx-auto rounded-full bg-primary px-[40px] py-[15px]">
-        <span class="text-center text-[28px] font-[600] text-gray-fe">
+        <h2 class="text-center text-[28px] font-[600] text-gray-fe">
           크게 걱정하지 않아도 되는 집
-        </span>
+        </h2>
       </div>
     </div>
     <!-- 분석 결과 -->
-    <div class="flex justify-center gap-[80px] pt-[50px]">
+    <div class="flex gap-[80px] px-[150px] pt-[50px]">
       <img
         src="~/assets/image/analysis-result-example.png"
         alt="분석 결과 예시"
         class="w-[475px]"
       />
-      <div class="flex max-w-[500px] flex-col gap-[30px] overflow-y-auto">
+      <div class="flex flex-col gap-[30px] overflow-y-auto">
         <!-- 한 줄 평가 -->
         <section class="block space-y-[8px]">
           <header class="flex items-center gap-[8px]">
@@ -71,5 +73,8 @@ const RATING = ref(4.5);
         </section>
       </div>
     </div>
+
+    <!-- 분석 절차 -->
+    <ProcessAndDisclaimer />
   </main>
 </template>

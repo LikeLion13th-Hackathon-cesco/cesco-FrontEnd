@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center gap-[40px]">
     <div class="flex flex-col items-center">
       <div class="justify-start text-center">
-        <span class="font-['Pretendard'] text-[32px] font-semibold leading-10 text-blue-500">
+        <span class="font-['Pretendard'] text-[32px] font-semibold leading-10 text-primary">
           한 달간 무제한으로
         </span>
         <span class="font-['Pretendard'] text-[32px] font-semibold leading-10 text-zinc-900">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="flex gap-[40px]">
-      <PriceBox option="PLUS" text-color="#2D8AE7" card-class="outline-blue-500 bg-blue-50">
+      <PriceBox option="PLUS" text-color="#2D8AE7" card-class="flex-1 outline-blue-500 bg-blue-50">
         <template #price>
           <div class="text-[24px] font-normal">
             월
@@ -26,7 +26,7 @@
         </template>
         <template #button>
           <button
-            class="inline-flex items-center justify-center rounded-[10px] bg-blue-500 px-10 py-[10px] text-[20px] font-semibold text-white"
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-[10px] bg-primary px-10 py-[10px] text-[20px] font-semibold text-white"
           >
             현재 PLUS 서비스 이용중
             <!--{{ isPlusUser ? '현재 PLUS 서비스 이용중' : 'PLUS 서비스 이용하기' }}-->
@@ -59,13 +59,13 @@
               전월세 사기 이력이 있는 임대인 정보를
               <br />
               고려하여
-              <span class="font-normal text-[#2D8AE7]">더 정확한 전월세 안전지수 제공</span>
+              <span class="font-normal text-primary">더 정확한 전월세 안전지수 제공</span>
             </div>
           </div>
         </template>
       </PriceBox>
 
-      <PriceBox option="Free" text-color="#1A1A1A" card-class="outline-zinc-300 bg-white">
+      <PriceBox option="Free" text-color="#1A1A1A" card-class="flex-1 outline-zinc-300 bg-white">
         <template #price>
           <div class="text-[36px] font-semibold text-zinc-900">
             0
@@ -74,7 +74,7 @@
         </template>
         <template #button>
           <button
-            class="inline-flex items-center justify-center rounded-[10px] bg-[#B4B4B4] px-10 py-[10px] text-[20px] font-semibold text-white"
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-[10px] bg-[#B4B4B4] px-10 py-[10px] text-[20px] font-semibold text-white"
           >
             서비스 구독 취소하기
             <!--{{ isPlusUser ? '서비스 구독 취소하기' : '현재 사용 서비스' }}-->

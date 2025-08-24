@@ -86,15 +86,21 @@
           @click="handlePostClick(post.postId)"
         />
 
-        <div v-if="openedPostId === post.postId && post.replies" class="mt-[10px] bg-gray-50 p-4">
-          <div v-for="reply in post.replies" :key="reply.id" class="mb-[10px] last:mb-0">
+        <div v-if="openedPostId === post.postId" class="mt-[10px] bg-gray-50 p-4">
+          <div v-if="isReplyLoading" class="text-zinc-400">댓글을 불러오는 중...</div>
+          <!-- <div v-else-if="isReplyError" class="text-red-500">댓글을 불러오는데 실패했습니다.</div> -->
+          <div v-for="reply in replyData" :key="reply.id" class="mb-[10px] last:mb-0">
             <ReplyItem
-              :writer="reply.writer"
-              :date="reply.date"
+              :writer="reply.userId"
+              :date="reply.createdAt"
               :comment="reply.content"
               class="border border-gray-200 bg-white shadow-sm"
             />
           </div>
+          <div v-if="!replyData || replyData.length === 0" class="mb-[30px] text-zinc-400">
+            댓글이 없습니다.
+          </div>
+          <PostReply :post-id="post.postId" :opened-post-id="openedPostId"></PostReply>
         </div>
       </div>
     </div>
@@ -121,6 +127,9 @@ import ReplyItem from "./ReplyItem.vue";
 import PostComment from "../_modals/PostComment.vue";
 import Stick from "~/assets/icon/stick.svg";
 import Pencil from "~/assets/icon/pencil.svg";
+import { useQuery } from "@tanstack/vue-query";
+import { apiInstance } from "~/utils/api";
+import PostReply from "./PostReply.vue";
 
 // Props 정의
 const props = defineProps({
@@ -186,5 +195,16 @@ const sortedPosts = computed(() => {
   }
 
   return sorted;
+});
+
+const { data: replyData, isLoading: isReplyLoading } = useQuery({
+  queryKey: ["replies", openedPostId],
+  queryFn: async () => {
+    if (!openedPostId.value) return [];
+    const res = await apiInstance.get(`v1/posts/${postId}/comments`);
+    return res.data;
+    console.log(res.data);
+  },
+  enabled: true,
 });
 </script>

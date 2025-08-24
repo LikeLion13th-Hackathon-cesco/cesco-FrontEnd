@@ -182,7 +182,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <main>
+  <main class="max-w-full">
     <section id="hero" ref="heroSection" class="relative h-screen w-full overflow-hidden">
       <!-- 배경 -->
       <div

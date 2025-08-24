@@ -1,6 +1,6 @@
 <template>
   <div
-    class="inline-block rounded-full px-[40px] py-[15px]"
+    class="inline-block whitespace-nowrap rounded-full px-[40px] py-[15px]"
     :style="{
       backgroundColor:
         safetyType === SafetyType.Safe
@@ -23,7 +23,7 @@
       이 부동산은 거래에 주의가 필요합니다.
     </span>
     <span v-else class="text-center text-[24px] font-[600] text-gray-fe">
-      이 부동산은 거래 시 위험 부담이 있습니다.
+      이 부동산은 거래에 위험합니다.
     </span>
   </div>
 </template>

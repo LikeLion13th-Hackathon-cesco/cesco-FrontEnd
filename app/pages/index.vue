@@ -244,7 +244,7 @@ onUnmounted(() => {
         <p class="text-center text-[32px]">
           <span class="font-[700] text-primary">복잡한 등기부등본,</span>
           <br />
-          <span class="font-[500] text-[#666666]">업로드 한 번으로 안전도 진단 끝!</span>
+          <span class="font-[500] text-gray-66">업로드 한 번으로 안전도 진단 끝!</span>
         </p>
       </div>
 
@@ -254,7 +254,7 @@ onUnmounted(() => {
         <p class="text-center text-[32px]">
           <span class="font-[700] text-primary">주소만 입력하면</span>
           <br />
-          <span class="font-[500] text-[#666666]">진짜 주민의 리뷰를 볼 수 있어요.</span>
+          <span class="font-[500] text-gray-66">진짜 주민의 리뷰를 볼 수 있어요.</span>
         </p>
       </div>
 
@@ -268,7 +268,7 @@ onUnmounted(() => {
         <p class="text-center text-[32px]">
           <span class="font-[700] text-primary">전월세 사기 신고 서비스로</span>
           <br />
-          <span class="font-[500] text-[#666666]">안전과 크레딧 모두를 챙겨보세요.</span>
+          <span class="font-[500] text-gray-66">안전과 크레딧 모두를 챙겨보세요.</span>
         </p>
       </div>
 
@@ -276,7 +276,7 @@ onUnmounted(() => {
       <div ref="feature4" class="w-full space-y-[50px]">
         <img src="~/assets/image/landing-feature-4.png" alt="" class="mx-auto w-[600px]" />
         <p class="text-center text-[32px]">
-          <span class="font-[500] text-[#666666]">신고 및 게시글 작성으로 받은 크레딧으로</span>
+          <span class="font-[500] text-gray-66">신고 및 게시글 작성으로 받은 크레딧으로</span>
           <br />
           <span class="font-[700] text-primary">지역 제휴처에서 할인 혜택까지!</span>
         </p>

@@ -10,16 +10,20 @@
       <Stick class="ml-[50px] h-[60px]" filled="false" :font-controlled="false"></Stick>
       <Pencil class="ml-[20px] h-[22px] w-[22px]" filled="false" :font-controlled="false"></Pencil>
     </div>
-    <div class="justify-start">
-      <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500">송파대로 48길 29</span>
-      <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">의</span>
-      <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500" />
-      <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">리뷰 게시글</span>
+
+    <div class="justify-start text-2xl font-semibold text-zinc-900">
+      <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500">
+        {{ selectedAddress || "지역을 선택해주세요" }}
+      </span>
+      의 리뷰 게시글
     </div>
+
     <div class="mt-[28px] flex gap-[254px]">
-      <div class="justify-start">
-        <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">총</span>
-        <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500">5</span>
+      <div class="justify-start text-2xl font-semibold text-zinc-900">
+        <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">총 {{ " " }}</span>
+        <span class="font-['Pretendard'] text-2xl font-semibold text-blue-500">
+          {{ posts?.length || 0 }}
+        </span>
         <span class="font-['Pretendard'] text-2xl font-semibold text-zinc-900">개</span>
       </div>
       <div class="relative">
@@ -49,141 +53,160 @@
         </div>
       </div>
     </div>
-    <div class="mt-[21px] flex h-[526px] w-[400px] flex-col overflow-y-auto overflow-x-hidden">
-      <div v-for="post in dummy" :key="post.id">
+
+    <div v-if="isLoading" class="mt-[21px] flex h-[526px] w-[400px] items-center justify-center">
+      <div class="text-zinc-400">게시글을 불러오는 중...</div>
+    </div>
+
+    <div v-else-if="error" class="mt-[21px] flex h-[526px] w-[400px] items-center justify-center">
+      <div class="text-red-500">게시글을 불러오는데 실패했습니다.</div>
+    </div>
+
+    <div
+      v-else-if="!posts || posts.length === 0"
+      class="mt-[21px] flex h-[526px] w-[400px] items-center justify-center"
+    >
+      <div class="text-zinc-400">아직 작성된 게시글이 없습니다.</div>
+    </div>
+
+    <!-- 게시글 목록 -->
+    <div
+      v-else
+      class="mt-[21px] flex h-[526px] w-[400px] flex-col overflow-y-auto overflow-x-hidden"
+    >
+      <div v-for="post in sortedPosts" :key="post.postId">
         <CommentItem
-          :writer="post?.writer"
-          :date="post?.date"
-          :comment="post.comment"
-          :comment-count="post.commentCount"
+          :writer="post.userId.toString()"
+          :date="post.createdAt"
+          :comment="post.content"
+          :comment-count="0"
           :like-count="post.likeCount"
-          @click="handlePostClick(post.id)"
+          :user-id="1"
+          :post-id="post.postId"
+          @click="handlePostClick(post.postId)"
         />
-        <!-- 해당 게시물의 댓글들 (게시물이 열려있을 때만 표시) -->
-        <div v-if="openedPostId === post.id && post.replies" class="mt-[10px] bg-gray-50 p-4">
-          <div v-for="reply in post.replies" :key="reply.id" class="mb-[10px] last:mb-0">
-            <!-- 댓글도 (좋아요/댓글수 숨긴 컴포넌트로) -->
+
+        <div v-if="openedPostId === post.postId" class="mt-[10px] bg-gray-50 p-4">
+          <div v-if="isReplyLoading" class="text-zinc-400">댓글을 불러오는 중...</div>
+          <!-- <div v-else-if="isReplyError" class="text-red-500">댓글을 불러오는데 실패했습니다.</div> -->
+          <div v-for="reply in replyData?.data" :key="reply?.postId" class="mb-[10px] last:mb-0">
             <ReplyItem
-              :writer="reply.writer"
-              :date="reply.date"
+              :writer="'작성자'"
+              :date="reply.createdAt"
               :comment="reply.content"
               class="border border-gray-200 bg-white shadow-sm"
             />
           </div>
+          <div v-if="!replyData || replyData.data.length === 0" class="mb-[30px] text-zinc-400">
+            댓글이 없습니다.
+          </div>
+          <PostReply :post-id="post.postId" :opened-post-id="openedPostId"></PostReply>
         </div>
       </div>
     </div>
+
     <div v-if="PostModalOpen" class="fixed inset-0 z-50 flex items-center justify-center">
       <div class="absolute inset-0 bg-zinc-900/40" @click="handlePostModal"></div>
       <div class="z-60 relative">
-        <PostComment @close="handlePostModal" />
+        <PostComment
+          :road-code="roadCode"
+          :building-number="buildingNumber"
+          :selected-address="selectedAddress"
+          @close="handlePostModal"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { computed } from "vue";
 import DropDownIcon from "~/assets/icon/dropDownIcon.svg";
 import CommentItem from "./CommentItem.vue";
 import ReplyItem from "./ReplyItem.vue";
 import PostComment from "../_modals/PostComment.vue";
 import Stick from "~/assets/icon/stick.svg";
 import Pencil from "~/assets/icon/pencil.svg";
+import { useQuery } from "@tanstack/vue-query";
+import { apiInstance, type BaseResponse } from "~/utils/api";
+import PostReply from "./PostReply.vue";
+import type { ReplyResponse } from "../_api/types/ReplyResponse";
+import type { PostResponse } from "../_api/types/PostResponse";
+
+// Props 정의
+const props = defineProps({
+  posts: {
+    type: Array,
+    default: () => [],
+  },
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+  error: {
+    type: [Error, String, null],
+    default: null,
+  },
+  selectedAddress: {
+    type: String,
+    default: "",
+  },
+  roadCode: {
+    type: String,
+    default: "",
+  },
+  buildingNumber: {
+    type: String,
+    default: "",
+  },
+});
 
 const ToggleOpen = ref(false);
 const PostModalOpen = ref(false);
 const selectedOption = ref("최신순");
 const options = ["최신순", "인기순"];
-const openedPostId = ref(null);
+const openedPostId = ref<number | null>(null);
 
-const handlePostClick = (postId) => {
+const handlePostClick = (postId: number) => {
   openedPostId.value = openedPostId.value === postId ? null : postId;
 };
+
 const handleToggle = () => {
   ToggleOpen.value = !ToggleOpen.value;
 };
 
-const selectOption = (option) => {
+const selectOption = (option: string) => {
   selectedOption.value = option;
   ToggleOpen.value = false;
 };
+
 const handlePostModal = () => {
   PostModalOpen.value = !PostModalOpen.value;
 };
-const dummy = [
-  {
-    id: 0,
-    writer: "작성자",
-    date: "2025-06-13",
-    comment: "102동 302호 층간소음 너무 심해서 계약기간 만기날만 기다리고 있음...",
-    commentCount: 4,
-    likeCount: 7,
-    replies: [
-      {
-        id: 0,
-        writer: "답글작성자1",
-        date: "2025-06-13",
-        content: "도대체 얼마나 심하길래 그러시나요?",
-      },
-      {
-        id: 1,
-        writer: "작성자",
-        date: "2025-06-13",
-        content: "밤잠을 도저히 못자겠어요 다들 왜이리 눈이 퀭해졌냐고 물어보네요",
-      },
-      {
-        id: 2,
-        writer: "답글작성자3",
-        date: "2025-06-12",
-        content: "헉... 그정도면 집주인이나 경찰에 얘기 해봐야 하는거 아닌가요 ??",
-      },
-    ],
+
+// 정렬된 게시글
+const sortedPosts = computed(() => {
+  if (!props.posts || props.posts.length === 0) return [];
+
+  const sorted = [...props.posts] as PostResponse[];
+
+  if (selectedOption.value === "최신순") {
+    return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  } else if (selectedOption.value === "인기순") {
+    return sorted.sort((a, b) => b.likeCount - a.likeCount);
+  }
+
+  return sorted;
+});
+
+const { data: replyData, isLoading: isReplyLoading } = useQuery<BaseResponse<ReplyResponse>>({
+  queryKey: ["replies", openedPostId],
+  queryFn: async () => {
+    if (!openedPostId.value) return [];
+    const res = await apiInstance.get(`v1/posts/${openedPostId.value}/comments`);
+    console.log(res.data);
+    return res.data;
   },
-  {
-    id: 1,
-    writer: "작성자",
-    date: "2025-06-13",
-    comment: "102동 302호 층간소음 너무 심해서 계약기간 만기날만 기다리고 있음...",
-    commentCount: 4,
-    likeCount: 1,
-    replies: [
-      {
-        id: 0,
-        writer: "답글작성자1",
-        date: "2025-06-13",
-        content: "하루빨리 이사 가시길..^^",
-      },
-      {
-        id: 1,
-        writer: "작성자",
-        date: "2025-06-13",
-        content: "밤잠을 도저히 못자겠어요 다들 왜이리 눈이 퀭해졌냐고 물어보네요",
-      },
-    ],
-  },
-  {
-    id: 2,
-    writer: "작성자",
-    date: "2025-06-13",
-    comment: "102동 302호 층간소음 너무 심해서 계약기간 만기날만 기다리고 있음...",
-    commentCount: 4,
-    likeCount: 1,
-  },
-  {
-    id: 3,
-    writer: "작성자",
-    date: "2025-06-13",
-    comment: "102동 302호 층간소음 너무 심해서 계약기간 만기날만 기다리고 있음...",
-    commentCount: 4,
-    likeCount: 13,
-  },
-  {
-    id: 4,
-    writer: "작성자",
-    date: "2025-06-13",
-    comment: "102동 302호 층간소음 너무 심해서 계약기간 만기날만 기다리고 있음...",
-    commentCount: 4,
-    likeCount: 1,
-  },
-];
+  enabled: computed(() => !!openedPostId.value),
+});
 </script>

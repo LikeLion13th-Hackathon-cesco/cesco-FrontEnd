@@ -89,6 +89,8 @@ const handleTabCommunity = () => {
 const roadCode = ref(null);
 const buildingNumber = ref(null);
 const selectedAddress = ref("");
+
+//검색한 주소의 게시글을 전체 불러오기
 const {
   data: posts,
   isLoading,

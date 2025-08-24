@@ -81,9 +81,10 @@
           :comment="post.content"
           :comment-count="0"
           :like-count="post.likeCount"
+          :user-id="1"
+          :post-id="post.postId"
           @click="handlePostClick(post.postId)"
         />
-        <!-- 댓글 기능은 나중에 구현 -->
 
         <div v-if="openedPostId === post.postId && post.replies" class="mt-[10px] bg-gray-50 p-4">
           <div v-for="reply in post.replies" :key="reply.id" class="mb-[10px] last:mb-0">

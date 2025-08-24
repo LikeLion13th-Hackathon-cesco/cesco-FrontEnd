@@ -89,15 +89,15 @@
         <div v-if="openedPostId === post.postId" class="mt-[10px] bg-gray-50 p-4">
           <div v-if="isReplyLoading" class="text-zinc-400">댓글을 불러오는 중...</div>
           <!-- <div v-else-if="isReplyError" class="text-red-500">댓글을 불러오는데 실패했습니다.</div> -->
-          <div v-for="reply in replyData" :key="reply.id" class="mb-[10px] last:mb-0">
+          <div v-for="reply in replyData?.data" :key="reply?.postId" class="mb-[10px] last:mb-0">
             <ReplyItem
-              :writer="reply.userId"
+              :writer="'작성자'"
               :date="reply.createdAt"
               :comment="reply.content"
               class="border border-gray-200 bg-white shadow-sm"
             />
           </div>
-          <div v-if="!replyData || replyData.length === 0" class="mb-[30px] text-zinc-400">
+          <div v-if="!replyData || replyData.data.length === 0" class="mb-[30px] text-zinc-400">
             댓글이 없습니다.
           </div>
           <PostReply :post-id="post.postId" :opened-post-id="openedPostId"></PostReply>
@@ -119,7 +119,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 import DropDownIcon from "~/assets/icon/dropDownIcon.svg";
 import CommentItem from "./CommentItem.vue";
@@ -128,8 +128,10 @@ import PostComment from "../_modals/PostComment.vue";
 import Stick from "~/assets/icon/stick.svg";
 import Pencil from "~/assets/icon/pencil.svg";
 import { useQuery } from "@tanstack/vue-query";
-import { apiInstance } from "~/utils/api";
+import { apiInstance, type BaseResponse } from "~/utils/api";
 import PostReply from "./PostReply.vue";
+import type { ReplyResponse } from "../_api/types/ReplyResponse";
+import type { PostResponse } from "../_api/types/PostResponse";
 
 // Props 정의
 const props = defineProps({
@@ -163,9 +165,9 @@ const ToggleOpen = ref(false);
 const PostModalOpen = ref(false);
 const selectedOption = ref("최신순");
 const options = ["최신순", "인기순"];
-const openedPostId = ref(null);
+const openedPostId = ref<number | null>(null);
 
-const handlePostClick = (postId) => {
+const handlePostClick = (postId: number) => {
   openedPostId.value = openedPostId.value === postId ? null : postId;
 };
 
@@ -173,7 +175,7 @@ const handleToggle = () => {
   ToggleOpen.value = !ToggleOpen.value;
 };
 
-const selectOption = (option) => {
+const selectOption = (option: string) => {
   selectedOption.value = option;
   ToggleOpen.value = false;
 };
@@ -186,7 +188,7 @@ const handlePostModal = () => {
 const sortedPosts = computed(() => {
   if (!props.posts || props.posts.length === 0) return [];
 
-  const sorted = [...props.posts];
+  const sorted = [...props.posts] as PostResponse[];
 
   if (selectedOption.value === "최신순") {
     return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
@@ -197,14 +199,14 @@ const sortedPosts = computed(() => {
   return sorted;
 });
 
-const { data: replyData, isLoading: isReplyLoading } = useQuery({
+const { data: replyData, isLoading: isReplyLoading } = useQuery<BaseResponse<ReplyResponse>>({
   queryKey: ["replies", openedPostId],
   queryFn: async () => {
     if (!openedPostId.value) return [];
-    const res = await apiInstance.get(`v1/posts/${postId}/comments`);
-    return res.data;
+    const res = await apiInstance.get(`v1/posts/${openedPostId.value}/comments`);
     console.log(res.data);
+    return res.data;
   },
-  enabled: true,
+  enabled: computed(() => !!openedPostId.value),
 });
 </script>

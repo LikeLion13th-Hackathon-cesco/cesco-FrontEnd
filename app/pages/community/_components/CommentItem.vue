@@ -55,6 +55,7 @@ import { useMutation, useQueryClient } from "@tanstack/vue-query";
 import { apiInstance } from "~/utils/api";
 
 const isLike = ref(false);
+
 const handleClickLike = () => {
   isLike.value = !isLike.value;
   if (isLike.value === true) {
@@ -81,7 +82,7 @@ const { mutate: clickLike } = useMutation({
   onSuccess: (data) => {
     console.log("좋아요 생성 성공:", data);
     queryClient.invalidateQueries({
-      queryKey: ["posts"],
+      queryKey: ["replies", props.postId],
     });
   },
   onError: (error) => {
@@ -94,6 +95,7 @@ const { mutate: clickLike } = useMutation({
     }
   },
 });
+
 const { mutate: cancelLike } = useMutation({
   mutationFn: async (postId: number) => {
     const response = await apiInstance.delete(`v1/posts/${postId}/likes`);
@@ -102,7 +104,7 @@ const { mutate: cancelLike } = useMutation({
   onSuccess: () => {
     console.log("좋아요 삭제 성공");
     queryClient.invalidateQueries({
-      queryKey: ["posts"],
+      queryKey: ["replies", props.postId],
     });
   },
   onError: (error) => {

@@ -49,10 +49,6 @@ import { useMutation, useQueryClient } from "@tanstack/vue-query";
 import { apiInstance } from "~/utils/api";
 
 const props = defineProps({
-  content: {
-    type: String,
-    required: true,
-  },
   roadCode: {
     type: String,
     required: true,

@@ -26,8 +26,8 @@
 import dayjs from "dayjs";
 defineProps({
   writer: {
-    type: Number,
-    default: 1,
+    type: String,
+    default: "",
   },
   date: {
     type: String,

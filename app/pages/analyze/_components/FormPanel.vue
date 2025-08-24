@@ -34,8 +34,27 @@ watch(
         form.setFieldValue("selected_file", fileStore.selectedFile);
         form.setFieldValue("selected_example", "");
       } else {
+        // 예시 파일 선택 시
         form.setFieldValue("selected_file", null);
         form.setFieldValue("selected_example", String(fileStore.selectedExample));
+
+        const exampleNo = String(fileStore.selectedExample).match(/\d+/)?.[0];
+        switch (exampleNo) {
+          case "1":
+            form.setFieldValue("detailed_address_dong", "1");
+            form.setFieldValue("detailed_address_ho", "914");
+            break;
+          case "2":
+            form.setFieldValue("detailed_address_dong", "");
+            form.setFieldValue("detailed_address_ho", "202");
+            break;
+          case "3":
+            form.setFieldValue("detailed_address_dong", "가");
+            form.setFieldValue("detailed_address_ho", "204");
+            break;
+          default:
+            break;
+        }
       }
     } else {
       form.setFieldValue("selected_file", null);
@@ -106,6 +125,7 @@ const emit = defineEmits<{
                 :id="field.name"
                 :name="field.name"
                 :value="field.state.value"
+                placeholder="0"
                 type="text"
                 autocomplete="off"
                 :class="[
@@ -127,6 +147,7 @@ const emit = defineEmits<{
                 :id="field.name"
                 :name="field.name"
                 :value="field.state.value"
+                placeholder="0"
                 type="text"
                 autocomplete="off"
                 :class="[
@@ -148,6 +169,7 @@ const emit = defineEmits<{
                 :id="field.name"
                 :name="field.name"
                 :value="field.state.value"
+                placeholder="0"
                 type="text"
                 autocomplete="off"
                 :class="[
@@ -177,6 +199,7 @@ const emit = defineEmits<{
                     :id="field.name"
                     :name="field.name"
                     :value="field.state.value"
+                    placeholder="0"
                     type="text"
                     autocomplete="off"
                     :class="[
@@ -198,6 +221,7 @@ const emit = defineEmits<{
                     :id="field.name"
                     :name="field.name"
                     :value="field.state.value"
+                    placeholder="0"
                     type="text"
                     autocomplete="off"
                     :class="[

@@ -1,4 +1,5 @@
 import z from "zod";
+import { calculateDepositAmount, calculateMonthlyRentAmount } from "./calculations";
 
 export const formSchema = z
   .object({
@@ -15,13 +16,16 @@ export const formSchema = z
       .string()
       .regex(/^[0-9]{0,3}$/)
       .refine((val) => Number(val) <= 999),
-    monthlyRent_hundred: z.string().regex(/^[0-9]*$/),
+    monthlyRent_hundred: z
+      .string()
+      .regex(/^[0-9]*$/)
+      .refine((val) => Number(val) <= 999),
     monthlyRent_ten_thousand: z
       .string()
       .regex(/^[0-9]{0,2}$/)
       .refine((val) => Number(val) <= 99),
-    detailed_address_dong: z.string().min(1),
-    detailed_address_ho: z.string().min(1),
+    detailed_address_dong: z.string(),
+    detailed_address_ho: z.string(),
     selected_file: z.union([z.instanceof(File), z.null()]),
     selected_example: z.string(),
   })
@@ -31,15 +35,18 @@ export const formSchema = z
     return hasFile || hasExample;
   })
   .refine((data) => {
-    if (
-      data.deposit_hundred_million?.length &&
-      data.deposit_ten_million?.length &&
-      data.deposit_million?.length
-    ) {
-      return (
-        data.rentType === "전세" ||
-        (data.monthlyRent_hundred?.length && data.monthlyRent_ten_thousand?.length)
-      );
+    const totalDeposit = calculateDepositAmount(data);
+    const totalMonthlyRent = calculateMonthlyRentAmount(data);
+
+    // Deposit must always be greater than 0
+    if (totalDeposit <= 0) {
+      return false;
     }
-    return false;
+
+    // If rent type is "월세", monthly rent must also be greater than 0
+    if (data.rentType === "월세" && totalMonthlyRent <= 0) {
+      return false;
+    }
+
+    return true;
   });

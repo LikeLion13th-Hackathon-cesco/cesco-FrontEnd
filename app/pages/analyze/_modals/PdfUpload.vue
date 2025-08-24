@@ -67,6 +67,7 @@ const handleSubmit = async () => {
         disabled: fileStore.selectedExample == null && fileStore.selectedFile == null,
       },
     ]"
+    :backdrop-close="false"
     @close="modalStore.close('pdf-select')"
   >
     <InfoIcon :font-controlled="false" filled="false" class="mx-auto h-[80px] w-[80px]" />
@@ -84,36 +85,36 @@ const handleSubmit = async () => {
       <div class="flex items-center gap-[40px]">
         <img
           src="~/assets/image/pdf-example.png"
-          alt="등기부등본 예시 1"
+          alt="예시파일1_등기부등본.pdf"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            fileStore.selectedExample === 'example1'
+            fileStore.selectedExample === '예시파일1_안전_등기부등본.pdf'
               ? 'ring-[5px] ring-primary'
               : 'ring-1 ring-gray-b4',
           ]"
-          @click="handleExampleSelect('example1')"
+          @click="handleExampleSelect('예시파일1_안전_등기부등본.pdf')"
         />
         <img
           src="~/assets/image/pdf-example.png"
-          alt="등기부등본 예시 2"
+          alt="예시파일2_등기부등본.pdf"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            fileStore.selectedExample === 'example2'
+            fileStore.selectedExample === '예시파일2_불안_등기부등본.pdf'
               ? 'ring-[5px] ring-primary'
               : 'ring-1 ring-gray-b4',
           ]"
-          @click="handleExampleSelect('example2')"
+          @click="handleExampleSelect('예시파일2_불안_등기부등본.pdf')"
         />
         <img
           src="~/assets/image/pdf-example.png"
-          alt="등기부등본 예시 3"
+          alt="예시파일3_등기부등본.pdf"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            fileStore.selectedExample === 'example3'
+            fileStore.selectedExample === '예시파일3_위험_등기부등본.pdf'
               ? 'ring-[5px] ring-primary'
               : 'ring-1 ring-gray-b4',
           ]"
-          @click="handleExampleSelect('example3')"
+          @click="handleExampleSelect('예시파일3_위험_등기부등본.pdf')"
         />
       </div>
       <label

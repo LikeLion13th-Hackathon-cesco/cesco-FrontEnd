@@ -82,7 +82,7 @@ const handleSubmit = async () => {
       }
     "
   >
-    <InfoIcon :font-controlled="false" :filled="false" class="mx-auto h-[80px] w-[80px]" />
+    <InfoIcon :font-controlled="false" filled="false" class="mx-auto h-[80px] w-[80px]" />
     <div class="mt-[30px] flex flex-col gap-[40px]">
       <div>
         <h1 class="text-center text-[32px] font-[600] text-foreground">
@@ -100,33 +100,33 @@ const handleSubmit = async () => {
           alt="민형사 고소증 예시 1"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            fileStore.selectedReportExample === 'example1'
+            fileStore.selectedReportExample === '예시파일1_고소증.pdf'
               ? 'ring-[5px] ring-primary'
               : 'ring-1 ring-gray-b4',
           ]"
-          @click="handleExampleSelect('example1')"
+          @click="handleExampleSelect('예시파일1_고소증.pdf')"
         />
         <img
           src="~/assets/image/pdf-example.png"
           alt="민형사 고소증 예시 2"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            fileStore.selectedReportExample === 'example2'
+            fileStore.selectedReportExample === '예시파일2_고소증.pdf'
               ? 'ring-[5px] ring-primary'
               : 'ring-1 ring-gray-b4',
           ]"
-          @click="handleExampleSelect('example2')"
+          @click="handleExampleSelect('예시파일2_고소증.pdf')"
         />
         <img
           src="~/assets/image/pdf-example.png"
           alt="민형사 고소증 예시 3"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
-            fileStore.selectedReportExample === 'example3'
+            fileStore.selectedReportExample === '예시파일3_고소증.pdf'
               ? 'ring-[5px] ring-primary'
               : 'ring-1 ring-gray-b4',
           ]"
-          @click="handleExampleSelect('example3')"
+          @click="handleExampleSelect('예시파일3_고소증.pdf')"
         />
       </div>
       <label

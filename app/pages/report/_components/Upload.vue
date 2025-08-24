@@ -4,9 +4,14 @@
       {{ fileName }}
     </div>
     <div class="flex h-96 w-80 flex-col items-center rounded-2xl bg-blue-50 py-[40px] pt-[47px]">
-      <CloudIcon alt="cloud" class="mb-[20px]" filled="false" :font-controlled="false" />
+      <CloudIcon
+        alt="cloud"
+        class="mb-[20px] h-[60px] w-[60px]"
+        filled="false"
+        :font-controlled="false"
+      />
       <button
-        class="mb-[40px] h-11 w-64 justify-start rounded-[10px] bg-blue-500 text-center font-['Pretendard'] text-lg font-semibold leading-loose text-white"
+        class="mb-[40px] justify-start whitespace-nowrap rounded-[10px] bg-blue-500 px-[30px] py-[8px] text-center font-['Pretendard'] text-[18px] font-[600] leading-7 text-white"
         @click="openModal"
       >
         {{ btnName }}

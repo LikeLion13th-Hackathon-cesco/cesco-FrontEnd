@@ -43,10 +43,12 @@ const emit = defineEmits(["close", "checkCredit"]);
 
 const handleClose = () => {
   emit("close");
+  navigateTo("/");
 };
 
 const handleCreditCheck = () => {
   emit("checkCredit");
   emit("close");
+  navigateTo("/my");
 };
 </script>

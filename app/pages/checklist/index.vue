@@ -1,17 +1,17 @@
 <template>
-  <div class="flex flex-col items-center justify-start">
+  <div class="mb-[200px] flex flex-col items-center justify-start">
     <div
       class="relative flex h-[371px] w-[896px] flex-col items-center justify-center rounded-2xl bg-neutral-100 py-[35px]"
     >
       <img src="~/assets/image/checklistIcon.jpg" alt="체크리스트" class="h-[147px] w-[107px]" />
       <div
-        class="justify-start px-[40px] py-[10px] text-center font-['Pretendard'] text-3xl font-semibold leading-10 text-zinc-900"
+        class="justify-start px-[40px] py-[20px] text-center font-['Pretendard'] text-[32px] font-[600] leading-10 text-zinc-900"
       >
         부동산 퀴즈 풀고 크레딧 받기
       </div>
 
       <button
-        class="h-[64px] w-[177px] justify-start rounded-[10px] bg-[#2D8AE7] font-['Pretendard'] text-[32px] font-semibold leading-10 text-white"
+        class="h-[64px] w-[177px] justify-start rounded-[10px] bg-[#2D8AE7] font-['Pretendard'] text-[28px] font-[600] leading-10 text-white"
         @click="gotoQuiz"
       >
         퀴즈풀기

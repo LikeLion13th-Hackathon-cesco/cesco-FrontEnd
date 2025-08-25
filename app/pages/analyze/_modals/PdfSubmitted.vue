@@ -59,11 +59,10 @@ watch(
   (states) => {
     const latestState = states?.[0];
     if (latestState?.status === "success" && latestState.data?.data?.reportId) {
-      // Close modal and navigate after a short delay to show completion message
       setTimeout(() => {
         modalStore.close("pdf-submitted");
         navigateTo(`/analyze/result/${latestState.data?.data.reportId}`);
-      }, 1500);
+      }, 2 * 1000);
     }
   },
   { deep: true }
@@ -75,6 +74,7 @@ watch(
     id="pdf-submitted"
     size="small"
     :buttons="undefined"
+    :backdrop-close="false"
     @close="modalStore.close('pdf-submitted')"
   >
     <CheckIcon :font-controlled="false" filled="false" class="mx-auto h-[80px] w-[80px]" />

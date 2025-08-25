@@ -72,7 +72,7 @@ const emit = defineEmits<{
 
 <template>
   <form
-    class="flex flex-col gap-[40px] py-[20px]"
+    class="flex flex-col gap-[40px] pt-[20px]"
     @submit="
       (e) => {
         e.preventDefault();

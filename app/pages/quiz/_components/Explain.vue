@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import CompleteQuiz from "../_modals/completeQuiz.vue";
+import CompleteQuiz from "../_modals/CompleteQuiz.vue";
 
 const isModalOpen = ref(false);
 const handleModal = () => {

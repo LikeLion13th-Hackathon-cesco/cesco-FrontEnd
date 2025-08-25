@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import MapIcon from "~/assets/icon/mapIcon.svg";
 import SearchBar from "./_components/SearchBar.vue";
 import CommentWrap from "./_components/CommentWrap.vue";
@@ -152,6 +152,29 @@ const loadKakaoMapScript = () => {
 };
 
 const kakaoRef = ref(null);
+const route = useRoute();
+
+// 네비바에서 검색해서 온 경우를 처리하는 함수
+const handleNavbarSearch = () => {
+  if (route.query.roadCode && route.query.buildingNumber && route.query.address) {
+    const suggestion = {
+      rnMgtSn: route.query.roadCode,
+      buldMnnm: route.query.buildingNumber,
+      roadAddrPart1: route.query.address,
+    };
+    searchAddress(suggestion);
+  }
+};
+
+// 라우트 쿼리 파라미터 변경을 감지하여 UI 업데이트
+watch(
+  () => route.query,
+  () => {
+    handleNavbarSearch();
+  },
+  { immediate: false }
+);
+
 onMounted(async () => {
   const kakao = await loadKakaoMapScript();
   kakaoRef.value = kakao;
@@ -169,6 +192,9 @@ onMounted(async () => {
     position: new kakao.maps.LatLng(37.4979, 127.0276),
     map: map.value,
   });
+
+  // 초기 로드 시 네비바에서 검색해서 온 경우 처리
+  handleNavbarSearch();
 });
 
 const searchAddress = (suggestion) => {

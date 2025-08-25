@@ -8,8 +8,8 @@
         :class="[
           'flex cursor-pointer items-center justify-center rounded-2xl border-[1.50px] px-[175px] py-[27px] text-[28px] font-[500]',
           selectedOption === 1
-            ? 'border-[3px] border-primary bg-secondary'
-            : 'border-zinc-400 hover:border-[3px] hover:border-primary hover:bg-secondary',
+            ? 'bg-secondary ring-[3px] ring-primary'
+            : 'ring-[1.50px] ring-gray-b4 hover:bg-secondary hover:ring-[3px] hover:ring-primary',
         ]"
         @click="selectOption(1)"
       >
@@ -19,8 +19,8 @@
         :class="[
           'flex cursor-pointer items-center justify-center rounded-2xl border-[1.50px] px-[175px] py-[27px] text-[28px] font-[500]',
           selectedOption === 2
-            ? 'border-[3px] border-primary bg-secondary'
-            : 'border-zinc-400 hover:border-[3px] hover:border-primary hover:bg-secondary',
+            ? 'bg-secondary ring-[3px] ring-primary'
+            : 'ring-[1.50px] ring-gray-b4 hover:bg-secondary hover:ring-[3px] hover:ring-primary',
         ]"
         @click="selectOption(2)"
       >
@@ -30,8 +30,8 @@
         :class="[
           'flex cursor-pointer items-center justify-center rounded-2xl border-[1.50px] px-[175px] py-[27px] text-[28px] font-[500]',
           selectedOption === 3
-            ? 'border-[3px] border-primary bg-secondary'
-            : 'border-zinc-400 hover:border-[3px] hover:border-primary hover:bg-secondary',
+            ? 'bg-secondary ring-[3px] ring-primary'
+            : 'ring-[1.50px] ring-gray-b4 hover:bg-secondary hover:ring-[3px] hover:ring-primary',
         ]"
         @click="selectOption(3)"
       >
@@ -41,8 +41,8 @@
         :class="[
           'flex cursor-pointer items-center justify-center rounded-2xl border-[1.50px] px-[175px] py-[27px] text-[28px] font-[500]',
           selectedOption === 4
-            ? 'border-[3px] border-primary bg-secondary'
-            : 'border-zinc-400 hover:border-[3px] hover:border-primary hover:bg-secondary',
+            ? 'bg-secondary ring-[3px] ring-primary'
+            : 'ring-[1.50px] ring-gray-b4 hover:bg-secondary hover:ring-[3px] hover:ring-primary',
         ]"
         @click="selectOption(4)"
       >
@@ -50,7 +50,11 @@
       </div>
     </div>
     <button
-      class="mt-[50px] flex items-center justify-center rounded-[10px] bg-[#B4B4B4] px-[182px] py-[15px] text-[32px] font-[600] text-gray-fe hover:bg-primary"
+      :class="[
+        'mt-[50px] flex items-center justify-center rounded-[10px] px-[182px] py-[15px] text-[32px] font-[600] text-gray-fe',
+        selectedOption === null ? 'cursor-not-allowed bg-gray-b4' : 'bg-primary',
+      ]"
+      :disabled="selectedOption === null"
       @click="goToResult"
     >
       확인하기
@@ -63,6 +67,10 @@ import { apiInstance } from "~/utils/api";
 import { useMutation } from "@tanstack/vue-query";
 import type { QuizResponse } from "./_api/types/quiz";
 import type { BaseResponse } from "~/utils/api";
+
+useHead({
+  title: "퀴즈 풀기",
+});
 
 const selectedOption = ref<number | null>(null); //선택한 정답 저장
 

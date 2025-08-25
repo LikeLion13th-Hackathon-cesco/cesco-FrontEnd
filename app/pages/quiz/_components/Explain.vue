@@ -28,7 +28,7 @@
           </div>
           <button
             class="item-center flex justify-center rounded-[10px] bg-primary px-[27px] py-[15px] text-[45px] text-white"
-            @click="handleModal"
+            @click="props.correct ? handleModal() : navigateTo('/checklist')"
           >
             ->
           </button>
@@ -36,7 +36,7 @@
       </div>
       <div
         v-if="isModalOpen"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/40"
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-zinc-900/40"
       >
         <CompleteQuiz @close="closeModal" @check-credit="handleCreditCheck" />
       </div>
@@ -59,4 +59,11 @@ const handleCreditCheck = () => {
   navigateTo("/my");
   console.log("크레딧 페이지로 이동");
 };
+
+const props = defineProps({
+  correct: {
+    type: Boolean,
+    required: false,
+  },
+});
 </script>

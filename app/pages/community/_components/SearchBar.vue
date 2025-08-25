@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import BlueSearch from "~/assets/icon/blueSearchIcon.svg";
-import { ref, defineEmits, computed } from "vue";
+import { ref, defineEmits, computed, defineProps, watch } from "vue";
 import { useQuery } from "@tanstack/vue-query";
 import { apiInstance } from "~/utils/api";
 import type { BaseResponse } from "~/utils/api";
@@ -46,8 +46,23 @@ import type { SearchAddressResponse } from "../_api/types/SearchAddressResponse"
 import { useDebounce } from "~/composables/useDebounce";
 import { splitByKeyword } from "../_utils/splitByKeyword";
 
-const address = ref("");
+const props = defineProps<{
+  initialValue?: string;
+}>();
+
+const address = ref(props.initialValue || "");
 const debouncedAddress = useDebounce(address, 500);
+
+// Watch for changes in initialValue prop
+watch(
+  () => props.initialValue,
+  (newValue) => {
+    if (newValue) {
+      address.value = newValue;
+    }
+  },
+  { immediate: true }
+);
 
 const emits = defineEmits(["search-address"]);
 

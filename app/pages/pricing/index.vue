@@ -1,3 +1,20 @@
+<script setup>
+import PriceBox from "./_components/PriceBox.vue";
+import CheckIconBlue from "~/assets/icon/checkIconBlue.svg";
+import CheckIconGrey from "~/assets/icon/checkIconGrey.svg";
+
+const props = defineProps({
+  isEmbedded: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+useHead({
+  title: props.isEmbedded ? undefined : "가격",
+});
+</script>
+
 <template>
   <div class="flex flex-col items-center justify-center gap-[40px]">
     <div class="flex flex-col items-center">
@@ -110,9 +127,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import PriceBox from "./_components/PriceBox.vue";
-import CheckIconBlue from "~/assets/icon/checkIconBlue.svg";
-import CheckIconGrey from "~/assets/icon/checkIconGrey.svg";
-</script>

@@ -14,7 +14,7 @@
         class="h-[64px] w-[177px] justify-start rounded-[10px] bg-primary text-[28px] font-[500] text-background"
         @click="gotoQuiz"
       >
-        퀴즈풀기
+        퀴즈 풀기
       </button>
     </div>
     <div class="mt-[90px] flex w-[896px] flex-col">
@@ -183,6 +183,10 @@ import Four from "~/assets/image/checkFour.jpg";
 import Five from "~/assets/image/checkFive.jpg";
 import CheckCard from "./_components/CheckCard.vue";
 import CheckTipBox from "./_components/CheckTipBox.vue";
+
+useHead({
+  title: "체크리스트",
+});
 
 const gotoQuiz = () => {
   navigateTo("/quiz");

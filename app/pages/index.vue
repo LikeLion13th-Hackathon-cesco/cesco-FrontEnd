@@ -6,6 +6,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ref, onMounted, onUnmounted } from "vue";
 
+useHead({
+  title: "전월세 피해 예방 플랫폼",
+});
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Refs for elements
@@ -285,7 +289,7 @@ onUnmounted(() => {
 
       <!-- 가격 -->
       <div ref="pricingSection">
-        <PricingPage />
+        <PricingPage :is-embedded="true" />
       </div>
     </section>
   </main>

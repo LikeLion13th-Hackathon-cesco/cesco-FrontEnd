@@ -10,6 +10,10 @@ import { apiInstance, type BaseResponse } from "~/utils/api";
 import { useModalStore } from "~/stores/modal";
 import PdfSubmitted from "./_modals/PdfSubmitted.vue";
 
+useHead({
+  title: "등기부등본 분석하기",
+});
+
 const modalStore = useModalStore();
 
 const { mutate: submit } = useMutation<

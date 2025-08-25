@@ -48,6 +48,11 @@ import { useFileStore } from "~/stores/file";
 import { apiInstance } from "~/utils/api";
 import { useMutation } from "@tanstack/vue-query";
 import UploadComplete from "./_modals/UploadComplete.vue";
+import { useHead } from "#app";
+
+useHead({
+  title: "사기신고",
+});
 
 const isModalOpen = ref(false);
 const fileStore = useFileStore();

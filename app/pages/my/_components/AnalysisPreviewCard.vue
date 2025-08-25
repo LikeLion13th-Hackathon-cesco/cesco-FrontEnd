@@ -5,6 +5,7 @@ const props = defineProps<{
   address: string;
   safetyScore: number;
   safetyDescription: string;
+  reportId: number;
 }>();
 </script>
 
@@ -29,7 +30,10 @@ const props = defineProps<{
           {{ props.safetyDescription }}
         </p>
       </div>
-      <span class="flex cursor-pointer items-center gap-2 text-[20px] font-[400] text-gray-b4">
+      <span
+        class="flex cursor-pointer items-center gap-2 text-[20px] font-[400] text-gray-b4"
+        @click="navigateTo(`/analyze/result/${props.reportId}`)"
+      >
         자세히 보기
         <RightArrowGrayIcon class="h-[10px]" :font-controlled="false" filled="false" />
       </span>

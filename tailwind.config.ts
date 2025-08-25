@@ -23,6 +23,9 @@ export default <Partial<Config>>{
         foreground: "rgb(var(--foreground) / <alpha-value>)",
       },
     },
+    screens: {
+      desktop: "1440px",
+    },
   },
   content: [
     "app/**/*.{vue,js,jsx,mjs,ts,tsx}",

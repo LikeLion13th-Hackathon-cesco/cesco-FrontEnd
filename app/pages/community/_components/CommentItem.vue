@@ -2,19 +2,11 @@
   <div
     class="box-border flex h-[200px] w-[400px] cursor-pointer flex-col rounded-[10px] p-[30px] hover:bg-blue-50"
   >
-    <div
-      class="mb-[5px] justify-start font-['Pretendard'] text-lg font-semibold leading-tight text-zinc-900"
-    >
-      {{ writer }}
-    </div>
-    <div
-      class="mb-[15px] justify-start font-['Pretendard'] text-base font-normal leading-tight text-neutral-400"
-    >
+    <div class="mb-[5px] justify-start text-lg font-semibold leading-tight text-gray-1a">익명</div>
+    <div class="mb-[15px] justify-start text-base font-normal text-gray-b4">
       {{ dayjs(date).format("YYYY-MM-DD") }}
     </div>
-    <div
-      class="mb-[10px] justify-start font-['Pretendard'] text-base font-normal leading-normal text-zinc-900"
-    >
+    <div class="mb-[10px] justify-start text-base font-normal text-gray-1a">
       {{ comment }}
     </div>
     <div class="flex items-start justify-start gap-[20px]">
@@ -27,17 +19,13 @@
         ></FilledLike>
 
         <Like v-else class="h-4 w-4" filled="false" :font-controlled="false" />
-        <div
-          class="justify-start font-['Pretendard'] text-base font-normal leading-none text-zinc-400"
-        >
+        <div class="justify-start text-base font-normal text-gray-b4">
           {{ likeCount }}
         </div>
       </div>
       <div class="flex justify-start gap-[10px]">
         <CommentIcon class="h-4 w-4" filled="false" :font-controlled="false" />
-        <div
-          class="justify-start font-['Pretendard'] text-base font-normal leading-none text-zinc-400"
-        >
+        <div class="justify-start text-base font-normal text-gray-b4">
           {{ commentCount }}
         </div>
       </div>
@@ -82,7 +70,7 @@ const { mutate: clickLike } = useMutation({
   onSuccess: (data) => {
     console.log("좋아요 생성 성공:", data);
     queryClient.invalidateQueries({
-      queryKey: ["replies", props.postId],
+      queryKey: ["post", props.postId],
     });
   },
   onError: (error) => {
@@ -119,7 +107,7 @@ const handleDelete = () => {
 const props = defineProps({
   writer: {
     type: String,
-    default: "",
+    default: "작성자",
   },
   date: {
     type: String,

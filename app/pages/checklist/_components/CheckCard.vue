@@ -1,10 +1,10 @@
 <template>
   <div
-    class="relative z-0 rounded-bl-2xl rounded-br-2xl rounded-tl-2xl rounded-tr-2xl bg-neutral-100 px-7 pb-9 pt-6"
+    class="relative z-0 rounded-bl-[15px] rounded-br-[15px] rounded-tl-[15px] rounded-tr-[15px] bg-gray-f5 px-7 pb-9 pt-6"
     :style="{ width: cardWidth, height: cardHeight }"
   >
     <img
-      class="absolute left-0 top-0 z-10 w-full rounded-tl-2xl rounded-tr-2xl object-cover"
+      class="absolute left-0 top-0 z-10 w-full rounded-tl-[15px] rounded-tr-[15px] object-cover"
       :src="img"
       alt="사진"
       :style="{ height: cardImgHeight }"

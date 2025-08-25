@@ -1,7 +1,7 @@
 <template>
   <div class="absolute left-[155px] top-[90px]">
     <div
-      class="relative z-50 flex h-[70px] items-center justify-center gap-[20px] rounded-[100px] bg-white px-[50px] py-5 shadow-[0px_0px_12px_0px_rgba(0,0,0,0.15)] outline outline-[3px] outline-[rgb(var(--primary))]"
+      class="relative z-50 flex h-[70px] items-center justify-center gap-[20px] rounded-[100px] bg-background px-[50px] py-5 shadow-[0px_0px_12px_0px_rgba(0,0,0,0.15)] outline outline-[3px] outline-[rgb(var(--primary))]"
     >
       <div class="flex items-center gap-[20px]">
         <BlueSearch class="h-[30px] w-[30px]" filled="false" :font-controlled="false"></BlueSearch>

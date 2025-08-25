@@ -1,31 +1,34 @@
 <template>
   <div class="relative flex justify-center">
     <div
-      class="absolute left-[120px] top-0 z-20 h-[871px] w-[488px] rounded-br-[30px] rounded-tr-[30px] bg-white shadow-[10px_15px_6px_0px_rgba(0,0,0,0.15)]"
+      class="absolute left-[120px] top-0 z-20 h-[871px] w-[488px] rounded-br-[30px] rounded-tr-[30px] bg-background shadow-[10px_15px_6px_0px_rgba(0,0,0,0.15)]"
     >
-      <div v-if="currentTab === 'community'" class="sticky top-[15px] flex justify-center">
+      <div
+        v-if="currentTab === 'community'"
+        class="sticky top-0 flex justify-center bg-background pt-[15px]"
+      >
         <div
-          class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] font-['Pretendard'] text-2xl font-semibold text-gray-fe"
+          class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] text-[24px] font-[500] text-gray-fe"
           @click="handleTabCommunity"
         >
           커뮤니티
         </div>
         <div
-          class="cursor-pointer rounded-full px-[70px] py-[15px] font-['Pretendard'] text-2xl font-semibold text-gray-b4"
+          class="cursor-pointer rounded-full px-[70px] py-[15px] text-[24px] font-[500] text-gray-b4"
           @click="handleTabStore"
         >
           제휴매장
         </div>
       </div>
-      <div v-else class="sticky top-[15px] flex justify-center">
+      <div v-else class="sticky top-0 flex justify-center bg-background pt-[15px]">
         <div
-          class="cursor-pointer rounded-full px-[70px] py-[15px] font-['Pretendard'] text-2xl font-semibold text-gray-b4"
+          class="cursor-pointer rounded-full px-[70px] py-[15px] text-[24px] font-[500] text-gray-b4"
           @click="handleTabCommunity"
         >
           커뮤니티
         </div>
         <div
-          class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] font-['Pretendard'] text-2xl font-semibold text-gray-fe"
+          class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] font-['Pretendard'] text-[24px] font-[500] text-gray-fe"
           @click="handleTabStore"
         >
           제휴매장
@@ -36,9 +39,7 @@
           <div v-if="!roadCode || !buildingNumber">
             <div class="mt-[264px] flex flex-col items-center justify-center gap-[30px]">
               <MapIcon class="h-[122px] w-[110px]" filled="false" :font-controlled="false" />
-              <div
-                class="justify-start text-center text-[26px] font-medium leading-9 text-neutral-400"
-              >
+              <div class="justify-start text-center text-[26px] font-medium text-gray-8f">
                 지도에서 위치를 검색하여
                 <br />
                 커뮤니티 게시글을 확인하세요.
@@ -63,7 +64,7 @@
     </div>
     <div
       id="map"
-      class="absolute left-[598px] top-0 z-10 h-[871px] w-[897px] rounded-[20px] bg-black"
+      class="absolute left-[598px] top-0 z-10 h-[871px] w-[897px] rounded-[20px] bg-gray-1a"
     >
       <SearchBar @search-address="searchAddress"></SearchBar>
     </div>
@@ -71,7 +72,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import MapIcon from "~/assets/icon/mapIcon.svg";
 import SearchBar from "./_components/SearchBar.vue";
 import CommentWrap from "./_components/CommentWrap.vue";
@@ -152,6 +153,29 @@ const loadKakaoMapScript = () => {
 };
 
 const kakaoRef = ref(null);
+const route = useRoute();
+
+// 네비바에서 검색해서 온 경우를 처리하는 함수
+const handleNavbarSearch = () => {
+  if (route.query.roadCode && route.query.buildingNumber && route.query.address) {
+    const suggestion = {
+      rnMgtSn: route.query.roadCode,
+      buldMnnm: route.query.buildingNumber,
+      roadAddrPart1: route.query.address,
+    };
+    searchAddress(suggestion);
+  }
+};
+
+// 라우트 쿼리 파라미터 변경을 감지하여 UI 업데이트
+watch(
+  () => route.query,
+  () => {
+    handleNavbarSearch();
+  },
+  { immediate: false }
+);
+
 onMounted(async () => {
   const kakao = await loadKakaoMapScript();
   kakaoRef.value = kakao;
@@ -169,6 +193,9 @@ onMounted(async () => {
     position: new kakao.maps.LatLng(37.4979, 127.0276),
     map: map.value,
   });
+
+  // 초기 로드 시 네비바에서 검색해서 온 경우 처리
+  handleNavbarSearch();
 });
 
 const searchAddress = (suggestion) => {

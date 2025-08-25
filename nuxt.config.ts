@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   modules: [
-    "@nuxt/devtools",
+    // "@nuxt/devtools",
     "@nuxt/image",
     "@nuxt/fonts",
     "@pinia/nuxt",
@@ -20,6 +20,11 @@ export default defineNuxtConfig({
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL!,
       kakaoJavascriptKey: process.env.KAKAO_JAVASCRIPT_KEY,
+    },
+  },
+  app: {
+    head: {
+      viewport: "width=device-width, initial-scale=1",
     },
   },
 });

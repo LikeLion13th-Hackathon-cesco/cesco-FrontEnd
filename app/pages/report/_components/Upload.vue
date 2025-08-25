@@ -1,9 +1,11 @@
 <template>
-  <div class="relative z-10 flex h-[439px] w-[341px] flex-col items-center gap-[30px]">
-    <div class="justify-start text-center text-[26px] font-normal leading-loose text-zinc-900">
+  <div class="relative z-10 flex h-[439px] w-[341px] flex-col items-center gap-[25px]">
+    <div class="justify-start text-center text-[24px] font-[400] leading-loose text-foreground">
       {{ fileName }}
     </div>
-    <div class="flex h-96 w-80 flex-col items-center rounded-2xl bg-blue-50 py-[40px] pt-[47px]">
+    <div
+      class="flex w-[341px] flex-col items-center rounded-[15px] bg-secondary px-[40px] py-[47px]"
+    >
       <CloudIcon
         alt="cloud"
         class="mb-[20px] h-[60px] w-[60px]"
@@ -11,37 +13,29 @@
         :font-controlled="false"
       />
       <button
-        class="mb-[40px] justify-start whitespace-nowrap rounded-[10px] bg-blue-500 px-[30px] py-[8px] text-center font-['Pretendard'] text-[18px] font-[600] leading-7 text-white"
+        class="mb-[40px] justify-start whitespace-nowrap rounded-[10px] bg-primary px-[30px] py-[8px] text-center text-[18px] font-[500] leading-7 text-gray-fe"
         @click="openModal"
       >
         {{ btnName }}
       </button>
       <div
-        class="mb-[20px] justify-start text-center font-['Pretendard'] text-xl font-normal leading-loose text-neutral-400"
+        class="mb-[20px] justify-start text-center font-['Pretendard'] text-[20px] font-[400] text-gray-8f"
       >
         - 업로드 유의사항 -
       </div>
-      <div class="flex flex-col justify-center text-center leading-6">
-        <div class="font-['Pretendard'] text-xl font-normal text-neutral-400">
-          파일 형식 : PDF 지원 (1개)
-        </div>
-        <div class="font-['Pretendard'] text-xl font-normal text-neutral-400">
-          파일 크기 : 50MB 이내
-        </div>
+      <div class="flex flex-col justify-center text-center">
+        <div class="text-[20px] font-normal text-gray-8f">파일 형식 : PDF 지원 (1개)</div>
+        <div class="text-[20px] font-normal text-gray-8f">파일 크기 : 50MB 이내</div>
       </div>
     </div>
     <div class="flex flex-col items-center justify-center gap-[15px]">
-      <div
-        class="justify-start text-center font-['Pretendard'] text-xl font-semibold leading-loose text-neutral-400"
-      >
+      <div class="justify-start text-center text-[20px] font-[600] text-gray-8f">
         업로드 된 파일
       </div>
       <div
-        class="flex h-[90px] w-[341px] items-center justify-center gap-[30px] rounded-[10px] border border-neutral-400 bg-white"
+        class="flex h-[90px] w-[341px] items-center justify-center gap-[30px] rounded-[10px] border border-gray-8f bg-background"
       >
-        <div
-          class="justify-start text-center font-['Pretendard'] text-[20px] font-normal leading-6 text-zinc-900"
-        >
+        <div class="justify-start text-center text-[20px] font-[400] text-foreground">
           {{ displayFileName }}
         </div>
         <TrashIcon
@@ -57,8 +51,8 @@
       v-if="modalStore.isOpen('pdf-select')"
       class="fixed inset-0 z-50 flex items-center justify-center"
     >
-      <div class="absolute inset-0 bg-zinc-900/40" @click="closeModal"></div>
-      <div class="z-60 relative">
+      <div class="absolute inset-0 bg-[rgba(26,26,26,0.40)]" @click="closeModal"></div>
+      <div class="relative z-[9999]">
         <PdfUploadModal @close="closeModal" />
       </div>
     </div>
@@ -66,8 +60,8 @@
       v-if="modalStore.isOpen('report-select')"
       class="fixed inset-0 z-50 flex items-center justify-center"
     >
-      <div class="absolute inset-0 bg-zinc-900/40" @click="closeModal"></div>
-      <div class="z-60 relative">
+      <div class="absolute inset-0 bg-[rgba(26,26,26,0.40)]" @click="closeModal"></div>
+      <div class="relative z-[9999]">
         <ReportUploadModal @close="closeModal" />
       </div>
     </div>

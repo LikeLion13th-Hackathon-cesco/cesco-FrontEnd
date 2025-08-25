@@ -105,17 +105,22 @@
       </div>
     </div>
 
-    <div v-if="PostModalOpen" class="fixed inset-0 z-50 flex items-center justify-center">
-      <div class="absolute inset-0 bg-zinc-900/40" @click="handlePostModal"></div>
-      <div class="z-60 relative">
-        <PostComment
-          :road-code="roadCode"
-          :building-number="buildingNumber"
-          :selected-address="selectedAddress"
-          @close="handlePostModal"
-        />
+    <Teleport to="body">
+      <div
+        v-if="PostModalOpen"
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-gray-1a/40"
+      >
+        <div class="absolute inset-0" @click="handlePostModal"></div>
+        <div class="relative">
+          <PostComment
+            :road-code="roadCode"
+            :building-number="buildingNumber"
+            :selected-address="selectedAddress"
+            @close="handlePostModal"
+          />
+        </div>
       </div>
-    </div>
+    </Teleport>
   </div>
 </template>
 

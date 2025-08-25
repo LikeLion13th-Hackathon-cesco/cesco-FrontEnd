@@ -66,7 +66,7 @@
       id="map"
       class="absolute left-[598px] top-0 z-10 h-[871px] w-[897px] rounded-[20px] bg-gray-1a"
     >
-      <SearchBar @search-address="searchAddress"></SearchBar>
+      <SearchBar :initial-value="selectedAddress" @search-address="searchAddress"></SearchBar>
     </div>
   </div>
 </template>
@@ -196,6 +196,15 @@ onMounted(async () => {
 
   // 초기 로드 시 네비바에서 검색해서 온 경우 처리
   handleNavbarSearch();
+
+  // 페이지 마운트 시 기본 주소로 검색
+  selectedAddress.value = "서울특별시 성북구 동소문로26나길 19";
+
+  searchAddress({
+    buldMnnm: "19",
+    rnMgtSn: "112904121104",
+    roadAddrPart1: "서울특별시 성북구 동소문로26나길 19",
+  });
 });
 
 const searchAddress = (suggestion) => {

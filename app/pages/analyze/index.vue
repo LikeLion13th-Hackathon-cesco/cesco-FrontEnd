@@ -95,6 +95,12 @@ const handleSubmit = (data: z.infer<typeof formSchema>) => {
         <PDFUploadPanel />
         <FormPanel @submit="handleSubmit" />
       </div>
+      <!-- 광고 배너 -->
+      <img
+        src="~/assets/image/ad-banner.png"
+        alt="광고 배너"
+        class="mx-auto mt-[105px] w-full max-w-[1200px] rounded-[20px]"
+      />
     </div>
   </main>
 

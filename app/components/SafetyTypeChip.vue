@@ -7,7 +7,9 @@
           ? 'rgb(var(--primary))'
           : safetyType === SafetyType.Caution
             ? 'rgb(var(--accent-2))'
-            : 'rgb(var(--destructive))',
+            : safetyType === SafetyType.Dangerous
+              ? 'rgb(var(--destructive))'
+              : 'rgb(var(--gray-8f))',
     }"
   >
     <span
@@ -22,8 +24,14 @@
     >
       이 부동산은 거래에 주의가 필요합니다.
     </span>
-    <span v-else class="text-center text-[24px] font-[600] text-gray-fe">
+    <span
+      v-else-if="safetyType === SafetyType.Dangerous"
+      class="text-center text-[24px] font-[600] text-gray-fe"
+    >
       이 부동산은 거래에 위험합니다.
+    </span>
+    <span v-else class="text-center text-[24px] font-[600] text-gray-fe">
+      분석 결과를 불러오는 중...
     </span>
   </div>
 </template>
@@ -33,7 +41,7 @@ import getSafetyTypeByScore from "~/utils/getSafetyTypeByScore";
 import { SafetyType } from "~/types/SafetyType";
 
 const props = defineProps<{
-  score: number;
+  score: number | null;
 }>();
 
 const safetyType = computed(() => getSafetyTypeByScore(props.score));

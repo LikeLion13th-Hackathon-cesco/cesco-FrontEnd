@@ -22,4 +22,9 @@ export default defineNuxtConfig({
       kakaoJavascriptKey: process.env.KAKAO_JAVASCRIPT_KEY,
     },
   },
+  app: {
+    head: {
+      viewport: "width=device-width, initial-scale=1",
+    },
+  },
 });

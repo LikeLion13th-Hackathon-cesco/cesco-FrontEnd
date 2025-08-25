@@ -1,7 +1,5 @@
 <template>
-  <nav
-    class="sticky top-0 z-[999] flex w-full items-center justify-center bg-background px-[80px] py-[40px]"
-  >
+  <nav class="sticky top-0 z-[999] flex w-full items-center justify-center bg-background py-[40px]">
     <!-- 로고 -->
     <NuxtLink to="/" class="inline-flex items-center gap-[2px]">
       <LogoOutline :font-controlled="false" filled="false" class="h-[35px] w-[35px]" />

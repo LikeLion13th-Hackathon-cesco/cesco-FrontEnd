@@ -11,7 +11,7 @@
       </div>
 
       <button
-        class="h-[64px] w-[177px] justify-start rounded-[10px] bg-[#2D8AE7] font-['Pretendard'] text-[28px] font-[600] leading-10 text-white"
+        class="h-[64px] w-[177px] justify-start rounded-[10px] bg-[#2D8AE7] font-['Pretendard'] text-[28px] font-[500] leading-10 text-white"
         @click="gotoQuiz"
       >
         퀴즈풀기
@@ -183,7 +183,7 @@
         </div>
       </section>
       <div
-        class="h-0 w-full outline outline-[1.50px] outline-offset-[-0.75px] outline-zinc-400"
+        class="h-0 w-full outline outline-[1.50px] outline-offset-[-0.75px] outline-[#B4B4B4]"
       ></div>
       <section class="mt-[80px]">
         <div class="mb-[34px] font-['Pretendard'] text-4xl font-bold leading-[58px] text-blue-500">

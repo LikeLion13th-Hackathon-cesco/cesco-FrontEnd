@@ -1,5 +1,5 @@
 <template>
-  <Explain>
+  <Explain :correct="true">
     <template #result>
       <div class="mb-[30px] text-[48px] font-[700] text-[#2D8AE7]">정답입니다.</div>
     </template>

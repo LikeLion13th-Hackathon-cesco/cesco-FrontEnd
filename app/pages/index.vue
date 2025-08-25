@@ -34,8 +34,8 @@ onMounted(() => {
     position: "fixed",
     top: 0,
     left: 0,
-    width: "100vw",
-    height: "100vh",
+    width: "100%",
+    height: "100%",
     zIndex: 10,
   });
 
@@ -43,8 +43,8 @@ onMounted(() => {
     position: "fixed",
     top: 0,
     left: 0,
-    width: "100vw",
-    height: "100vh",
+    width: "100%",
+    height: "100%",
     zIndex: -1,
   });
 
@@ -139,8 +139,8 @@ onMounted(() => {
         position: "fixed",
         top: 0,
         left: 0,
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        height: "100%",
         opacity: 1,
         zIndex: 10,
       });
@@ -149,8 +149,8 @@ onMounted(() => {
         position: "fixed",
         top: 0,
         left: 0,
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        height: "100%",
         zIndex: -1,
       });
     },
@@ -201,7 +201,7 @@ onUnmounted(() => {
       <!-- 히어로 -->
       <div
         ref="heroContent"
-        class="relative z-10 flex h-full items-center justify-center px-[100px] py-[300px]"
+        class="relative z-10 flex h-full w-full items-center justify-center px-[100px] py-[300px]"
       >
         <div class="flex flex-col items-center gap-[30px]">
           <!-- Animated h1 -->

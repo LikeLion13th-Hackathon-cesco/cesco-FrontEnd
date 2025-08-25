@@ -38,8 +38,8 @@ useHead({
     --gray-fe: 254 254 254; --background: 254 254 254; --gray-f5: 245 245 245; --gray-d9: 217 217
     217; --gray-b4: 180 180 180; --gray-8f: 143 143 143; --gray-66: 102 102 102; --gray-1a: 26 26
     26; --foreground: 26 26 26; } * { font-family: "Pretendard", sans-serif; -webkit-font-smoothing:
-    antialiased; -moz-osx-font-smoothing: grayscale; } body { min-height: 100vh; background-color:
-    var(--background); color: var(--foreground); }
+    antialiased; -moz-osx-font-smoothing: grayscale; } html { zoom: 0.8 } body { min-height: 100vh;
+    background-color: var(--background); color: var(--foreground); }
   </component>
   <Navbar />
   <NuxtPage class="mx-auto max-w-[1440px]" />

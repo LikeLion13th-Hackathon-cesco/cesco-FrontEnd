@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-[30px] flex-col">
+  <div class="mt-[30px] flex-col pr-[20px]">
     <div
       class="my-[30px] box-border flex h-[60px] cursor-pointer items-center justify-start rounded-[10px] border-[#B4B4B4] px-[15px] py-[25px] outline outline-[1.50px] outline-offset-[-1.50px] outline-zinc-400"
       @click="handlePostModal"
@@ -15,10 +15,12 @@
       <span class="text-[24px] font-semibold text-primary">
         {{ selectedAddress || "지역을 선택해주세요" }}
       </span>
-      의 리뷰 게시글
+      의
+      <br />
+      리뷰 게시글
     </div>
 
-    <div class="mt-[28px] flex gap-[254px]">
+    <div class="mt-[28px] flex justify-between">
       <div class="justify-start text-[24px] font-semibold text-zinc-900">
         <span class="text-[24px] font-semibold text-gray-1a">총 {{ " " }}</span>
         <span class="text-[24px] font-semibold text-primary">
@@ -68,10 +70,7 @@
     </div>
 
     <!-- 게시글 목록 -->
-    <div
-      v-else
-      class="mt-[21px] flex h-[526px] w-[400px] flex-col overflow-y-auto overflow-x-hidden"
-    >
+    <div v-else class="mt-[21px] flex h-[526px] flex-col overflow-y-auto overflow-x-hidden">
       <div v-for="post in sortedPosts" :key="post.postId">
         <CommentItem
           :writer="post.userId.toString()"
@@ -79,6 +78,7 @@
           :comment="post.content"
           :comment-count="post.commentCount"
           :like-count="post.likeCount"
+          :like-by-user="true"
           :user-id="1"
           :post-id="post.postId"
           @click="handlePostClick(post.postId)"

@@ -5,6 +5,11 @@ import PostAchievementCard from "./_components/PostAchievementCard.vue";
 import type { MyPageResponse } from "./_api/types/MyPageResponse";
 import { useQuery } from "@tanstack/vue-query";
 import { apiInstance } from "~/utils/api";
+import { useHead } from "#app";
+
+useHead({
+  title: "마이 페이지",
+});
 
 const { data } = useQuery<BaseResponse<MyPageResponse>>({
   queryKey: ["mypage"],

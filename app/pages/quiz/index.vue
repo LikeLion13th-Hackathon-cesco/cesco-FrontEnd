@@ -68,6 +68,10 @@ import { useMutation } from "@tanstack/vue-query";
 import type { QuizResponse } from "./_api/types/quiz";
 import type { BaseResponse } from "~/utils/api";
 
+useHead({
+  title: "퀴즈 풀기",
+});
+
 const selectedOption = ref<number | null>(null); //선택한 정답 저장
 
 const submitQuizMutation = useMutation({

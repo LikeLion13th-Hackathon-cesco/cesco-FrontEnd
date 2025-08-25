@@ -80,6 +80,10 @@ import CreditStore from "../credit/creditStore.vue";
 import { useQuery } from "@tanstack/vue-query";
 import { apiInstance } from "~/utils/api";
 
+useHead({
+  title: "커뮤니티",
+});
+
 const currentTab = ref("community");
 const handleTabStore = () => {
   currentTab.value = "store";

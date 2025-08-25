@@ -30,22 +30,22 @@ console.log(data);
       <MyCredit :credit="data?.data.credit ?? 0" />
       <h1 class="text-[36px] font-[600] text-foreground">
         현재 내가 작성한 게시글 수
-        <span class="font-[700] text-primary">5개</span>
+        <span class="font-[700] text-primary">{{ data?.data.postCount ?? "-" }}개</span>
       </h1>
       <div class="mb-[100px] flex flex-col gap-[30px]">
         <PostAchievementCard
           :completed="(data?.data.postCount ?? 0) >= 3"
-          achievement="게시글 3개"
+          achievement="게시글 1개"
           :credit="500"
         />
         <PostAchievementCard
           :completed="(data?.data.postCount ?? 0) >= 10"
-          achievement="게시글 10개"
+          achievement="게시글 5개"
           :credit="700"
         />
         <PostAchievementCard
           :completed="(data?.data.postCount ?? 0) >= 30"
-          achievement="게시글 30개"
+          achievement="게시글 15개"
           :credit="1000"
         />
       </div>

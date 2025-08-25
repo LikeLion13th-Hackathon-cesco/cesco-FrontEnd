@@ -68,7 +68,7 @@
           :value="address"
           type="search"
           placeholder="실거주 후기가 궁금하다면, 주소를 입력하세요."
-          class="desktop:w-[20rem] w-full text-[16px] font-[500] text-foreground outline-none placeholder:text-gray-b4"
+          class="w-full text-[16px] font-[500] text-foreground outline-none placeholder:text-gray-b4 desktop:w-[20rem]"
           @input="handleInput"
         />
       </div>

@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   modules: [
-    "@nuxt/devtools",
+    // "@nuxt/devtools",
     "@nuxt/image",
     "@nuxt/fonts",
     "@pinia/nuxt",

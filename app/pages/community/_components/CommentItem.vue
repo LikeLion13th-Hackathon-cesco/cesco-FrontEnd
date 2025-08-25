@@ -5,7 +5,7 @@
     <div
       class="mb-[5px] justify-start font-['Pretendard'] text-lg font-semibold leading-tight text-zinc-900"
     >
-      {{ writer }}
+      익명
     </div>
     <div
       class="mb-[15px] justify-start font-['Pretendard'] text-base font-normal leading-tight text-neutral-400"
@@ -82,7 +82,7 @@ const { mutate: clickLike } = useMutation({
   onSuccess: (data) => {
     console.log("좋아요 생성 성공:", data);
     queryClient.invalidateQueries({
-      queryKey: ["replies", props.postId],
+      queryKey: ["post", props.postId],
     });
   },
   onError: (error) => {
@@ -119,7 +119,7 @@ const handleDelete = () => {
 const props = defineProps({
   writer: {
     type: String,
-    default: "",
+    default: "작성자",
   },
   date: {
     type: String,

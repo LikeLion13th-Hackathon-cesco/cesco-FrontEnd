@@ -79,19 +79,19 @@
           :writer="post.userId.toString()"
           :date="post.createdAt"
           :comment="post.content"
-          :comment-count="0"
+          :comment-count="post.commentCount"
           :like-count="post.likeCount"
           :user-id="1"
           :post-id="post.postId"
           @click="handlePostClick(post.postId)"
         />
 
-        <div v-if="openedPostId === post.postId" class="mt-[10px] bg-gray-50 p-4">
+        <div v-if="openedPostId === post.postId" class="relative mt-[10px] bg-gray-50 p-4">
           <div v-if="isReplyLoading" class="text-zinc-400">댓글을 불러오는 중...</div>
           <!-- <div v-else-if="isReplyError" class="text-red-500">댓글을 불러오는데 실패했습니다.</div> -->
           <div v-for="reply in replyData?.data" :key="reply?.postId" class="mb-[10px] last:mb-0">
             <ReplyItem
-              :writer="'작성자'"
+              :writer="'익명'"
               :date="reply.createdAt"
               :comment="reply.content"
               class="border border-gray-200 bg-white shadow-sm"
@@ -100,7 +100,9 @@
           <div v-if="!replyData || replyData.data.length === 0" class="mb-[30px] text-zinc-400">
             댓글이 없습니다.
           </div>
-          <PostReply :post-id="post.postId" :opened-post-id="openedPostId"></PostReply>
+          <div class="sticky bottom-0">
+            <PostReply :post-id="post.postId" :opened-post-id="openedPostId"></PostReply>
+          </div>
         </div>
       </div>
     </div>

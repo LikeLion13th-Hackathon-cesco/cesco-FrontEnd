@@ -1,6 +1,6 @@
 <template>
   <div
-    class="hover:bg-gray-70 box-border flex h-[200px] cursor-pointer flex-col rounded-[10px] p-[30px]"
+    class="hover:bg-gray-70 box-border flex h-[150px] cursor-pointer flex-col rounded-[10px] p-[30px]"
   >
     <div
       class="mb-[5px] justify-start font-['Pretendard'] text-lg font-semibold leading-tight text-zinc-900"

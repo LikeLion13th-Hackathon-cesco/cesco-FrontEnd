@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative box-border flex h-[62px] w-[350px] items-center justify-start rounded-[10px] border-[1.50px] border-zinc-300 bg-white p-[30px]"
+    class="relative box-border flex h-[62px] w-[360px] items-center justify-start rounded-[10px] border-[1.50px] border-zinc-300 bg-white p-[30px]"
   >
     <div class="absolute left-0">
       <input
@@ -10,26 +10,23 @@
       />
     </div>
     <button
-      v-if="replyContent.length > 0"
-      class="absolute right-0 top-0 flex items-center justify-center rounded-br-[10px] rounded-tr-[10px] bg-zinc-300 px-[21px] py-[16px]"
+      v-if="hasContent"
+      :disabled="isSubmitting"
+      :class="[
+        'absolute right-0 top-0 flex items-center justify-center rounded-br-[10px] rounded-tr-[10px] px-[21px] py-[16px] transition-colors',
+        isSubmitting ? 'cursor-not-allowed bg-gray-300' : 'hover:bg-primary-dark bg-primary',
+      ]"
+      @click="handleSubmit"
     >
-      <SendIcon
-        filled="false"
-        :font-controlled="false"
-        class="h-[30px] w-[30px]"
-        @click="handleSubmit"
-      ></SendIcon>
+      <SendIcon filled="false" :font-controlled="false" class="h-[30px] w-[30px]" />
     </button>
+
     <button
-      v-if="replyContent.trim() !== 0"
-      class="absolute right-0 top-0 flex items-center justify-center rounded-br-[10px] rounded-tr-[10px] bg-primary px-[21px] py-[16px]"
+      v-else
+      disabled
+      class="absolute right-0 top-0 flex cursor-not-allowed items-center justify-center rounded-br-[10px] rounded-tr-[10px] bg-zinc-300 px-[21px] py-[16px]"
     >
-      <SendIcon
-        filled="false"
-        :font-controlled="false"
-        class="h-[30px] w-[30px]"
-        @click="handleSubmit"
-      ></SendIcon>
+      <SendIcon filled="false" :font-controlled="false" class="h-[30px] w-[30px] opacity-50" />
     </button>
   </div>
 </template>
@@ -57,13 +54,14 @@ const { mutate: createReply } = useMutation({
   },
   onSuccess: (data) => {
     console.log("댓글생성 성공:", data);
-    //게시글 목록 캐시 무효화 (새로 고침)
+    // 게시글 목록도 새로고침 (commentCount 업데이트를 위해)
+    queryClient.invalidateQueries({
+      queryKey: ["posts"],
+    });
+    //댓글 목록 캐시 무효화 (새로 고침)
     queryClient.invalidateQueries({
       queryKey: ["replies", props.postId],
     });
-    alert("게시글이 성공적으로 등록되었습니다!");
-    // emit("success");
-    // emit("close");
   },
   onError: (error) => {
     console.error("댓글생성 실패:", error);
@@ -80,4 +78,8 @@ const handleSubmit = () => {
   createReply({ replyContent: replyContent.value, userId: 1, postId: props.postId });
   replyContent.value = "";
 };
+
+const hasContent = computed(() => {
+  return replyContent.value.trim().length > 0;
+});
 </script>

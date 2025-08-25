@@ -3,10 +3,10 @@
     <div class="flex justify-center gap-5">
       <div class="h-[60px] justify-start">
         <div class="justify-start">
-          <div class="font-['Pretendard'] text-xl font-semibold text-zinc-900">
+          <div class="font-['Pretendard'] text-xl font-[500] text-zinc-900">
             사용 가능한 제휴 매장이 가까이 있습니다.
           </div>
-          <div class="font-['Pretendard'] text-xl font-semibold text-blue-500">
+          <div class="font-['Pretendard'] text-xl font-[600] text-blue-500">
             지금 제휴처를 확인하고, 크레딧을 사용해보세요.
           </div>
         </div>
@@ -21,7 +21,7 @@
           현재 보유 크레딧 :
         </span>
         <span class="font-['Pretendard'] text-xl font-semibold leading-10 text-blue-500">
-          1,500P
+          {{ currentCredit.toLocaleString() }}
         </span>
       </div>
       <div
@@ -33,11 +33,11 @@
         >
           생성
         </button>
-        <div
-          class="absolute left-[21px] top-0 justify-start font-['Pretendard'] text-base font-semibold leading-10 text-zinc-900"
-        >
-          1,000
-        </div>
+        <input
+          v-model="usingCredit"
+          class="absolute left-[21px] top-0 justify-start font-['Pretendard'] text-base font-semibold leading-10 text-zinc-900 outline-none"
+          placeholder="사용할 크레딧 입력"
+        />
       </div>
     </div>
     <div class="h-[480px] overflow-y-auto overflow-x-hidden">
@@ -49,7 +49,7 @@
         />
         <div v-if="index !== dummy.length - 1" class="my-[43px]">
           <div
-            class="h-0 w-[446px] outline outline-[1.50px] outline-offset-[-0.75px] outline-zinc-400"
+            class="h-0 w-[446px] outline outline-[1.50px] outline-offset-[-0.75px] outline-[#D9D9D9]"
           />
         </div>
       </div>
@@ -67,11 +67,28 @@
 import StoreItem from "./_components/StoreItem.vue";
 import storeImage from "~/assets/image/storeImage.jpg";
 import BarcodeModal from "./_modals/Barcode.vue";
+import VictoryImg from "~/assets/image/victorySuper.jpg";
+import FlowerImg from "~/assets/image/flowerGimbap.jpg";
+import Amisan from "~/assets/image/amisan.jpg";
 
 const showBarcodeModal = ref(false);
+const currentCredit = ref(1500); //현재 크레딧 = 현재크레딧 - 입력크레딧
+const usingCredit = ref(null); //입력 크레딧
+
+const handleCredit = () => {
+  if (usingCredit.value) {
+    if (usingCredit.value <= currentCredit.value) {
+      currentCredit.value = currentCredit.value - usingCredit.value;
+    } else {
+      alert("사용 금액이 현재 크레딧을 초과할 수 없습니다.");
+      showBarcodeModal.value = false;
+    }
+  }
+};
 
 const openBarcodeModal = () => {
   showBarcodeModal.value = true;
+  handleCredit();
 };
 
 const closeBarcodeModal = () => {
@@ -81,21 +98,21 @@ const closeBarcodeModal = () => {
 const dummy = ref([
   {
     id: 0,
-    storeName: "중앙톤 스토어1",
-    address: "서울 서초구 양재로 232",
-    image: storeImage,
+    storeName: "영광수퍼",
+    address: "서울 서대문구 연희로 204",
+    image: VictoryImg,
   },
   {
     id: 1,
-    storeName: "중앙톤 스토어2",
-    address: "서울 서초구 양재로 232",
-    image: storeImage,
+    storeName: "봄꽃김밥",
+    address: "서울 서대문구 연희로36길 10",
+    image: FlowerImg,
   },
   {
     id: 2,
-    storeName: "중앙톤 스토어3",
-    address: "서울 서초구 양재로 232",
-    image: storeImage,
+    storeName: "아미산",
+    address: "서울 서대문구 연희로32길 151",
+    image: Amisan,
   },
   {
     id: 3,

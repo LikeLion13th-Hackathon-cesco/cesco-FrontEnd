@@ -3,29 +3,32 @@
     <div
       class="absolute left-[120px] top-0 z-20 h-[871px] w-[488px] rounded-br-[30px] rounded-tr-[30px] bg-white shadow-[10px_15px_6px_0px_rgba(0,0,0,0.15)]"
     >
-      <div v-if="currentTab === 'community'" class="sticky top-[15px] flex justify-center">
+      <div
+        v-if="currentTab === 'community'"
+        class="sticky top-0 flex justify-center bg-white pt-[15px]"
+      >
         <div
-          class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] font-['Pretendard'] text-2xl font-semibold text-gray-fe"
+          class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] text-[24px] font-[500] text-gray-fe"
           @click="handleTabCommunity"
         >
           커뮤니티
         </div>
         <div
-          class="cursor-pointer rounded-full px-[70px] py-[15px] font-['Pretendard'] text-2xl font-semibold text-gray-b4"
+          class="cursor-pointer rounded-full px-[70px] py-[15px] text-[24px] font-[500] text-gray-b4"
           @click="handleTabStore"
         >
           제휴매장
         </div>
       </div>
-      <div v-else class="sticky top-[15px] flex justify-center">
+      <div v-else class="sticky top-0 flex justify-center bg-white pt-[15px]">
         <div
-          class="cursor-pointer rounded-full px-[70px] py-[15px] font-['Pretendard'] text-2xl font-semibold text-gray-b4"
+          class="cursor-pointer rounded-full px-[70px] py-[15px] font-['Pretendard'] text-[24px] font-[500] text-gray-b4"
           @click="handleTabCommunity"
         >
           커뮤니티
         </div>
         <div
-          class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] font-['Pretendard'] text-2xl font-semibold text-gray-fe"
+          class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] font-['Pretendard'] text-[24px] font-[500] text-gray-fe"
           @click="handleTabStore"
         >
           제휴매장

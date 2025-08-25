@@ -12,6 +12,7 @@
 
       <button
         class="h-[64px] w-[177px] justify-start rounded-[10px] bg-[#2D8AE7] font-['Pretendard'] text-[32px] font-semibold leading-10 text-white"
+        @click="gotoQuiz"
       >
         퀴즈풀기
       </button>
@@ -256,4 +257,8 @@ import Four from "~/assets/image/checkFour.jpg";
 import Five from "~/assets/image/checkFive.jpg";
 import CheckCard from "./_components/CheckCard.vue";
 import CheckTipBox from "./_components/CheckTipBox.vue";
+
+const gotoQuiz = () => {
+  navigateTo("/quiz");
+};
 </script>

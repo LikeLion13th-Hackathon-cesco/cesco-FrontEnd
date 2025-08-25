@@ -22,6 +22,7 @@ console.log(data);
         <AnalysisPreviewCard
           v-for="report in data?.data.reports"
           :key="report.reportId"
+          :report-id="report.reportId"
           :address="report.address"
           :safety-score="report.safetyScore"
           :safety-description="report.summary"
@@ -34,17 +35,17 @@ console.log(data);
       </h1>
       <div class="mb-[100px] flex flex-col gap-[30px]">
         <PostAchievementCard
-          :completed="(data?.data.postCount ?? 0) >= 3"
+          :completed="(data?.data.postCount ?? 0) >= 1"
           achievement="게시글 1개"
           :credit="500"
         />
         <PostAchievementCard
-          :completed="(data?.data.postCount ?? 0) >= 10"
+          :completed="(data?.data.postCount ?? 0) >= 5"
           achievement="게시글 5개"
           :credit="700"
         />
         <PostAchievementCard
-          :completed="(data?.data.postCount ?? 0) >= 30"
+          :completed="(data?.data.postCount ?? 0) >= 15"
           achievement="게시글 15개"
           :credit="1000"
         />

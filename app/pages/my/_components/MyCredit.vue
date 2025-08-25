@@ -7,6 +7,7 @@
     </div>
     <button
       class="ml-auto rounded-[10px] bg-primary px-[40px] py-[10px] text-[28px] font-[600] text-gray-fe"
+      @click="navigateTo('/community?tab=store')"
     >
       크레딧 사용 제휴처 확인
     </button>

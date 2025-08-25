@@ -4,6 +4,7 @@ import { useForm } from "@tanstack/vue-form";
 import { useFileStore } from "~/stores/file";
 import { formSchema } from "../_utils/formSchema";
 import type z from "zod";
+import HelpCircle from "~/assets/icon/help-circle.svg";
 
 const fileStore = useFileStore();
 
@@ -92,7 +93,7 @@ const emit = defineEmits<{
             <button
               type="button"
               :class="[
-                'rounded-[10px] border border-primary px-[100px] py-[30px] text-center text-[26px] font-[400] text-primary transition-colors',
+                'rounded-[10px] border border-primary px-[100px] py-[24px] text-center text-[26px] font-[400] text-primary transition-colors',
                 field.state.value === '전세' ? 'border-2 bg-secondary font-[600]' : 'border-1',
               ]"
               @click="field.handleChange('전세')"
@@ -102,7 +103,7 @@ const emit = defineEmits<{
             <button
               type="button"
               :class="[
-                'rounded-[10px] border border-primary px-[100px] py-[30px] text-center text-[26px] font-[400] text-primary transition-colors',
+                'rounded-[10px] border border-primary px-[100px] py-[24px] text-center text-[26px] font-[400] text-primary transition-colors',
                 field.state.value === '월세' ? 'border-2 bg-secondary font-[600]' : 'border-1',
               ]"
               @click="field.handleChange('월세')"
@@ -116,7 +117,19 @@ const emit = defineEmits<{
 
     <!-- 2. 보증금 입력 -->
     <div>
-      <span class="text-[26px] font-[400] text-foreground">2. 보증금 입력</span>
+      <span class="inline-flex items-center gap-2 text-[26px] font-[400] text-foreground">
+        2. 보증금 입력
+        <Tooltip
+          content="보증금은 안전지수 분석에 활용되므로, 해당 매물의 실제 금액을 정확히 입력해 주세요."
+          position="top"
+        >
+          <HelpCircle
+            class="h-[16px] w-[16px] cursor-help text-primary"
+            :font-controlled="false"
+            filled="false"
+          />
+        </Tooltip>
+      </span>
       <div class="mt-4 flex items-center justify-between gap-[15px]">
         <form.Field name="deposit_hundred_million">
           <template #default="{ field }">

@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="mt-[30px] flex flex-col items-center">
     <div class="flex flex-col items-center justify-center leading-10">
-      <div class="font-['Pretendard'] text-[28px] font-bold leading-10 text-[#2D8AE7]">
+      <div class="text-[28px] font-bold leading-10 text-primary">
         신고해주신 정보는 다른 임차인들의 피해 예방을 위해 소중히 활용 됩니다.
       </div>
-      <div class="font-['Pretendard'] text-[28px] font-bold leading-10 text-[#2D8AE7]">
+      <div class="text-[28px] font-bold leading-10 text-primary">
         신고시 소중한 제보에 감사한 마음을 담아 크레딧을 드립니다.
       </div>
       <div class="mt-[50px] flex h-[643px] justify-center gap-[80px]">
@@ -19,15 +19,13 @@
           type="pdf"
         ></Upload>
       </div>
-      <div
-        class="mt-[40px] justify-start font-['Pretendard'] text-2xl font-normal text-neutral-400"
-      >
+      <div class="mt-[40px] justify-start text-[24px] font-[400] text-gray-8f">
         ※ 상기 서류가 모두 구비되어야 신고 접수가 가능합니다.
       </div>
       <button
         :class="[
-          'mb-[160px] mt-[35px] flex h-20 w-[762px] items-center justify-center rounded-[10px] text-3xl font-semibold leading-7',
-          fileStore.canSubmit ? 'bg-blue-500 text-white' : 'bg-zinc-400 text-white',
+          'mb-[160px] mt-[35px] flex h-20 w-[762px] items-center justify-center rounded-[10px] text-3xl font-[600]',
+          fileStore.canSubmit ? 'bg-primary text-background' : 'bg-gray-b4 text-background',
         ]"
         :disabled="!fileStore.canSubmit"
         @click="handleReport"
@@ -36,7 +34,7 @@
       </button>
       <div
         v-if="isModalOpen"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/40"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(26,26,26,0.40)]"
       >
         <UploadComplete @close="closeModal" @check-credit="handleCreditCheck" />
       </div>

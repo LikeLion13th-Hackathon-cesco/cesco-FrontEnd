@@ -10,7 +10,7 @@
       <div
         class="h-12 w-auto justify-start font-['Pretendard'] text-[20px] font-normal leading-[50.31px] text-zinc-900"
       >
-        주소 : {{ address }}
+        {{ address }}
       </div>
     </div>
   </div>

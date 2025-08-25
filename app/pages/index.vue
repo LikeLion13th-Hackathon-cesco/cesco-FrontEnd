@@ -219,6 +219,7 @@ onUnmounted(() => {
           <button
             ref="heroButton"
             class="rounded-[15px] bg-gray-fe px-[50px] py-[15px] text-[24px] font-[600] text-primary"
+            @click="navigateTo('/analyze')"
           >
             내 등기부등본 분석하기
           </button>

@@ -1,11 +1,11 @@
 <template>
   <div class="relative flex justify-center">
     <div
-      class="absolute left-[120px] top-0 z-20 h-[871px] w-[488px] rounded-br-[30px] rounded-tr-[30px] bg-white shadow-[10px_15px_6px_0px_rgba(0,0,0,0.15)]"
+      class="absolute left-[120px] top-0 z-20 h-[871px] w-[488px] rounded-br-[30px] rounded-tr-[30px] bg-background shadow-[10px_15px_6px_0px_rgba(0,0,0,0.15)]"
     >
       <div
         v-if="currentTab === 'community'"
-        class="sticky top-0 flex justify-center bg-white pt-[15px]"
+        class="sticky top-0 flex justify-center bg-background pt-[15px]"
       >
         <div
           class="cursor-pointer rounded-full bg-primary px-[70px] py-[15px] text-[24px] font-[500] text-gray-fe"
@@ -20,9 +20,9 @@
           제휴매장
         </div>
       </div>
-      <div v-else class="sticky top-0 flex justify-center bg-white pt-[15px]">
+      <div v-else class="sticky top-0 flex justify-center bg-background pt-[15px]">
         <div
-          class="cursor-pointer rounded-full px-[70px] py-[15px] font-['Pretendard'] text-[24px] font-[500] text-gray-b4"
+          class="cursor-pointer rounded-full px-[70px] py-[15px] text-[24px] font-[500] text-gray-b4"
           @click="handleTabCommunity"
         >
           커뮤니티
@@ -39,9 +39,7 @@
           <div v-if="!roadCode || !buildingNumber">
             <div class="mt-[264px] flex flex-col items-center justify-center gap-[30px]">
               <MapIcon class="h-[122px] w-[110px]" filled="false" :font-controlled="false" />
-              <div
-                class="justify-start text-center text-[26px] font-medium leading-9 text-neutral-400"
-              >
+              <div class="justify-start text-center text-[26px] font-medium text-gray-8f">
                 지도에서 위치를 검색하여
                 <br />
                 커뮤니티 게시글을 확인하세요.
@@ -66,7 +64,7 @@
     </div>
     <div
       id="map"
-      class="absolute left-[598px] top-0 z-10 h-[871px] w-[897px] rounded-[20px] bg-black"
+      class="absolute left-[598px] top-0 z-10 h-[871px] w-[897px] rounded-[20px] bg-gray-1a"
     >
       <SearchBar @search-address="searchAddress"></SearchBar>
     </div>

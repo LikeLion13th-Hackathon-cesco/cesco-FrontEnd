@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative box-border flex h-[62px] w-[360px] items-center justify-start rounded-[10px] border-[1.50px] border-zinc-300 bg-white p-[30px]"
+    class="relative box-border flex h-[62px] w-[360px] items-center justify-start rounded-[10px] border-[1.50px] border-gray-d9 bg-background p-[30px]"
   >
     <div class="absolute left-0">
       <input

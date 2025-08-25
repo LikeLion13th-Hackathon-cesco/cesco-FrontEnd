@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col items-start justify-start rounded-2xl bg-white px-[52px] py-[60px]">
+  <div
+    class="flex flex-col items-start justify-start rounded-2xl bg-background px-[52px] py-[60px]"
+  >
     <!-- 헤더 -->
     <div class="mb-[20px] flex items-center justify-center">
       <BackIcon
@@ -10,21 +12,21 @@
       />
       <div
         v-if="selectedAddress"
-        class="mr-[198px] justify-start whitespace-nowrap text-[32px] font-[600] text-zinc-900"
+        class="mr-[198px] justify-start whitespace-nowrap text-[32px] font-[600] text-gray-1a"
       >
-        <span class="text-[32px] font-semibold text-blue-500">
+        <span class="text-[32px] font-semibold text-primary">
           {{ selectedAddress }}
         </span>
         에 게시글 작성
       </div>
-      <div v-else class="mr-[198px] justify-start text-[32px] font-semibold text-zinc-900">
+      <div v-else class="mr-[198px] justify-start text-[32px] font-semibold text-gray-1a">
         지역을 검색해주세요.
       </div>
       <button
-        class="inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-[10px] bg-blue-500 px-[30px] py-[10px]"
+        class="inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-[10px] bg-primary px-[30px] py-[10px]"
         @click="handleSubmit"
       >
-        <div class="box-border justify-start text-[28px] font-[600] text-white">등록</div>
+        <div class="box-border justify-start text-[28px] font-[600] text-background">등록</div>
       </button>
     </div>
 
@@ -34,7 +36,7 @@
     <!-- 입력 영역 -->
     <textarea
       v-model="postContent"
-      class="h-[400px] w-full resize-none rounded-[10px] text-[28px] focus:border-blue-500 focus:outline-none"
+      class="h-[400px] w-full resize-none rounded-[10px] text-[28px] focus:border-primary focus:outline-none"
       :placeholder="placeholderText"
       style="font-size: 28px; color: #b4b4b4"
     ></textarea>

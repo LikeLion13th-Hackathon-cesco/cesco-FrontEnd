@@ -138,7 +138,6 @@ import PostReply from "./PostReply.vue";
 import type { ReplyResponse } from "../_api/types/ReplyResponse";
 import type { PostResponse } from "../_api/types/PostResponse";
 
-// Props 정의
 const props = defineProps({
   posts: {
     type: Array,

@@ -99,18 +99,14 @@ watch(
 
 const handleClickLike = () => {
   if (isLike.value) {
-    // 현재 좋아요 상태라면 취소
     handleDelete();
   } else {
-    // 현재 좋아요가 아니라면 좋아요 추가
     clickLike({
       userId: props.userId,
       postId: props.postId,
     });
   }
 };
-
-// const queryClient = useQueryClient();
 
 const { mutate: clickLike } = useMutation({
   mutationFn: async (postData: { userId: number; postId: number }) => {
@@ -125,9 +121,6 @@ const { mutate: clickLike } = useMutation({
     console.log("좋아요 생성 성공:", data);
     isLike.value = true;
     currentLikeCount.value += 1;
-    // queryClient.invalidateQueries({
-    //   queryKey: ["post", props.postId],
-    // });
   },
   onError: (error) => {
     console.error("좋아요 생성 실패:", error);
@@ -149,9 +142,6 @@ const { mutate: cancelLike } = useMutation({
     console.log("좋아요 삭제 성공");
     isLike.value = false;
     currentLikeCount.value = Math.max(0, currentLikeCount.value - 1);
-    // queryClient.invalidateQueries({
-    //   queryKey: ["replies", props.postId],
-    // });
   },
   onError: (error) => {
     console.error(`좋아요 삭제 실패했습니다: ${error.message}`);

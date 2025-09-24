@@ -78,7 +78,7 @@
           :comment="post.content"
           :comment-count="post.commentCount"
           :like-count="post.likeCount"
-          :like-by-user="true"
+          :like-by-user="post.likeByUser"
           :user-id="1"
           :post-id="post.postId"
           @click="handlePostClick(post.postId)"

@@ -6,4 +6,5 @@ export interface PostResponse {
   userId: number;
   createdAt: string;
   modifiedAt: string;
+  likeByUser: boolean;
 }

@@ -72,7 +72,7 @@ useHead({
   title: "퀴즈 풀기",
 });
 
-const selectedOption = ref<number | null>(null); //선택한 정답 저장
+const selectedOption = ref<number | null>(null);
 
 const submitQuizMutation = useMutation({
   mutationFn: async (answerData: { selectedOption: number; quizId: number; userId: number }) => {

@@ -3,44 +3,44 @@
     <div class="flex justify-center gap-5">
       <div class="h-[60px] justify-start">
         <div class="justify-start">
-          <div class="font-['Pretendard'] text-xl font-[500] text-zinc-900">
+          <div class="font-['Pretendard'] text-[20px] font-[600] text-gray-1a">
             사용 가능한 제휴 매장이 가까이 있습니다.
           </div>
-          <div class="font-['Pretendard'] text-xl font-[600] text-blue-500">
+          <div class="font-['Pretendard'] text-[20px] font-[700] text-primary">
             지금 제휴처를 확인하고, 크레딧을 사용해보세요.
           </div>
         </div>
       </div>
     </div>
     <div
-      class="mt-[20px] flex h-[230px] w-[446px] flex-col items-center justify-center rounded-2xl bg-blue-50 px-[50px] py-[30px]"
+      class="mt-[20px] flex flex-col items-center justify-center rounded-2xl bg-secondary px-[50px] py-[30px]"
     >
       <img src="~/assets/icon/creditIcon.png" class="h-[75px] w-[66px]" />
       <div class="justify-start text-center">
-        <span class="font-['Pretendard'] text-xl font-semibold leading-10 text-zinc-900">
+        <span class="font-['Pretendard'] text-[20px] font-[600] text-gray-1a">
           현재 보유 크레딧 :
         </span>
-        <span class="font-['Pretendard'] text-xl font-semibold leading-10 text-blue-500">
+        <span class="font-['Pretendard'] text-[20px] font-[600] text-primary">
           {{ currentCredit.toLocaleString() }}
         </span>
       </div>
       <div
-        class="relative my-[5px] h-11 w-80 rounded-[10px] border-[1.50px] border-zinc-300 bg-white"
+        class="relative my-[5px] h-11 w-80 rounded-[10px] border-[1.50px] border-gray-b4 bg-background"
       >
         <button
-          class="absolute right-0 top-0 flex h-11 w-20 items-center justify-center rounded-br-[10px] rounded-tr-[10px] bg-blue-500 text-[#FEFEFE]"
+          class="absolute right-0 top-0 flex h-11 w-20 items-center justify-center rounded-br-[10px] rounded-tr-[10px] bg-primary text-background"
           @click="openBarcodeModal"
         >
           생성
         </button>
         <input
           v-model="usingCredit"
-          class="absolute left-[21px] top-0 justify-start font-['Pretendard'] text-base font-semibold leading-10 text-zinc-900 outline-none"
+          class="absolute left-[21px] top-0 items-center justify-start font-['Pretendard'] text-base font-[600] text-gray-1a outline-none"
           placeholder="사용할 크레딧 입력"
         />
       </div>
     </div>
-    <div class="h-[480px] overflow-y-auto overflow-x-hidden">
+    <div class="h-[450px] overflow-y-auto overflow-x-hidden">
       <div v-for="(store, index) in dummy" :key="store.id">
         <StoreItem
           :store-name="store?.storeName"
@@ -49,7 +49,7 @@
         />
         <div v-if="index !== dummy.length - 1" class="my-[43px]">
           <div
-            class="h-0 w-[446px] outline outline-[1.50px] outline-offset-[-0.75px] outline-[#D9D9D9]"
+            class="h-0 w-[446px] outline outline-[1.50px] outline-offset-[-0.75px] outline-gray-d9"
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="mb-[200px] flex flex-col items-center justify-start">
     <div
-      class="relative flex h-[371px] w-[896px] flex-col items-center justify-center rounded-[15px] bg-gray-f5 py-[35px]"
+      class="relative flex flex-col items-center justify-center rounded-[15px] bg-gray-f5 px-[267px] py-[36px]"
     >
       <img src="~/assets/image/checklistIcon.jpg" alt="체크리스트" class="h-[147px] w-[107px]" />
       <div
@@ -11,7 +11,7 @@
       </div>
 
       <button
-        class="h-[64px] w-[177px] justify-start rounded-[10px] bg-primary text-[28px] font-[500] text-background"
+        class="justify-start rounded-[10px] bg-primary px-[40px] py-[10px] text-[28px] font-[500] text-background"
         @click="gotoQuiz"
       >
         퀴즈 풀기
@@ -29,7 +29,7 @@
         <div class="mb-[80px] flex justify-center">
           <div class="grid grid-cols-2 items-start gap-x-[70px] gap-y-[50px]">
             <CheckCard card-width="413px" card-height="447px" card-img-height="240px" :img="One">
-              <div class="mb-[10px]">
+              <div class="mb-[10px] flex gap-[4px]">
                 <span class="text-[24px] font-[600] text-primary">보증보험 가입</span>
                 <span class="text-[24px] font-[600] text-gray-1a">가능 여부 확인</span>
               </div>
@@ -40,12 +40,12 @@
               </div>
             </CheckCard>
             <CheckCard card-width="413px" card-height="447px" card-img-height="240px" :img="Two">
-              <div class="mb-[10px]">
+              <div class="mb-[10px] flex gap-[4px]">
                 <span class="text-[24px] font-[600] text-primary">중개업자 신원</span>
                 <span class="text-[24px] font-[600] text-gray-1a">확인</span>
               </div>
               <div class="justify-start">
-                <span class="whitespace-nowrap text-[18px] font-[400] text-primary">
+                <span class="whitespace-nowrap text-[18px] font-[500] text-primary">
                   국토부 중개사 조회 사이트
                 </span>
                 <span class="text-[18px] font-[400] text-gray-1a">
@@ -58,35 +58,39 @@
               </div>
             </CheckCard>
             <CheckCard card-width="413px" card-height="570px" card-img-height="240px" :img="Three">
-              <div class="mb-[10px]">
+              <div class="mb-[10px] flex gap-[4px]">
                 <span class="text-[24px] font-[600] text-primary">등기부등본</span>
                 <span class="text-[24px] font-[600] text-gray-1a">확인</span>
               </div>
               <div class="justify-start">
-                <span class="text-[18px] font-normal text-gray-1a">등기부등본은 부동산 또는</span>
-                <span class="text-[18px] font-semibold text-primary">대법원 인터넷등기소</span>
-                <span class="text-[18px] font-normal text-gray-1a">
+                <span class="text-[18px] font-[400] text-gray-1a">등기부등본은 부동산 또는</span>
+                <span class="text-[18px] font-[500] text-primary">대법원 인터넷등기소</span>
+                <span class="text-[18px] font-[400] text-gray-1a">
                   를 통해 반드시 확인해야할 정보입니다.
                   <br />
                   실제 집주인이 누구인지 확인하고 근저당이나 압류 여부를 확인할 수 있습니다.
                   <br />
                 </span>
-                <span class="text-base font-normal text-gray-1a">
+                <span class="text-base font-[400] text-gray-1a">
                   <br />
                 </span>
                 <span class="text-[14px] font-[400] text-primary">
                   TIP!
                   <br />
                 </span>
-                <span class="text-base font-normal text-gray-1a">
+                <span class="text-base font-[400] text-gray-1a">
                   등기부등본은 변경 가능성이 있기에 입주 전 반드시 한번 더 확인해야합니다!
                 </span>
               </div>
             </CheckCard>
             <CheckCard card-width="413px" card-height="570px" card-img-height="240px" :img="Four">
               <div class="mb-[10px]">
-                <span class="text-[24px] font-[600] text-primary">확정일자 및 전입신고</span>
-                <span class="text-[24px] font-[600] text-gray-1a">가능 여부 확인</span>
+                <span class="whitespace-nowrap text-[24px] font-[600] text-primary">
+                  확정일자 및 전입신고
+                </span>
+                <span class="whitespace-nowrap text-[24px] font-[600] text-gray-1a">
+                  가능 여부 확인
+                </span>
               </div>
               <div class="justify-start text-[18px] font-[400] text-gray-1a">
                 확정일자와 전입신고가 가능해야지만 보증금을 법적으로 보호할 수 있습니다.
@@ -102,12 +106,14 @@
         <div class="flex justify-center">
           <CheckCard :img="Five" card-width="896px" card-height="764px" card-img-height="533px">
             <div class="justify-start">
-              <span class="text-[24px] font-[600] text-primary">선순위 계약자</span>
-              <span class="text-[24px] font-[600] text-gray-1a">확인</span>
+              <div class="flex gap-1">
+                <span class="text-[24px] font-[600] text-primary">선순위 계약자</span>
+                <span class="text-[24px] font-[600] text-gray-1a">확인</span>
+              </div>
               <div class="mt-[10px] w-[836px] justify-start">
                 <span class="text-[18px] font-[400] text-gray-1a">입주하기 전 반드시</span>
                 <span class="text-[18px] font-[400] text-primary"></span>
-                <span class="text-[18px] font-semibold text-primary">
+                <span class="text-[18px] font-[500] text-primary">
                   주민센터나 정부24에서 전세입자의 전출 여부를 확인
                 </span>
                 <span class="text-[18px] font-[400] text-gray-1a">
@@ -125,23 +131,27 @@
         </div>
       </section>
       <div
-        class="h-0 w-full outline outline-[1.50px] outline-offset-[-0.75px] outline-[#B4B4B4]"
+        class="h-0 w-full outline outline-[1.50px] outline-offset-[-0.75px] outline-gray-b4"
       ></div>
       <section class="mt-[80px]">
         <div class="mb-[34px] text-[40px] font-[700] text-primary">등기부등본 위조 확인 TIP</div>
         <div class="flex flex-col gap-[44px]">
           <CheckTipBox check-num="1">
-            <div class="w-[634px] justify-start">
-              <div class="text-[32px] font-normal text-gray-1a">
+            <div class="justify-start">
+              <div class="text-[32px] font-[400] text-gray-1a">
                 등기부등본은 말소된 내역이 포함된
               </div>
-              <span class="text-[32px] font-semibold text-primary">등기사항 전부 증명서 유형</span>
-              <span class="text-[32px] font-normal text-gray-1a">으로 발급 받아야합니다.</span>
+              <span class="whitespace-nowrap text-[32px] font-[500] text-primary">
+                등기사항 전부 증명서 유형
+              </span>
+              <span class="whitespace-nowrap text-[32px] font-[400] text-gray-1a">
+                으로 발급 받아야합니다.
+              </span>
             </div>
           </CheckTipBox>
 
           <CheckTipBox check-num="2">
-            <div class="justify-start text-[32px] font-normal text-gray-1a">
+            <div class="justify-start text-[32px] font-[400] text-gray-1a">
               가압류, 가처분, 가등기, 근저당권 등에 대해 말소된
               <br />
               내역을 찾아야 합니다.
@@ -149,8 +159,8 @@
           </CheckTipBox>
 
           <CheckTipBox check-num="3">
-            <div class="w-[634px] justify-start">
-              <div class="justify-start whitespace-nowrap text-[32px] font-normal text-gray-1a">
+            <div class="justify-start">
+              <div class="justify-start whitespace-nowrap text-[32px] font-[400] text-gray-1a">
                 말소된 이력에 대해 임대인에게 채권자로부터 채권변제
                 <br />
                 확인서 발급을 꼭 요청해야합니다.
@@ -159,13 +169,13 @@
           </CheckTipBox>
 
           <CheckTipBox check-num="4">
-            <div class="w-[634px] justify-start">
+            <div class="justify-start">
               <div class="justify-start whitespace-nowrap">
-                <span class="text-[32px] font-normal text-gray-1a">요청을 거부한다면,</span>
-                <span class="text-[32px] font-semibold text-primary">
+                <span class="text-[32px] font-[400] text-gray-1a">요청을 거부한다면,</span>
+                <span class="text-[31px] font-[500] text-primary">
                   해당 매물은 피하는 것이 안전
                 </span>
-                <span class="text-[32px] font-normal text-gray-1a">합니다.</span>
+                <span class="text-[32px] font-[400] text-gray-1a">합니다.</span>
               </div>
             </div>
           </CheckTipBox>

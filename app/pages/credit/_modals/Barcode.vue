@@ -1,22 +1,20 @@
 <template>
   <div class="flex items-center justify-center">
-    <div
-      class="flex h-[556px] w-[820px] flex-col items-center rounded-2xl bg-white px-[139px] py-[59px]"
-    >
-      <div class="mb-[20px] whitespace-nowrap text-[28px] text-stone-500">
-        <span class="text-blue-500">해당 바코드를 저장</span>
+    <div class="flex flex-col items-center rounded-2xl bg-background px-[139px] py-[59px]">
+      <div class="mb-[20px] whitespace-nowrap text-[28px] text-gray-66">
+        <span class="font-[500] text-primary">해당 바코드를 저장</span>
         하여 제휴매장에서 사용하세요.
       </div>
       <img src="~/assets/image/barcode.png" alt="바코드" />
       <div class="mt-[40px] flex justify-center gap-[40px]">
         <button
-          class="flex items-center justify-center rounded-[10px] bg-[#B4B4B4] px-[70px] py-[30px] text-3xl text-white"
+          class="flex items-center justify-center rounded-[10px] bg-gray-b4 px-[80px] py-[30px] text-[30px] text-background"
           @click="$emit('close')"
         >
           취소
         </button>
         <button
-          class="flex items-center justify-center rounded-[10px] bg-blue-500 px-[70px] py-[30px] text-3xl text-white"
+          class="flex items-center justify-center rounded-[10px] bg-primary px-[70px] py-[30px] text-[30px] text-background"
           @click="saveBarcodeImage"
         >
           이미지로 저장

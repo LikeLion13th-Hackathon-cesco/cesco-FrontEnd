@@ -1,11 +1,9 @@
 <template>
   <div class="relative z-10 flex h-[439px] w-[341px] flex-col items-center gap-[25px]">
-    <div class="justify-start text-center text-[24px] font-[400] leading-loose text-foreground">
+    <div class="justify-start text-center text-[24px] font-[400] text-foreground">
       {{ fileName }}
     </div>
-    <div
-      class="flex w-[341px] flex-col items-center rounded-[15px] bg-secondary px-[40px] py-[47px]"
-    >
+    <div class="flex flex-col items-center rounded-[15px] bg-secondary px-[40px] py-[47px]">
       <CloudIcon
         alt="cloud"
         class="mb-[20px] h-[60px] w-[60px]"
@@ -13,7 +11,7 @@
         :font-controlled="false"
       />
       <button
-        class="mb-[40px] justify-start whitespace-nowrap rounded-[10px] bg-primary px-[30px] py-[8px] text-center text-[18px] font-[500] leading-7 text-gray-fe"
+        class="mb-[40px] justify-start whitespace-nowrap rounded-[10px] bg-primary px-[30px] py-[8px] text-center text-[18px] font-[500] text-gray-fe"
         @click="openModal"
       >
         {{ btnName }}
@@ -24,8 +22,8 @@
         - 업로드 유의사항 -
       </div>
       <div class="flex flex-col justify-center text-center">
-        <div class="text-[20px] font-normal text-gray-8f">파일 형식 : PDF 지원 (1개)</div>
-        <div class="text-[20px] font-normal text-gray-8f">파일 크기 : 50MB 이내</div>
+        <div class="text-[20px] font-[400] text-gray-8f">파일 형식 : PDF 지원 (1개)</div>
+        <div class="text-[20px] font-[400] text-gray-8f">파일 크기 : 50MB 이내</div>
       </div>
     </div>
     <div class="flex flex-col items-center justify-center gap-[15px]">
@@ -33,7 +31,7 @@
         업로드 된 파일
       </div>
       <div
-        class="flex h-[90px] w-[341px] items-center justify-center gap-[30px] rounded-[10px] border border-gray-8f bg-background"
+        class="flex items-center justify-center gap-[30px] rounded-[10px] border border-gray-8f bg-background px-[30px] py-[18px]"
       >
         <div class="justify-start text-center text-[20px] font-[400] text-foreground">
           {{ displayFileName }}

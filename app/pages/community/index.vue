@@ -39,7 +39,7 @@
           <div v-if="!roadCode || !buildingNumber">
             <div class="mt-[264px] flex flex-col items-center justify-center gap-[30px]">
               <MapIcon class="h-[122px] w-[110px]" filled="false" :font-controlled="false" />
-              <div class="justify-start text-center text-[26px] font-medium text-gray-8f">
+              <div class="justify-start text-center text-[26px] font-[400] text-gray-8f">
                 지도에서 위치를 검색하여
                 <br />
                 커뮤니티 게시글을 확인하세요.
@@ -127,11 +127,6 @@ const {
     }
   },
 });
-
-//const selectedPost = ref(null);
-// const handlePost = () => {
-//   selectedPost.value = post;
-// };
 
 const config = useRuntimeConfig();
 const kakaoKey = config.public.kakaoJavascriptKey;

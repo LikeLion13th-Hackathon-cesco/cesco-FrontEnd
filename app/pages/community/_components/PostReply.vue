@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative box-border flex h-[62px] w-[360px] items-center justify-start rounded-[10px] border-[1.50px] border-gray-d9 bg-background p-[30px]"
+    class="relative box-border flex items-center justify-start rounded-[10px] border-[1.50px] border-gray-d9 bg-background p-[30px]"
   >
     <div class="absolute left-0">
       <input
@@ -14,7 +14,7 @@
       :disabled="isSubmitting"
       :class="[
         'absolute right-0 top-0 flex items-center justify-center rounded-br-[10px] rounded-tr-[10px] px-[21px] py-[16px] transition-colors',
-        isSubmitting ? 'cursor-not-allowed bg-gray-300' : 'hover:bg-primary-dark bg-primary',
+        isSubmitting ? 'cursor-not-allowed bg-gray-d9' : 'hover:bg-primary-dark bg-primary',
       ]"
       @click="handleSubmit"
     >
@@ -24,7 +24,7 @@
     <button
       v-else
       disabled
-      class="absolute right-0 top-0 flex cursor-not-allowed items-center justify-center rounded-br-[10px] rounded-tr-[10px] bg-zinc-300 px-[21px] py-[16px]"
+      class="absolute right-0 top-0 flex cursor-not-allowed items-center justify-center rounded-br-[10px] rounded-tr-[10px] bg-gray-d9 px-[21px] py-[16px]"
     >
       <SendIcon filled="false" :font-controlled="false" class="h-[30px] w-[30px] opacity-50" />
     </button>

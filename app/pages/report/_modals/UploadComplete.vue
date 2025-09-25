@@ -9,13 +9,13 @@
       신고 접수가 완료되었습니다.
     </div>
     <div class="mb-[30px] justify-start text-center">
-      <span class="text-[24px] font-[400] leading-6 text-gray-8f">
+      <span class="text-[24px] font-[400] text-gray-8f">
         소중한 신고 감사합니다.
         <br />
         감사 크레딧
       </span>
-      <span class="text-[24px] font-[600] leading-6 text-primary">500P</span>
-      <span class="text-[24px] font-[400] leading-6 text-gray-8f">가 적립되었습니다.</span>
+      <span class="text-[24px] font-[600] text-primary">500P</span>
+      <span class="text-[24px] font-[400] text-gray-8f">가 적립되었습니다.</span>
     </div>
     <div class="flex gap-10">
       <button

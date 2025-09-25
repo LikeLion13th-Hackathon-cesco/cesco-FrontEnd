@@ -2,7 +2,7 @@
   <div class="rounded-[20px] px-[54px] py-[40px] outline outline-[1.50px]" :class="cardClass">
     <div class="flex flex-col items-start">
       <div
-        class="mb-[10px] mt-[34px] justify-start text-center font-['Pretendard'] text-[28px] font-semibold leading-10"
+        class="mb-[10px] mt-[34px] justify-start text-center font-['Pretendard'] text-[28px] font-[600] leading-10"
         :style="{ color: textColor }"
       >
         {{ option }}

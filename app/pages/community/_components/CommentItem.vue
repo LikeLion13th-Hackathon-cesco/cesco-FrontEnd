@@ -1,12 +1,12 @@
 <template>
   <div
-    class="box-border flex h-[200px] w-[400px] cursor-pointer flex-col rounded-[10px] p-[30px] hover:bg-blue-50"
+    class="box-border flex cursor-pointer flex-col rounded-[10px] px-[30px] py-[26px] hover:bg-secondary"
   >
-    <div class="mb-[5px] justify-start text-lg font-semibold leading-tight text-gray-1a">익명</div>
-    <div class="mb-[15px] justify-start text-base font-normal text-gray-b4">
+    <div class="mb-[5px] justify-start text-[20px] font-[600] text-gray-1a">익명</div>
+    <div class="mb-[15px] justify-start text-[16px] font-[400] text-gray-b4">
       {{ dayjs(date).format("YYYY-MM-DD") }}
     </div>
-    <div class="mb-[10px] justify-start text-base font-normal text-gray-1a">
+    <div class="mb-[10px] justify-start text-[20px] font-[400] text-gray-1a">
       {{ comment }}
     </div>
     <div class="flex items-start justify-start gap-[20px]">
@@ -19,18 +19,18 @@
         ></FilledLike>
 
         <Like v-else class="h-4 w-4" filled="false" :font-controlled="false" />
-        <div class="justify-start text-base font-normal text-gray-b4">
+        <div class="justify-start text-[18px] font-[400] text-gray-b4">
           {{ currentLikeCount }}
         </div>
       </div>
       <div class="flex justify-start gap-[10px]">
         <CommentIcon class="h-4 w-4" filled="false" :font-controlled="false" />
-        <div class="justify-start text-base font-normal text-gray-b4">
+        <div class="justify-start text-[18px] font-[400] text-gray-b4">
           {{ commentCount }}
         </div>
       </div>
     </div>
-    <div class="hidden h-48 w-96 rounded-[10px] bg-blue-50" />
+    <div class="hidden h-48 w-96 rounded-[10px] bg-secondary" />
   </div>
 </template>
 

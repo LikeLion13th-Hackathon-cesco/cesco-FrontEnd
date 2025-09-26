@@ -39,7 +39,7 @@
           <div v-if="!roadCode || !buildingNumber">
             <div class="mt-[264px] flex flex-col items-center justify-center gap-[30px]">
               <MapIcon class="h-[122px] w-[110px]" filled="false" :font-controlled="false" />
-              <div class="justify-start text-center text-[26px] font-medium text-gray-8f">
+              <div class="justify-start text-center text-[26px] font-[400] text-gray-8f">
                 지도에서 위치를 검색하여
                 <br />
                 커뮤니티 게시글을 확인하세요.
@@ -66,7 +66,7 @@
       id="map"
       class="absolute left-[598px] top-0 z-10 h-[871px] w-[897px] rounded-[20px] bg-gray-1a"
     >
-      <SearchBar @search-address="searchAddress"></SearchBar>
+      <SearchBar :initial-value="selectedAddress" @search-address="searchAddress"></SearchBar>
     </div>
   </div>
 </template>
@@ -79,6 +79,10 @@ import CommentWrap from "./_components/CommentWrap.vue";
 import CreditStore from "../credit/creditStore.vue";
 import { useQuery } from "@tanstack/vue-query";
 import { apiInstance } from "~/utils/api";
+
+useHead({
+  title: "커뮤니티",
+});
 
 const currentTab = ref("community");
 const handleTabStore = () => {
@@ -123,11 +127,6 @@ const {
     }
   },
 });
-
-//const selectedPost = ref(null);
-// const handlePost = () => {
-//   selectedPost.value = post;
-// };
 
 const config = useRuntimeConfig();
 const kakaoKey = config.public.kakaoJavascriptKey;
@@ -196,6 +195,15 @@ onMounted(async () => {
 
   // 초기 로드 시 네비바에서 검색해서 온 경우 처리
   handleNavbarSearch();
+
+  // 페이지 마운트 시 기본 주소로 검색
+  selectedAddress.value = "서울특별시 성북구 동소문로26나길 19";
+
+  searchAddress({
+    buldMnnm: "19",
+    rnMgtSn: "112904121104",
+    roadAddrPart1: "서울특별시 성북구 동소문로26나길 19",
+  });
 });
 
 const searchAddress = (suggestion) => {

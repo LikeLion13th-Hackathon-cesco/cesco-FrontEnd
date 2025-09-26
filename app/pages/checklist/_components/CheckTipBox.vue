@@ -1,9 +1,9 @@
 <template>
   <div
-    class="box-border flex w-[894px] items-center justify-start gap-[23px] rounded-[15px] bg-gray-f5 px-[50px] py-[30px]"
+    class="box-border flex items-center justify-start gap-[23px] rounded-[15px] bg-gray-f5 px-[50px] py-[30px]"
   >
     <div
-      class="flex h-16 w-16 items-center justify-center rounded-[15px] bg-primary text-[40px] text-background"
+      class="flex items-center justify-center rounded-[15px] bg-primary px-[26px] py-[10px] text-[40px] text-background"
     >
       {{ checkNum }}
     </div>

@@ -3,6 +3,11 @@ import { useQuery } from "@tanstack/vue-query";
 import ProcessAndDisclaimer from "./_components/ProcessAndDisclaimer.vue";
 import { apiInstance } from "~/utils/api";
 import type { AnalyzeResultResponse } from "./_api/types/AnalyzeResultResponse";
+import { useHead } from "#app";
+
+useHead({
+  title: "분석 결과",
+});
 
 const reportId = useRoute().params.reportId;
 

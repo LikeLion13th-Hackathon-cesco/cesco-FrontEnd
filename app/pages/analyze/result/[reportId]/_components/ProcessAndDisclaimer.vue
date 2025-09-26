@@ -16,14 +16,14 @@ import ChevronRightBlue from "~/assets/icon/chevron-right-blue.svg";
     <!-- 절차 -->
     <div class="flex justify-center gap-[60px] py-[60px]">
       <!-- Step 1 -->
-      <ProcessStep :step="1" title="등본 업로드">
+      <ProcessStep :step="1" title="전처리">
         <template #icon>
           <AnalysisStep1 class="h-[180px] w-[180px]" :font-controlled="false" filled="false" />
         </template>
         <template #description>
-          업로드 한 등본을
+          업로드 한 등기부등본을
           <br />
-          AI가 분석합니다.
+          전처리 후, AI가 분석을 시작합니다.
         </template>
       </ProcessStep>
       <ChevronRightBlue
@@ -37,7 +37,7 @@ import ChevronRightBlue from "~/assets/icon/chevron-right-blue.svg";
           <AnalysisStep2 class="h-[180px] w-[180px]" :font-controlled="false" filled="false" />
         </template>
         <template #description>
-          등본에서 뭐뭐를 추출, 무엇의 기준을 바탕으로 등본을 계산하여 분석을 진행합니다.
+          등기부등본에서 텍스트를 추출하고, 공인된 기준들을 바탕으로 분석을 진행합니다.
         </template>
       </ProcessStep>
       <ChevronRightBlue
@@ -51,7 +51,7 @@ import ChevronRightBlue from "~/assets/icon/chevron-right-blue.svg";
           <AnalysisStep3 class="h-[180px] w-[180px]" :font-controlled="false" filled="false" />
         </template>
         <template #description>
-          안전도를 분석하여 위험도 점수를 도출합니다.
+          자체 연구하여 도출한 검증된 안전지수 공식을 바탕으로 위험도 점수를 계산합니다.
           <br />
           <br />
           0-2점: 위험
@@ -71,7 +71,7 @@ import ChevronRightBlue from "~/assets/icon/chevron-right-blue.svg";
         <template #icon>
           <AnalysisStep4 class="h-[180px] w-[180px]" :font-controlled="false" filled="false" />
         </template>
-        <template #description>AI가 종합하여 최종 결과를 자세히 내보냅니다.</template>
+        <template #description>AI가 분석 결과를 종합하여 최종 결과를 내보냅니다.</template>
       </ProcessStep>
     </div>
 
@@ -82,13 +82,17 @@ import ChevronRightBlue from "~/assets/icon/chevron-right-blue.svg";
       >
         <img src="~/assets/image/alien.png" alt="셋방살이" class="h-auto w-[130px]" />
         <span class="mt-[30px] text-[24px] font-[600] text-primary">
-          셋방살이는 (공공기관 이름)의 가이드를 바탕으로 근거를 수립했습니다.
+          셋방살이는 공공기관의 자료와 전문가의 가이드를 바탕으로 근거를 수립했습니다.
         </span>
         <span class="mt-[15px] text-[20px] font-[500] text-gray-66">
-          더 자세한 내용은 (공공기관 이름 또는 우리 노션)을 참고해주세요.
+          더 자세한 내용은
+          <a href="https://www.khug.or.kr/index.jsp" target="_blank" class="text-primary">
+            HUG 주택도시보증공사
+          </a>
+          를 참고해주세요.
         </span>
-        <p class="mt-[25px] text-[20px] font-[500] text-gray-66">
-          AI가 분석한 내용은 실제와 다를 수 있으니 확인용도로만 이용 부탁드립니다.
+        <p class="mt-[25px] text-[16px] font-[500] text-gray-66">
+          AI가 분석한 내용은 실제와 다를 수 있으며,
           <br />
           AI 분석 결과로 인한 문제 발생 시 법적 책임은 본인에게 있음을 알려드립니다.
         </p>

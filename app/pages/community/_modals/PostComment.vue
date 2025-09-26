@@ -14,12 +14,12 @@
         v-if="selectedAddress"
         class="mr-[198px] justify-start whitespace-nowrap text-[32px] font-[600] text-gray-1a"
       >
-        <span class="text-[32px] font-semibold text-primary">
+        <span class="text-[32px] font-[600] text-primary">
           {{ selectedAddress }}
         </span>
         에 게시글 작성
       </div>
-      <div v-else class="mr-[198px] justify-start text-[32px] font-semibold text-gray-1a">
+      <div v-else class="mr-[198px] justify-start text-[32px] font-[600] text-gray-1a">
         지역을 검색해주세요.
       </div>
       <button
@@ -31,7 +31,7 @@
     </div>
 
     <!-- 구분선 -->
-    <div class="mb-[20px] h-[1px] w-full bg-[#B4B4B4]"></div>
+    <div class="mb-[20px] h-[1px] w-full bg-gray-b4"></div>
 
     <!-- 입력 영역 -->
     <textarea

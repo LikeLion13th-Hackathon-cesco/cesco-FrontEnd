@@ -96,7 +96,7 @@ const handleSubmit = async () => {
       </div>
       <div class="flex items-center gap-[40px]">
         <img
-          src="~/assets/image/pdf-example.png"
+          src="~/assets/image/reportExample.jpg"
           alt="민형사 고소증 예시 1"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
@@ -107,7 +107,7 @@ const handleSubmit = async () => {
           @click="handleExampleSelect('예시파일1_고소증.pdf')"
         />
         <img
-          src="~/assets/image/pdf-example.png"
+          src="~/assets/image/reportExample.jpg"
           alt="민형사 고소증 예시 2"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',
@@ -118,7 +118,7 @@ const handleSubmit = async () => {
           @click="handleExampleSelect('예시파일2_고소증.pdf')"
         />
         <img
-          src="~/assets/image/pdf-example.png"
+          src="~/assets/image/reportExample.jpg"
           alt="민형사 고소증 예시 3"
           :class="[
             'h-[220px] w-[220px] cursor-pointer rounded-[10px] object-cover object-top transition duration-100 ease-in-out',

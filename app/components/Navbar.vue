@@ -1,5 +1,7 @@
 <template>
-  <nav class="sticky top-0 z-[999] flex w-full items-center justify-center bg-background py-[40px]">
+  <nav
+    class="sticky top-0 z-[999] flex w-full items-center justify-center whitespace-nowrap bg-background py-[40px]"
+  >
     <!-- 로고 -->
     <NuxtLink to="/" class="inline-flex items-center gap-[2px]">
       <LogoOutline :font-controlled="false" filled="false" class="h-[35px] w-[35px]" />
@@ -61,7 +63,7 @@
     <!-- 검색바 -->
     <div class="relative ml-[70px]">
       <div
-        class="flex items-center gap-[12px] rounded-full border-[1.5px] border-gray-b4 px-[30px] py-[15px]"
+        class="flex min-w-max items-center gap-[12px] rounded-full border-[1.5px] border-gray-b4 px-[30px] py-[15px]"
       >
         <SearchIcon class="h-[20px] w-[20px]" filled="false" />
         <input

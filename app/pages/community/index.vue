@@ -85,11 +85,33 @@ useHead({
 });
 
 const currentTab = ref("community");
+
+// Initialize tab based on query parameter
+const initializeTab = () => {
+  const tabParam = route.query.tab;
+  if (tabParam === "store" || tabParam === "community") {
+    currentTab.value = tabParam;
+  } else {
+    currentTab.value = "community";
+  }
+};
+
 const handleTabStore = () => {
   currentTab.value = "store";
+  // Update query parameter
+  navigateTo({
+    path: "/community",
+    query: { ...route.query, tab: "store" },
+  });
 };
+
 const handleTabCommunity = () => {
   currentTab.value = "community";
+  // Update query parameter
+  navigateTo({
+    path: "/community",
+    query: { ...route.query, tab: "community" },
+  });
 };
 const roadCode = ref(null);
 const buildingNumber = ref(null);
@@ -169,13 +191,20 @@ const handleNavbarSearch = () => {
 // 라우트 쿼리 파라미터 변경을 감지하여 UI 업데이트
 watch(
   () => route.query,
-  () => {
+  (newQuery) => {
     handleNavbarSearch();
+    // Handle tab parameter changes
+    if (newQuery.tab && (newQuery.tab === "store" || newQuery.tab === "community")) {
+      currentTab.value = newQuery.tab;
+    }
   },
   { immediate: false }
 );
 
 onMounted(async () => {
+  // Initialize tab based on query parameter
+  initializeTab();
+
   const kakao = await loadKakaoMapScript();
   kakaoRef.value = kakao;
 

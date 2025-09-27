@@ -63,22 +63,76 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { useQuery } from "@tanstack/vue-query";
 import StoreItem from "./_components/StoreItem.vue";
 import storeImage from "~/assets/image/storeImage.jpg";
 import BarcodeModal from "./_modals/Barcode.vue";
 import VictoryImg from "~/assets/image/victorySuper.jpg";
 import FlowerImg from "~/assets/image/flowerGimbap.jpg";
 import Amisan from "~/assets/image/amisan.jpg";
+import { apiInstance } from "~/utils/api";
+import type { CreditResponse } from "./_api/types/CreditResponse";
 
 const showBarcodeModal = ref(false);
-const currentCredit = ref(1500); //현재 크레딧 = 현재크레딧 - 입력크레딧
-const usingCredit = ref(null); //입력 크레딧
+const usingCredit = ref<number | null>(null);
+const currentCredit = ref(0); // This will hold the current credit amount for frontend calculations
+
+const CREDIT_STORAGE_KEY = "user_credit_1"; // Key for localStorage
+
+// Function to get credit from localStorage
+const getCreditFromStorage = (): number | null => {
+  if (import.meta.client) {
+    const stored = localStorage.getItem(CREDIT_STORAGE_KEY);
+    return stored ? parseInt(stored, 10) : null;
+  }
+  return null;
+};
+
+// Function to save credit to localStorage
+const saveCreditToStorage = (credit: number) => {
+  if (import.meta.client) {
+    localStorage.setItem(CREDIT_STORAGE_KEY, credit.toString());
+  }
+};
+
+// Initialize credit from localStorage if available
+onMounted(() => {
+  const storedCredit = getCreditFromStorage();
+  if (storedCredit !== null) {
+    currentCredit.value = storedCredit;
+  }
+});
+
+// Fetch credit data from API only once
+const { data: creditData } = useQuery<BaseResponse<CreditResponse>>({
+  queryKey: ["hasCredit", 1],
+  queryFn: () => apiInstance.get("v1/hascredit/1").then((res) => res.data),
+});
+
+// Watch for API data and initialize currentCredit if not already set from localStorage
+watch(
+  creditData,
+  (newData) => {
+    if (newData?.data.credit && currentCredit.value === 0) {
+      const storedCredit = getCreditFromStorage();
+      // Only use API data if localStorage is empty
+      if (storedCredit === null) {
+        currentCredit.value = newData.data.credit;
+        saveCreditToStorage(newData.data.credit);
+      }
+    }
+  },
+  { immediate: true }
+);
 
 const handleCredit = () => {
   if (usingCredit.value) {
     if (usingCredit.value <= currentCredit.value) {
+      // Subtract credit on frontend
       currentCredit.value = currentCredit.value - usingCredit.value;
+      // Persist to localStorage
+      saveCreditToStorage(currentCredit.value);
     } else {
       alert("사용 금액이 현재 크레딧을 초과할 수 없습니다.");
       showBarcodeModal.value = false;
